@@ -1,11 +1,11 @@
 import { useEffect, useMemo, useState, type CSSProperties, type ReactElement } from 'react';
-import heroImage from '../photo/1.png';
-import forestImage from '../photo/2.png';
-import treatmentImage from '../photo/3.png';
-import roomImage from '../photo/4.png';
-import familyImage from '../photo/5.png';
-import staffImage from '../photo/6.png';
-import documentsImage from '../photo/7.png';
+import heroImage from '../photo/1.webp';
+import forestImage from '../photo/2.webp';
+import treatmentImage from '../photo/3.webp';
+import roomImage from '../photo/4.webp';
+import familyImage from '../photo/5.webp';
+import staffImage from '../photo/6.webp';
+import documentsImage from '../photo/7.webp';
 import {
   advantages,
   arrivalDocuments,
