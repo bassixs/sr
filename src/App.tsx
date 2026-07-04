@@ -68,7 +68,13 @@ function getHref(path: string) {
 
 function App() {
   const [currentPath, setCurrentPath] = useState(() => normalizePath(window.location.pathname));
-  const [accessible, setAccessible] = useState(false);
+  const [accessible, setAccessible] = useState(() => {
+    try {
+      return localStorage.getItem('accessible') === '1';
+    } catch {
+      return false;
+    }
+  });
 
   useEffect(() => {
     const onPopState = () => setCurrentPath(normalizePath(window.location.pathname));
@@ -78,6 +84,11 @@ function App() {
 
   useEffect(() => {
     document.documentElement.classList.toggle('accessible-mode', accessible);
+    try {
+      localStorage.setItem('accessible', accessible ? '1' : '0');
+    } catch {
+      /* localStorage может быть недоступен — игнорируем */
+    }
   }, [accessible]);
 
   useEffect(() => {
@@ -129,13 +140,16 @@ function App() {
 
   return (
     <div className="page">
+      <a className="skip-link" href="#main-content">
+        Перейти к содержимому
+      </a>
       <Header
         activePath={activeRoute.path}
         accessible={accessible}
         onToggleAccessible={() => setAccessible((value) => !value)}
         onNavigate={navigate}
       />
-      <main>
+      <main id="main-content">
         <Page onNavigate={navigate} />
       </main>
       <Footer onNavigate={navigate} />
@@ -173,7 +187,12 @@ function Header({ activePath, accessible, onToggleAccessible, onNavigate }: Navi
         </a>
 
         <div className="header-actions">
-          <button className="utility-button" type="button" onClick={onToggleAccessible}>
+          <button
+            className="utility-button"
+            type="button"
+            onClick={onToggleAccessible}
+            aria-pressed={!!accessible}
+          >
             {accessible ? 'Обычная версия' : 'Версия для слабовидящих'}
           </button>
           <a className="phone-link" href={`tel:${contacts.phone.replace(/[^+\d]/g, '')}`}>
