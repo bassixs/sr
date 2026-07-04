@@ -44,7 +44,7 @@ import {
 } from './content';
 
 const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
-const primaryNavPaths = ['/', '/about', '/treatment', '/procedures', '/doctors', '/prepare', '/official', '/contacts'];
+const primaryNavPaths = ['/', '/about', '/treatment', '/procedures', '/doctors', '/stay', '/prepare', '/oms', '/official', '/contacts'];
 const heroFacts = ['40+ лет опыта', '150 коек', 'дети с 4 лет'];
 
 function normalizePath(pathname: string) {
@@ -82,6 +82,12 @@ function App() {
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [currentPath]);
+
+  useEffect(() => {
+    const siteTitle = 'Калужский санаторий Звездный — официальный информационный сайт';
+    const route = routes.find((item) => item.path === currentPath);
+    document.title = route && currentPath !== '/' ? `${route.label} — Калужский санаторий Звездный` : siteTitle;
   }, [currentPath]);
 
   useEffect(() => {
