@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://bassixs.github.io/sr/sitemap.xml

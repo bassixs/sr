@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://bassixs.github.io/sr/</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://bassixs.github.io/sr/about</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://bassixs.github.io/sr/treatment</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://bassixs.github.io/sr/procedures</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://bassixs.github.io/sr/doctors</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://bassixs.github.io/sr/stay</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://bassixs.github.io/sr/prepare</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://bassixs.github.io/sr/oms</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://bassixs.github.io/sr/official</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://bassixs.github.io/sr/news</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://bassixs.github.io/sr/contacts</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://bassixs.github.io/sr/privacy</loc><changefreq>yearly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://bassixs.github.io/sr/accessibility</loc><changefreq>yearly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://bassixs.github.io/sr/quality</loc><changefreq>yearly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://bassixs.github.io/sr/anti-corruption</loc><changefreq>yearly</changefreq><priority>0.4</priority></url>
+</urlset>

@@ -38,7 +38,9 @@ import {
   treatmentProfiles,
   treatmentPrograms,
   treatmentStages,
+  legalPages,
   type InfoCard,
+  type LegalPageContent,
 } from './content';
 
 const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
@@ -744,7 +746,7 @@ function OmsPage() {
   );
 }
 
-function OfficialPage() {
+function OfficialPage({ onNavigate }: PageProps) {
   return (
     <>
       <PageHero
@@ -792,6 +794,29 @@ function OfficialPage() {
                   Открыть файл
                 </a>
               </article>
+            ))}
+          </div>
+        </div>
+      </section>
+      <section className="section">
+        <div className="container">
+          <SectionIntro
+            eyebrow="Правовые разделы"
+            title="Обязательная информация для сайта медорганизации"
+            text="Разделы подготовлены как заготовки: структура готова, тексты требуют юридической сверки и подстановки реальных данных учреждения."
+          />
+          <div className="legal-links">
+            {legalPages.map((page, index) => (
+              <button
+                key={page.path}
+                type="button"
+                onClick={() => onNavigate(page.path)}
+                data-animate
+                style={getDelay(index)}
+              >
+                <strong>{page.label}</strong>
+                <span>{page.title}</span>
+              </button>
             ))}
           </div>
         </div>
@@ -853,6 +878,40 @@ function ContactsPage() {
               ссылку на порядок рассмотрения обращений граждан.
             </p>
           </article>
+        </div>
+      </section>
+    </>
+  );
+}
+
+function LegalPage({ content }: { content: LegalPageContent }) {
+  return (
+    <>
+      <section className="legal-hero">
+        <div className="container">
+          <span className="eyebrow">{content.eyebrow}</span>
+          <h1>{content.title}</h1>
+          <p>{content.intro}</p>
+        </div>
+      </section>
+      <section className="section">
+        <div className="container legal-body">
+          <p className="legal-note" data-animate>{content.reviewNote}</p>
+          {content.sections.map((section, index) => (
+            <article className="legal-section" key={section.heading} data-animate style={getDelay(index)}>
+              <h2>{section.heading}</h2>
+              {section.paragraphs?.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+              {section.list ? (
+                <ul>
+                  {section.list.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              ) : null}
+            </article>
+          ))}
         </div>
       </section>
     </>
@@ -1023,6 +1082,9 @@ const pages: Record<string, (props: PageProps) => ReactElement> = {
   '/official': OfficialPage,
   '/news': NewsPage,
   '/contacts': ContactsPage,
+  ...Object.fromEntries(
+    legalPages.map((content) => [content.path, () => <LegalPage content={content} />]),
+  ),
 };
 
 export default App;
