@@ -39,6 +39,10 @@ import {
   treatmentPrograms,
   treatmentStages,
   legalPages,
+  priceGroups,
+  priceMeta,
+  scheduleRows,
+  scheduleMeta,
   type InfoCard,
   type LegalPageContent,
 } from './content';
@@ -767,6 +771,29 @@ function OmsPage() {
           </article>
         </div>
       </section>
+      <section className="section section-muted">
+        <div className="container">
+          <SectionIntro eyebrow="График заездов" title={scheduleMeta.title} text={scheduleMeta.note} />
+          <ScheduleTable />
+          <div className="inline-actions" data-animate>
+            <a className="button button-secondary" href={getHref(scheduleMeta.href)} target="_blank" rel="noreferrer">
+              Официальный график (PDF)
+            </a>
+          </div>
+        </div>
+      </section>
+      <section className="section">
+        <div className="container">
+          <SectionIntro eyebrow="Прейскурант 2026" title={priceMeta.title} text={priceMeta.approved} />
+          <p className="legal-note" data-animate>{priceMeta.note}</p>
+          <PriceTables />
+          <div className="inline-actions" data-animate>
+            <a className="button button-primary" href={getHref(priceMeta.href)} target="_blank" rel="noreferrer">
+              Официальный прейскурант (PDF)
+            </a>
+          </div>
+        </div>
+      </section>
     </>
   );
 }
@@ -906,6 +933,72 @@ function ContactsPage() {
         </div>
       </section>
     </>
+  );
+}
+
+function formatPrice(value: number) {
+  return `${value.toLocaleString('ru-RU')} ₽`;
+}
+
+function PriceTables() {
+  return (
+    <div className="price-tables">
+      {priceGroups.map((group) => (
+        <article className="price-block" key={group.title} data-animate>
+          <h3>{group.title}</h3>
+          <div className="table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  {group.withCode ? <th className="col-code">Код</th> : null}
+                  <th>Наименование</th>
+                  <th className="col-unit">Ед. / период</th>
+                  <th className="col-price">Стоимость</th>
+                </tr>
+              </thead>
+              <tbody>
+                {group.rows.map((row, index) => (
+                  <tr key={`${row.code ?? ''}-${row.name}-${index}`}>
+                    {group.withCode ? <td className="col-code">{row.code}</td> : null}
+                    <td>{row.name}</td>
+                    <td className="col-unit">{row.unit}</td>
+                    <td className="col-price">
+                      {formatPrice(row.price)}
+                      {row.vat ? <small>в т.ч. НДС {row.vat} ₽</small> : null}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </article>
+      ))}
+    </div>
+  );
+}
+
+function ScheduleTable() {
+  return (
+    <div className="table-scroll schedule-table" data-animate>
+      <table>
+        <thead>
+          <tr>
+            <th>Период заезда</th>
+            <th className="col-days">Дней</th>
+            <th>Категория путёвок</th>
+          </tr>
+        </thead>
+        <tbody>
+          {scheduleRows.map((row) => (
+            <tr key={row.period}>
+              <td>{row.period}</td>
+              <td className="col-days">{row.days}</td>
+              <td>{row.category}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 }
 
