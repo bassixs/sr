@@ -13,6 +13,9 @@ import {
   arrivalTips,
   audienceCards,
   contacts,
+  contactChannels,
+  contactRequestTips,
+  contactRouteNotes,
   doctorProfiles,
   guestJourney,
   homeHighlights,
@@ -50,6 +53,11 @@ import {
 const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
 const primaryNavPaths = ['/', '/about', '/treatment', '/procedures', '/doctors', '/stay', '/prepare', '/oms', '/official', '/contacts'];
 const heroFacts = ['40+ лет опыта', '150 коек', 'дети с 4 лет'];
+
+function getPhoneHref(phone: string) {
+  const normalized = phone.replace(/[^+\d]/g, '');
+  return normalized.replace(/\D/g, '').length >= 10 ? `tel:${normalized}` : null;
+}
 
 function normalizePath(pathname: string) {
   let path = pathname;
@@ -170,6 +178,7 @@ type NavigationProps = {
 
 function Header({ activePath, accessible, onToggleAccessible, onNavigate }: NavigationProps) {
   const mainRoutes = routes.filter((route) => primaryNavPaths.includes(route.path));
+  const phoneHref = getPhoneHref(contacts.phone);
 
   return (
     <header className="site-header">
@@ -199,9 +208,13 @@ function Header({ activePath, accessible, onToggleAccessible, onNavigate }: Navi
           >
             {accessible ? 'Обычная версия' : 'Версия для слабовидящих'}
           </button>
-          <a className="phone-link" href={`tel:${contacts.phone.replace(/[^+\d]/g, '')}`}>
-            {contacts.phone}
-          </a>
+          {phoneHref ? (
+            <a className="phone-link" href={phoneHref}>
+              {contacts.phone}
+            </a>
+          ) : (
+            <span className="phone-link phone-link-muted">{contacts.phone}</span>
+          )}
         </div>
       </div>
 
@@ -901,35 +914,116 @@ function NewsPage() {
   );
 }
 
-function ContactsPage() {
+function ContactsPage({ onNavigate }: PageProps) {
+  const phoneHref = getPhoneHref(contacts.phone);
+
   return (
     <>
       <PageHero
         eyebrow="Контакты"
         title="Как связаться с санаторием и подготовить обращение"
-        text="Контакты сейчас оставлены временными. Их нужно заменить данными из реквизитов и официальных документов."
+        text="Здесь собраны подтверждённые каналы связи, статус данных, подсказки для обращения и быстрые ссылки на официальные разделы."
         image={forestImage}
       />
       <section className="section">
+        <div className="container">
+          <SectionIntro
+            eyebrow="Связь"
+            title="Что уже можно использовать, а что требует подтверждения"
+            text="Мы не публикуем фейковый телефон как рабочий контакт. До сверки с учреждением сайт честно показывает статус данных."
+          />
+          <div className="contact-channel-grid">
+            {contactChannels.map((item, index) => (
+              <InfoTile key={item.title} item={item} style={getDelay(index)} />
+            ))}
+          </div>
+        </div>
+      </section>
+      <section className="section section-muted">
         <div className="container contact-layout">
           <article className="contact-panel" data-animate>
-            <h2>Связь</h2>
-            <a href={`tel:${contacts.phone.replace(/[^+\d]/g, '')}`}>{contacts.phone}</a>
+            <h2>Подтверждённые контакты</h2>
+            {phoneHref ? <a href={phoneHref}>{contacts.phone}</a> : <span className="contact-status">{contacts.phone}</span>}
             <a href={`mailto:${contacts.email}`}>{contacts.email}</a>
             <p>{contacts.address}</p>
             <span>{contacts.note}</span>
           </article>
           <article className="contact-panel" data-animate style={getDelay(1)}>
-            <h2>Для обращений</h2>
+            <h2>Официальные обращения</h2>
             <p>
-              Если на сайте появится форма обратной связи, рядом нужны политика обработки
-              персональных данных и отдельное согласие на обработку.
+              Сейчас для обращений указан email учреждения. Почтовый адрес и телефон будут добавлены
+              после подтверждения официальной формулировки.
             </p>
             <p>
-              Для официальных обращений лучше также дать почтовый адрес, email учреждения и
-              ссылку на порядок рассмотрения обращений граждан.
+              Если позже появится форма обратной связи, рядом нужны политика обработки персональных
+              данных и отдельное согласие на обработку.
             </p>
+            <div className="contact-action-list">
+              <button type="button" onClick={() => window.location.href = `mailto:${contacts.email}`}>
+                Написать на email
+              </button>
+              <button type="button" onClick={() => onNavigate('/privacy')}>
+                Персональные данные
+              </button>
+            </div>
           </article>
+        </div>
+      </section>
+      <section className="section">
+        <div className="container split-layout">
+          <SectionIntro
+            eyebrow="Что указать"
+            title="Так обращение будет проще обработать"
+            text="Короткие подсказки помогают человеку написать не абстрактное письмо, а запрос, на который учреждению легче ответить."
+          />
+          <div className="contact-tip-list">
+            {contactRequestTips.map((item, index) => (
+              <InfoTile key={item.title} item={item} style={getDelay(index)} />
+            ))}
+          </div>
+        </div>
+      </section>
+      <section className="section section-muted">
+        <div className="container">
+          <SectionIntro
+            eyebrow="Как добраться"
+            title="Маршрут будет опубликован после сверки адреса"
+            text="Пока в материалах есть противоречия по адресу и расстоянию от Калуги, поэтому на сайте лучше не закреплять неподтверждённую схему."
+          />
+          <div className="contact-route-grid">
+            {contactRouteNotes.map((item, index) => (
+              <InfoTile key={item.title} item={item} style={getDelay(index)} />
+            ))}
+          </div>
+        </div>
+      </section>
+      <section className="section">
+        <div className="container">
+          <SectionIntro
+            eyebrow="Быстрые ссылки"
+            title="Документы и правила рядом с контактами"
+            text="Контактная страница должна помогать не только написать письмо, но и сразу найти официальную информацию."
+          />
+          <div className="contact-link-grid">
+            {[
+              { label: 'Документы', path: '/official' },
+              { label: 'Перед заездом', path: '/prepare' },
+              { label: 'ОМС и цены', path: '/oms' },
+              { label: 'Персональные данные', path: '/privacy' },
+              { label: 'Обращения граждан', path: '/anti-corruption' },
+              { label: 'Доступная среда', path: '/accessibility' },
+            ].map((item, index) => (
+              <button
+                key={item.path}
+                type="button"
+                onClick={() => onNavigate(item.path)}
+                data-animate
+                style={getDelay(index)}
+              >
+                {item.label}
+              </button>
+            ))}
+          </div>
         </div>
       </section>
     </>
