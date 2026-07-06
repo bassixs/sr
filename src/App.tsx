@@ -8,8 +8,8 @@ import staffImage from '../photo/6.webp';
 import documentsImage from '../photo/7.webp';
 import {
   advantages,
-  arrivalDocuments,
-  arrivalSteps,
+  arrivalDocumentGroups,
+  arrivalFlow,
   arrivalTips,
   audienceCards,
   contacts,
@@ -20,12 +20,18 @@ import {
   guestJourney,
   homeHighlights,
   infrastructure,
+  institutionDetails,
   keyStats,
   leisureCards,
+  licensedWorkGroups,
+  licenseDetails,
   news,
   officialDocuments,
   officialFacts,
   officialSections,
+  oversightContacts,
+  paidServiceRules,
+  patientRightsGroups,
   procedureGroups,
   procedureDayFlow,
   procedureHighlights,
@@ -34,6 +40,7 @@ import {
   roomNotes,
   routes,
   staffRequests,
+  stayRules,
   stayComfort,
   teamPrinciples,
   treatmentMyths,
@@ -46,6 +53,8 @@ import {
   priceMeta,
   scheduleRows,
   scheduleMeta,
+  type ChecklistGroup,
+  type DetailGroup,
   type InfoCard,
   type LegalPageContent,
 } from './content';
@@ -684,20 +693,24 @@ function PreparePage() {
         <div className="container">
           <SectionIntro
             eyebrow="Порядок подготовки"
-            title="Три шага до спокойного заезда"
-            text="Этот блок снижает тревогу перед поездкой: человек понимает, что сделать заранее и что произойдет в первый день."
+            title="Пять шагов до спокойного курса"
+            text="Этот блок снижает тревогу перед поездкой: человек понимает, что сделать заранее, какие документы собрать и что произойдет в первый день."
           />
-          <div className="arrival-step-grid">
-            {arrivalSteps.map((item, index) => (
+          <div className="arrival-step-grid arrival-flow-grid">
+            {arrivalFlow.map((item, index) => (
               <InfoTile key={item.title} item={item} style={getDelay(index)} />
             ))}
           </div>
         </div>
       </section>
       <section className="section section-muted">
-        <div className="container docs-layout">
-          <Checklist title="Взрослому" items={arrivalDocuments.adult} />
-          <Checklist title="Ребенку" items={arrivalDocuments.child} />
+        <div className="container">
+          <SectionIntro
+            eyebrow="Документы"
+            title="Что подготовить взрослым, детям и сопровождающим"
+            text="Список собран как рабочий чеклист. Финальные требования по детям и сопровождающим нужно сверить с администрацией перед публикацией."
+          />
+          <GroupedChecklist groups={arrivalDocumentGroups} />
         </div>
       </section>
       <section className="section">
@@ -711,6 +724,16 @@ function PreparePage() {
         </div>
       </section>
       <section className="section section-muted">
+        <div className="container">
+          <SectionIntro
+            eyebrow="Правила пребывания"
+            title="Санаторный режим, безопасность и медицинские ограничения"
+            text="Такие правила есть у большинства санаториев: они помогают гостю понимать, где заканчивается отдых и начинается медицинская ответственность."
+          />
+          <GroupedChecklist groups={stayRules} />
+        </div>
+      </section>
+      <section className="section">
         <div className="container split-layout">
           <Checklist title="Что взять с собой" items={packingList} />
           <div>
@@ -842,6 +865,36 @@ function OfficialPage({ onNavigate }: PageProps) {
       <section className="section section-muted">
         <div className="container">
           <SectionIntro
+            eyebrow="Сведения об учреждении"
+            title="Короткая официальная карточка без открытия PDF"
+            text="По референсам это один из главных блоков: проверяющий и гость должны быстро увидеть название, реквизиты, адреса, контакты, руководителя и режим работы."
+          />
+          <DetailGroupGrid groups={institutionDetails} />
+        </div>
+      </section>
+      <section className="section">
+        <div className="container official-license-layout">
+          <div>
+            <SectionIntro
+              eyebrow="Лицензия"
+              title="Медицинская деятельность текстом"
+              text="Ключевые сведения о лицензии вынесены на страницу, а PDF и XML остаются первоисточниками для сверки."
+            />
+            <DetailGroupGrid groups={licenseDetails} />
+          </div>
+          <div>
+            <SectionIntro
+              eyebrow="Перечень работ"
+              title="Что указано в лицензии"
+              text="Список сгруппирован для чтения. Перед публикацией как официальный текст формулировки стоит сверить с медчастью."
+            />
+            <GroupedChecklist groups={licensedWorkGroups} compact />
+          </div>
+        </div>
+      </section>
+      <section className="section section-muted">
+        <div className="container">
+          <SectionIntro
             eyebrow="Документы"
             title="Материалы, которые уже есть у нас"
             text="Файлы подключены к сайту и открываются из публичной папки. Перед публикацией останется сверить актуальность дат, реквизитов и согласовать финальные формулировки."
@@ -864,6 +917,22 @@ function OfficialPage({ onNavigate }: PageProps) {
         </div>
       </section>
       <section className="section">
+        <div className="container official-service-grid">
+          <div>
+            <SectionIntro
+              eyebrow="Пациенту"
+              title="Права, обязанности и обращения"
+              text="Эти блоки закрывают практическую часть официального слоя: что может пациент, что обязан соблюдать и куда обращаться."
+            />
+            <GroupedChecklist groups={patientRightsGroups} compact />
+          </div>
+          <div>
+            <GroupedChecklist groups={oversightContacts} compact />
+            <GroupedChecklist groups={paidServiceRules} compact />
+          </div>
+        </div>
+      </section>
+      <section className="section section-muted">
         <div className="container">
           <SectionIntro
             eyebrow="Правовые разделы"
@@ -1240,6 +1309,45 @@ function Checklist({ title, items }: { title: string; items: string[] }) {
         ))}
       </ul>
     </article>
+  );
+}
+
+function GroupedChecklist({ groups, compact = false }: { groups: ChecklistGroup[]; compact?: boolean }) {
+  return (
+    <div className={compact ? 'grouped-checklist grouped-checklist-compact' : 'grouped-checklist'}>
+      {groups.map((group, index) => (
+        <article key={group.title} className="checklist" data-animate style={getDelay(index)}>
+          <h2>{group.title}</h2>
+          {group.text ? <p>{group.text}</p> : null}
+          <ul>
+            {group.items.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        </article>
+      ))}
+    </div>
+  );
+}
+
+function DetailGroupGrid({ groups }: { groups: DetailGroup[] }) {
+  return (
+    <div className="detail-group-grid">
+      {groups.map((group, index) => (
+        <article key={group.title} className="detail-group" data-animate style={getDelay(index)}>
+          <h3>{group.title}</h3>
+          {group.text ? <p>{group.text}</p> : null}
+          <dl>
+            {group.rows.map((row) => (
+              <div key={row.label}>
+                <dt>{row.label}</dt>
+                <dd>{row.value}</dd>
+              </div>
+            ))}
+          </dl>
+        </article>
+      ))}
+    </div>
   );
 }
 
