@@ -929,8 +929,8 @@ function ContactsPage({ onNavigate }: PageProps) {
         <div className="container">
           <SectionIntro
             eyebrow="Связь"
-            title="Что уже можно использовать, а что требует подтверждения"
-            text="Мы не публикуем фейковый телефон как рабочий контакт. До сверки с учреждением сайт честно показывает статус данных."
+            title="Контакты из официальных материалов"
+            text="Телефон, email и почтовый адрес перенесены из реквизитов учреждения. Режим работы и порядок приема обращений еще нужно подтвердить."
           />
           <div className="contact-channel-grid">
             {contactChannels.map((item, index) => (
@@ -944,6 +944,8 @@ function ContactsPage({ onNavigate }: PageProps) {
           <article className="contact-panel" data-animate>
             <h2>Подтверждённые контакты</h2>
             {phoneHref ? <a href={phoneHref}>{contacts.phone}</a> : <span className="contact-status">{contacts.phone}</span>}
+            <span>Дополнительный телефон: {contacts.phoneExtra}</span>
+            <span>Факс: {contacts.fax}</span>
             <a href={`mailto:${contacts.email}`}>{contacts.email}</a>
             <p>{contacts.address}</p>
             <span>{contacts.note}</span>
@@ -951,8 +953,8 @@ function ContactsPage({ onNavigate }: PageProps) {
           <article className="contact-panel" data-animate style={getDelay(1)}>
             <h2>Официальные обращения</h2>
             <p>
-              Сейчас для обращений указан email учреждения. Почтовый адрес и телефон будут добавлены
-              после подтверждения официальной формулировки.
+              Для обращений указаны телефон, email и почтовый адрес учреждения. Перед публикацией
+              нужно добавить режим работы и подтвердить порядок приема обращений.
             </p>
             <p>
               Если позже появится форма обратной связи, рядом нужны политика обработки персональных
