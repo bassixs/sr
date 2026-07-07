@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState, type CSSProperties, type ReactElement } from 'react';
+import { useEffect, useMemo, useRef, useState, type CSSProperties, type ReactElement, type ReactNode } from 'react';
 import heroImage from '../photo/1.webp';
 import forestImage from '../photo/2.webp';
 import treatmentImage from '../photo/3.webp';
@@ -398,6 +398,85 @@ function getDelay(index: number): CSSProperties {
   return { '--delay': `${Math.min(index, 6) * 80}ms` } as CSSProperties;
 }
 
+function EditorialNote({ children }: { children: ReactNode }) {
+  return (
+    <aside className="editorial-note" data-animate>
+      <strong>Пометка для заказчика</strong>
+      <p>{children}</p>
+    </aside>
+  );
+}
+
+function AnimatedStat({ value, delay = 0 }: { value: string; delay?: number }) {
+  const elementRef = useRef<HTMLElement | null>(null);
+  const [displayValue, setDisplayValue] = useState(() => value.replace(/\d+/u, '0'));
+
+  useEffect(() => {
+    const element = elementRef.current;
+    const numberMatch = value.match(/\d+/u);
+
+    if (!element || !numberMatch) {
+      setDisplayValue(value);
+      return;
+    }
+
+    const target = Number(numberMatch[0]);
+    const prefix = value.slice(0, numberMatch.index);
+    const suffix = value.slice((numberMatch.index ?? 0) + numberMatch[0].length);
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (prefersReducedMotion || !('IntersectionObserver' in window)) {
+      setDisplayValue(value);
+      return;
+    }
+
+    let frame = 0;
+    let start = 0;
+    let timeout = 0;
+    let started = false;
+
+    const animate = (timestamp: number) => {
+      if (!start) {
+        start = timestamp;
+      }
+
+      const progress = Math.min((timestamp - start) / 1150, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = Math.round(target * eased);
+      setDisplayValue(`${prefix}${current}${suffix}`);
+
+      if (progress < 1) {
+        frame = window.requestAnimationFrame(animate);
+      } else {
+        setDisplayValue(value);
+      }
+    };
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !started) {
+          started = true;
+          timeout = window.setTimeout(() => {
+            frame = window.requestAnimationFrame(animate);
+          }, delay);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.45 },
+    );
+
+    observer.observe(element);
+
+    return () => {
+      observer.disconnect();
+      window.clearTimeout(timeout);
+      window.cancelAnimationFrame(frame);
+    };
+  }, [delay, value]);
+
+  return <strong ref={elementRef}>{displayValue}</strong>;
+}
+
 function HomePage({ onNavigate }: PageProps) {
   const taskPaths = ['/treatment', '/procedures', '/prepare', '/official'];
 
@@ -446,7 +525,7 @@ function HomePage({ onNavigate }: PageProps) {
           <SectionIntro
             eyebrow="Быстрый выбор"
             title="Что вы хотите узнать в первую очередь"
-            text="Четыре понятных входа помогают сразу попасть в нужный раздел: лечение, процедуры, подготовка к заезду или официальные документы."
+            text="Если вы родитель, пациент, сопровождающий или ищете документы, начните отсюда: каждый вход ведет к практическому разделу без лишнего поиска по меню."
           />
           <div className="task-link-grid">
             {homeTaskLinks.map((item, index) => (
@@ -469,57 +548,12 @@ function HomePage({ onNavigate }: PageProps) {
 
       <section className="section section-stats">
         <div className="container stat-ribbon" data-animate>
-          {keyStats.map((item) => (
+          {keyStats.map((item, index) => (
             <article key={item.title}>
-              <strong>{item.title}</strong>
+              <AnimatedStat value={item.title} delay={index * 120} />
               <span>{item.text}</span>
             </article>
           ))}
-        </div>
-      </section>
-
-      <section className="section">
-        <div className="container split-layout">
-          <SectionIntro
-            eyebrow="С чего начать"
-            title="Три быстрых пути по сайту"
-            text="Если вы впервые на сайте, двигайтесь по этим трём шагам: сначала оцените место, затем лечение, затем практические условия поездки."
-          />
-          <div className="visit-flow">
-            <button
-              type="button"
-              onClick={() => onNavigate('/about')}
-              aria-label="Понять место: перейти в раздел О санатории"
-              data-animate
-              style={getDelay(0)}
-            >
-              <span>01</span>
-              <strong>Понять место</strong>
-              <em>территория, инфраструктура, питание и отдых</em>
-            </button>
-            <button
-              type="button"
-              onClick={() => onNavigate('/treatment')}
-              aria-label="Разобраться в лечении: перейти в раздел Лечение"
-              data-animate
-              style={getDelay(1)}
-            >
-              <span>02</span>
-              <strong>Разобраться в лечении</strong>
-              <em>программы, профили, процедуры, врачи</em>
-            </button>
-            <button
-              type="button"
-              onClick={() => onNavigate('/prepare')}
-              aria-label="Подготовить поездку: перейти в раздел Перед заездом"
-              data-animate
-              style={getDelay(2)}
-            >
-              <span>03</span>
-              <strong>Подготовить поездку</strong>
-              <em>документы, ОМС, цены и правила заезда</em>
-            </button>
-          </div>
         </div>
       </section>
 
@@ -585,10 +619,36 @@ function AboutPage() {
         <div className="container split-layout">
           <SectionIntro
             eyebrow="Преимущества"
-            title="Почему гости выбирают Звездный"
-            text="Эти тезисы взяты из буклетов и презентационных материалов. Формулировки можно уточнить перед публикацией."
+            title="Чем санаторий отличается по содержанию"
+            text="На этой странице лучше показывать не те же цифры, что на главной, а устройство места: природные факторы, медицинское сопровождение, спокойный режим и будущие визуальные материалы."
           />
-          <CardGrid items={advantages} />
+          <div>
+            <CardGrid items={advantages} />
+            <EditorialNote>
+              Для заказчика: сюда позже стоит добавить реальные фото территории, кабинетов и номеров, а затем заменить их генерациями в едином стиле.
+            </EditorialNote>
+          </div>
+        </div>
+      </section>
+      <section className="section section-muted">
+        <div className="container">
+          <SectionIntro
+            eyebrow="Будущая галерея"
+            title="Территория, кабинеты и номера должны стать визуальным доказательством"
+            text="Когда будут отобраны реальные фотографии, этот блок можно превратить в спокойную галерею: территория, лечебные кабинеты, бассейн, номера, столовая и зоны отдыха."
+          />
+          <div className="future-gallery-grid">
+            {['Территория и прогулочные маршруты', 'Лечебные кабинеты и процедуры', 'Номера и бытовые условия', 'Столовая и зоны отдыха'].map((item, index) => (
+              <article key={item} data-animate style={getDelay(index)}>
+                <span>{String(index + 1).padStart(2, '0')}</span>
+                <h3>{item}</h3>
+                <p>Место для финального изображения и короткой подписи после отбора исходных фото.</p>
+              </article>
+            ))}
+          </div>
+          <EditorialNote>
+            Для заказчика: этот блок не должен остаться заглушкой в финальной версии. Его нужно заменить настоящими изображениями или генерациями по реальным фото.
+          </EditorialNote>
         </div>
       </section>
       <section className="section section-muted">
@@ -818,7 +878,7 @@ function DoctorsPage() {
       <PageHero
         eyebrow="Врачи и персонал"
         title="Квалифицированная команда, которая ведет гостя по курсу лечения"
-        text="Для обязательного раздела нужны ФИО, должности, образование, квалификация, сертификаты или аккредитация и график приема."
+        text="Раздел показывает, как медицинская команда сопровождает гостя: от первичного приема и назначений до наблюдения в ходе курса."
         image={staffImage}
       />
       <section className="section">
@@ -872,10 +932,13 @@ function DoctorsPage() {
         <div className="container">
           <SectionIntro
             eyebrow="Будущие карточки"
-            title="Какие данные нужны по каждому врачу"
-            text="Эта структура готова под реальные сведения: когда администрация передаст данные и согласия, карточки можно будет заполнить без переделки раздела."
+            title="Как будут выглядеть карточки специалистов"
+            text="Карточки должны быть спокойными и проверяемыми: должность, специализация, образование, квалификация, аккредитация и график приема."
           />
           <DetailGroupGrid groups={doctorCardTemplate} />
+          <EditorialNote>
+            Для заказчика: заполнить этот блок можно только после передачи ФИО, должностей, образования, квалификации, аккредитаций, графиков и согласий на публикацию фото.
+          </EditorialNote>
         </div>
       </section>
       <section className="section">
@@ -883,7 +946,7 @@ function DoctorsPage() {
           <SectionIntro
             eyebrow="Для официальной публикации"
             title="Что нужно запросить по каждому специалисту"
-            text="Этот блок можно оставить как внутреннюю карту подготовки: он показывает, какие данные нужны для обязательного раздела сайта медорганизации."
+            text="Для посетителя этот раздел позже должен стать обычными карточками врачей, а пока он помогает собрать данные без риска публикации неподтвержденной информации."
           />
           <div className="staff-request-grid">
             {staffRequests.map((item, index) => (
@@ -897,9 +960,12 @@ function DoctorsPage() {
           <SectionIntro
             eyebrow="Персональные данные"
             title="Публиковать врачей можно только после сверки и согласий"
-            text="Для госмедучреждения лучше честно оставить страницу в режиме подготовки, чем публиковать неподтвержденные ФИО, фото или квалификацию."
+            text="В финальной версии здесь должны остаться только подтвержденные публичные сведения о специалистах."
           />
           <GroupedChecklist groups={staffPublicationRules} />
+          <EditorialNote>
+            Для заказчика: неподтвержденные ФИО, фото и квалификацию публиковать нельзя. Нужна сверка с кадровыми документами и согласия сотрудников.
+          </EditorialNote>
         </div>
       </section>
     </>
@@ -947,8 +1013,8 @@ function StayPage() {
         <div className="container split-layout">
           <SectionIntro
             eyebrow="Номера и стоимость"
-            title="Категории размещения нужно сверить по прейскуранту"
-            text="Пока на сайте лучше честно показать структуру будущей карточки номера и дать ссылку на официальный PDF с ценами."
+            title="Номера и стоимость должны быть понятны до заезда"
+            text="Посетителю важно заранее увидеть формат размещения, состав путевки и официальный источник цен."
           />
           <div className="room-grid">
             {roomNotes.map((item, index) => (
@@ -967,9 +1033,12 @@ function StayPage() {
           <SectionIntro
             eyebrow="Карточки размещения"
             title="Что нужно показать по номерам и путевке"
-            text="Пока нет реальных фотографий и согласованного описания номеров, но структура уже готова: ее можно заполнить точными данными администрации."
+            text="Карточка номера должна быстро отвечать на практические вопросы: кому подходит, что внутри, сколько мест и что входит в путевку."
           />
           <DetailGroupGrid groups={roomCategoryDetails} />
+          <EditorialNote>
+            Для заказчика: нужны реальные категории номеров, оснащение, фотографии, доступность Wi-Fi, условия для детей и подтвержденный состав путевки.
+          </EditorialNote>
         </div>
       </section>
       <section className="section">
@@ -1049,9 +1118,12 @@ function PreparePage() {
           <SectionIntro
             eyebrow="Документы"
             title="Что подготовить взрослым, детям и сопровождающим"
-            text="Список собран как рабочий чеклист. Финальные требования по детям и сопровождающим нужно сверить с администрацией перед публикацией."
+            text="Список помогает заранее проверить основные документы и понять, что может понадобиться взрослым, детям и сопровождающим."
           />
           <GroupedChecklist groups={arrivalDocumentGroups} />
+          <EditorialNote>
+            Для заказчика: финальные требования по детям, сопровождающим и срокам действия справок нужно сверить с администрацией перед публикацией.
+          </EditorialNote>
         </div>
       </section>
       <section className="section">
@@ -1122,9 +1194,12 @@ function OmsPage() {
               в рамках программы государственных гарантий и территориальной программы.
             </p>
             <p>
-              Для публикации нужен согласованный текст: кто имеет право на направление, где его
-              получить, какие документы нужны и куда звонить.
+              В финальной версии здесь должен быть простой порядок действий: кто может получить
+              направление, где его оформить, какие документы подготовить и куда обратиться.
             </p>
+            <EditorialNote>
+              Для заказчика: нужен согласованный текст по ОМС, госгарантиям, направлению, документам и контактам ответственного сотрудника.
+            </EditorialNote>
           </article>
           <article data-animate style={getDelay(1)}>
             <span className="eyebrow">Платные услуги</span>
@@ -1208,9 +1283,12 @@ function OfficialPage({ onNavigate }: PageProps) {
           <SectionIntro
             eyebrow="Сведения об учреждении"
             title="Короткая официальная карточка без открытия PDF"
-            text="По референсам это один из главных блоков: проверяющий и гость должны быстро увидеть название, реквизиты, адреса, контакты, руководителя и режим работы."
+            text="Проверяющий и гость должны быстро увидеть название, реквизиты, адреса, контакты, руководителя и режим работы без открытия PDF."
           />
           <DetailGroupGrid groups={institutionDetails} />
+          <EditorialNote>
+            Для заказчика: режим работы и часть должностных/контактных данных нужно подтвердить у администрации перед публикацией.
+          </EditorialNote>
         </div>
       </section>
       <section className="section">
@@ -1227,9 +1305,12 @@ function OfficialPage({ onNavigate }: PageProps) {
             <SectionIntro
               eyebrow="Перечень работ"
               title="Что указано в лицензии"
-              text="Список сгруппирован для чтения. Перед публикацией как официальный текст формулировки стоит сверить с медчастью."
+              text="Список сгруппирован для чтения, чтобы посетитель видел направления медицинской деятельности в понятном виде."
             />
             <GroupedChecklist groups={licensedWorkGroups} compact />
+            <EditorialNote>
+              Для заказчика: формулировки лицензии нужно сверить с медицинской частью и первоисточниками перед финальной публикацией.
+            </EditorialNote>
           </div>
         </div>
       </section>
@@ -1238,7 +1319,7 @@ function OfficialPage({ onNavigate }: PageProps) {
           <SectionIntro
             eyebrow="Документы"
             title="Материалы, которые уже есть у нас"
-            text="Файлы подключены к сайту и открываются из публичной папки. Перед публикацией останется сверить актуальность дат, реквизитов и согласовать финальные формулировки."
+            text="Файлы подключены к сайту и открываются из публичной папки, чтобы посетитель мог свериться с первоисточником."
           />
           <div className="document-grid">
             {officialDocuments.map((document, index) => (
@@ -1255,6 +1336,9 @@ function OfficialPage({ onNavigate }: PageProps) {
               </article>
             ))}
           </div>
+          <EditorialNote>
+            Для заказчика: перед публикацией нужно проверить актуальность дат, реквизитов и финальные формулировки официальных документов.
+          </EditorialNote>
         </div>
       </section>
       <section className="section">
@@ -1278,7 +1362,7 @@ function OfficialPage({ onNavigate }: PageProps) {
           <SectionIntro
             eyebrow="Правовые разделы"
             title="Обязательная информация для сайта медорганизации"
-            text="Разделы подготовлены как заготовки: структура готова, тексты требуют юридической сверки и подстановки реальных данных учреждения."
+            text="Здесь собраны разделы, которые помогают посетителю найти правовую информацию, сведения о доступности, качестве и обращениях."
           />
           <div className="legal-links">
             {legalPages.map((page, index) => (
@@ -1340,13 +1424,16 @@ function ContactsPage({ onNavigate }: PageProps) {
           <SectionIntro
             eyebrow="Связь"
             title="Контакты из официальных материалов"
-            text="Телефон, email и почтовый адрес перенесены из реквизитов учреждения. Режим работы и порядок приема обращений еще нужно подтвердить."
+            text="Телефон, email и почтовый адрес перенесены из реквизитов учреждения, чтобы посетитель мог быстро выбрать удобный канал связи."
           />
           <div className="contact-channel-grid">
             {contactChannels.map((item, index) => (
               <InfoTile key={item.title} item={item} style={getDelay(index)} />
             ))}
           </div>
+          <EditorialNote>
+            Для заказчика: режим работы, разделение телефонов по отделам и порядок приема обращений нужно подтвердить отдельно.
+          </EditorialNote>
         </div>
       </section>
       <section className="section section-muted">
@@ -1387,12 +1474,12 @@ function ContactsPage({ onNavigate }: PageProps) {
           <article className="contact-panel" data-animate style={getDelay(1)}>
             <h2>Официальные обращения</h2>
             <p>
-              Для обращений указаны телефон, email и почтовый адрес учреждения. Перед публикацией
-              нужно добавить режим работы и подтвердить порядок приема обращений.
+              Для обращений указаны телефон, email и почтовый адрес учреждения. Посетителю важно
+              сразу понимать, какие данные приложить и как сформулировать запрос.
             </p>
             <p>
-              Если позже появится форма обратной связи, рядом нужны политика обработки персональных
-              данных и отдельное согласие на обработку.
+              Форма обратной связи пока не добавляется: для неё нужен согласованный способ приема
+              заявок и правила обработки персональных данных.
             </p>
             <div className="contact-action-list">
               <button type="button" onClick={() => window.location.href = `mailto:${contacts.email}`}>
@@ -1444,9 +1531,9 @@ function ContactsPage({ onNavigate }: PageProps) {
         </div>
       </section>
       <section className="section section-muted">
-        <div className="container">
+        <div className="container customer-zone">
           <SectionIntro
-            eyebrow="Перед запуском"
+            eyebrow="Для заказчика"
             title="Какие контактные данные ещё нужны от администрации"
             text="Этот блок помогает не потерять важные официальные детали: режим работы, точные маршруты, разделение телефонов и регламент обращений."
           />
@@ -1480,6 +1567,9 @@ function ContactsPage({ onNavigate }: PageProps) {
               </button>
             ))}
           </div>
+          <EditorialNote>
+            Для заказчика: эти разделы пока подготовлены как структура. Нужны юридическая сверка и подстановка реальных данных учреждения.
+          </EditorialNote>
         </div>
       </section>
     </>
