@@ -25,6 +25,7 @@ import {
   leisureCards,
   licensedWorkGroups,
   licenseDetails,
+  mealDetails,
   news,
   officialDocuments,
   officialFacts,
@@ -37,9 +38,13 @@ import {
   procedureHighlights,
   procedureRules,
   packingList,
+  roomCategoryDetails,
   roomNotes,
   routes,
   staffRequests,
+  stayInfrastructureGroups,
+  stayQuestions,
+  stayRoutine,
   stayRules,
   stayComfort,
   teamPrinciples,
@@ -680,6 +685,20 @@ function StayPage() {
         </div>
       </section>
       <section className="section section-muted">
+        <div className="container">
+          <SectionIntro
+            eyebrow="Режим дня"
+            title="Как проходит день между лечением, питанием и отдыхом"
+            text="Гостю важно заранее представить не только номер, но и весь ритм пребывания: когда процедуры, где паузы, как встроены питание и прогулки."
+          />
+          <div className="stay-routine-grid">
+            {stayRoutine.map((item, index) => (
+              <InfoTile key={item.title} item={item} style={getDelay(index)} />
+            ))}
+          </div>
+        </div>
+      </section>
+      <section className="section">
         <div className="container split-layout">
           <SectionIntro
             eyebrow="Номера и стоимость"
@@ -698,6 +717,36 @@ function StayPage() {
           </div>
         </div>
       </section>
+      <section className="section section-muted">
+        <div className="container">
+          <SectionIntro
+            eyebrow="Карточки размещения"
+            title="Что нужно показать по номерам и путевке"
+            text="Пока нет реальных фотографий и согласованного описания номеров, но структура уже готова: ее можно заполнить точными данными администрации."
+          />
+          <DetailGroupGrid groups={roomCategoryDetails} />
+        </div>
+      </section>
+      <section className="section">
+        <div className="container split-layout">
+          <SectionIntro
+            eyebrow="Питание"
+            title="Столовая и лечебное питание как часть курса"
+            text="Питание в санатории стоит объяснять не как гостиничный сервис, а как часть режима: оно связано с процедурами, отдыхом и рекомендациями врача."
+          />
+          <DetailGroupGrid groups={mealDetails} />
+        </div>
+      </section>
+      <section className="section section-muted">
+        <div className="container">
+          <SectionIntro
+            eyebrow="Инфраструктура"
+            title="Что есть на территории и как этим пользоваться"
+            text="Инфраструктура сгруппирована по задачам, чтобы посетителю было легче понять, что относится к лечению, что к отдыху, а что важно для семей."
+          />
+          <GroupedChecklist groups={stayInfrastructureGroups} />
+        </div>
+      </section>
       <section className="section">
         <div className="container">
           <SectionIntro
@@ -710,6 +759,16 @@ function StayPage() {
               <InfoTile key={item.title} item={item} style={getDelay(index)} />
             ))}
           </div>
+        </div>
+      </section>
+      <section className="section section-muted">
+        <div className="container">
+          <SectionIntro
+            eyebrow="Перед выбором"
+            title="Что лучше уточнить заранее"
+            text="Этот блок помогает не потеряться в бытовых деталях: номер, питание, дети, доступная среда и ограничения по процедурам."
+          />
+          <GroupedChecklist groups={stayQuestions} compact />
         </div>
       </section>
       <ImageBand image={familyImage} title="После процедур остается место для отдыха" text="Бассейн, библиотека, видеозал, бильярд, настольные игры и прогулки помогают удерживать санаторный режим без ощущения больницы." />
