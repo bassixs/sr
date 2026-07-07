@@ -13,7 +13,11 @@ import {
   arrivalTips,
   audienceCards,
   contacts,
+  contactAppealFlow,
   contactChannels,
+  contactDetailGroups,
+  contactPublicationChecklist,
+  contactPurposeGroups,
   contactRequestTips,
   contactRouteNotes,
   careTeamFlow,
@@ -1190,9 +1194,33 @@ function ContactsPage({ onNavigate }: PageProps) {
         </div>
       </section>
       <section className="section section-muted">
+        <div className="container">
+          <SectionIntro
+            eyebrow="Реквизиты"
+            title="Проверенные контакты и адреса лучше разделить по смыслу"
+            text="У учреждения есть контакты для связи и отдельные адресные формулировки в официальных документах. На странице они разведены, чтобы посетитель понимал, что использовать для письма, звонка и маршрута."
+          />
+          <DetailGroupGrid groups={contactDetailGroups} />
+        </div>
+      </section>
+      <section className="section">
+        <div className="container split-layout">
+          <SectionIntro
+            eyebrow="Обращение"
+            title="Как написать так, чтобы ответить было проще"
+            text="Вместо одной общей подсказки показываем простой порядок действий. Он подходит для письма на email, официального обращения или запроса по документам."
+          />
+          <div className="contact-flow-grid">
+            {contactAppealFlow.map((item, index) => (
+              <InfoTile key={item.title} item={item} style={getDelay(index)} />
+            ))}
+          </div>
+        </div>
+      </section>
+      <section className="section section-muted">
         <div className="container contact-layout">
           <article className="contact-panel" data-animate>
-            <h2>Подтверждённые контакты</h2>
+            <h2>Быстрая связь</h2>
             {phoneHref ? <a href={phoneHref}>{contacts.phone}</a> : <span className="contact-status">{contacts.phone}</span>}
             <span>Дополнительный телефон: {contacts.phoneExtra}</span>
             <span>Факс: {contacts.fax}</span>
@@ -1222,6 +1250,16 @@ function ContactsPage({ onNavigate }: PageProps) {
         </div>
       </section>
       <section className="section">
+        <div className="container">
+          <SectionIntro
+            eyebrow="Сценарии"
+            title="Куда направить вопрос: заезд, лечение или официальное обращение"
+            text="Посетителю не нужно угадывать, как описать запрос. Раздел подсказывает, какие данные приложить в зависимости от ситуации."
+          />
+          <GroupedChecklist groups={contactPurposeGroups} />
+        </div>
+      </section>
+      <section className="section section-muted">
         <div className="container split-layout">
           <SectionIntro
             eyebrow="Что указать"
@@ -1235,7 +1273,7 @@ function ContactsPage({ onNavigate }: PageProps) {
           </div>
         </div>
       </section>
-      <section className="section section-muted">
+      <section className="section">
         <div className="container">
           <SectionIntro
             eyebrow="Как добраться"
@@ -1247,6 +1285,16 @@ function ContactsPage({ onNavigate }: PageProps) {
               <InfoTile key={item.title} item={item} style={getDelay(index)} />
             ))}
           </div>
+        </div>
+      </section>
+      <section className="section section-muted">
+        <div className="container">
+          <SectionIntro
+            eyebrow="Перед запуском"
+            title="Какие контактные данные ещё нужны от администрации"
+            text="Этот блок помогает не потерять важные официальные детали: режим работы, точные маршруты, разделение телефонов и регламент обращений."
+          />
+          <GroupedChecklist groups={contactPublicationChecklist} compact />
         </div>
       </section>
       <section className="section">
