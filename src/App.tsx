@@ -45,8 +45,11 @@ import {
   teamPrinciples,
   treatmentMyths,
   treatmentAudience,
-  treatmentProfiles,
+  treatmentPrinciples,
+  treatmentProfileDetails,
+  treatmentProgramDetails,
   treatmentPrograms,
+  treatmentSafetyGroups,
   treatmentStages,
   legalPages,
   priceGroups,
@@ -460,6 +463,20 @@ function TreatmentPage() {
       <section className="section section-muted">
         <div className="container">
           <SectionIntro
+            eyebrow="Как собирается курс"
+            title="Лечение складывается из врача, режима, процедур и среды"
+            text="Этот блок помогает снять главное недопонимание: санаторий не продает отдельные процедуры как меню, а собирает безопасный курс вокруг состояния гостя."
+          />
+          <div className="treatment-principle-grid">
+            {treatmentPrinciples.map((item, index) => (
+              <InfoTile key={item.title} item={item} style={getDelay(index)} />
+            ))}
+          </div>
+        </div>
+      </section>
+      <section className="section">
+        <div className="container">
+          <SectionIntro
             eyebrow="Программы"
             title="Форматы пребывания"
             text="Каждую программу позже можно раскрыть отдельной страницей с условиями, сроками, документами и составом процедур."
@@ -481,6 +498,16 @@ function TreatmentPage() {
           </div>
         </div>
       </section>
+      <section className="section section-muted">
+        <div className="container">
+          <SectionIntro
+            eyebrow="Что внутри программы"
+            title="Чем отличаются форматы лечения"
+            text="Подробные карточки помогают понять, где нужен полный заезд, где восстановительный курс, а где достаточно курсовки."
+          />
+          <DetailGroupGrid groups={treatmentProgramDetails} />
+        </div>
+      </section>
       <section className="section">
         <div className="container treatment-pathway">
           <SectionIntro
@@ -500,9 +527,19 @@ function TreatmentPage() {
           <SectionIntro
             eyebrow="Профили лечения"
             title="Основные медицинские направления"
-            text="Формулировки должны оставаться информирующими: без обещаний результата и с акцентом на назначение врача."
+            text="Каждый профиль раскрыт через задачу курса, возможные методики и ограничение. Так текст остается полезным, но не обещает медицинский результат."
           />
-          <CardGrid items={treatmentProfiles} />
+          <DetailGroupGrid groups={treatmentProfileDetails} />
+        </div>
+      </section>
+      <section className="section">
+        <div className="container">
+          <SectionIntro
+            eyebrow="Безопасность"
+            title="Показания, осторожность и вопросы до заезда"
+            text="Для медицинского сайта важно заранее объяснять ограничения: процедуры назначаются врачом, а острые состояния требуют отдельной консультации."
+          />
+          <GroupedChecklist groups={treatmentSafetyGroups} />
         </div>
       </section>
       <ImageBand image={treatmentImage} title="Лечение здесь собрано вокруг спокойного режима" text="Восстановление складывается из врачебного наблюдения, процедур, питания, движения, прогулок и отдыха, а не из одной отдельной методики." />

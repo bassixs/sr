@@ -658,6 +658,7 @@ h3,
 }
 
 .treatment-audience,
+.treatment-principle-grid,
 .procedure-highlight-grid,
 .team-principles,
 .stay-grid,
@@ -669,6 +670,10 @@ h3,
 
 .treatment-pathway .section-intro {
   max-width: 780px;
+}
+
+.treatment-principle-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
 .pathway-grid {
@@ -1505,6 +1510,7 @@ button:focus-visible {
   .wide-grid,
   .staff-grid,
   .audience-grid,
+  .treatment-principle-grid,
   .document-grid,
   .official-summary,
   .grouped-checklist,
@@ -1599,6 +1605,7 @@ button:focus-visible {
   .program-grid,
   .staff-grid,
   .audience-grid,
+  .treatment-principle-grid,
   .news-grid,
   .document-grid,
   .official-summary,
