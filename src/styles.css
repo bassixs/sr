@@ -661,6 +661,7 @@ h3,
 .treatment-audience,
 .treatment-principle-grid,
 .procedure-highlight-grid,
+.procedure-flow-grid,
 .team-principles,
 .stay-grid,
 .leisure-grid,
@@ -674,6 +675,10 @@ h3,
 }
 
 .treatment-principle-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.procedure-flow-grid {
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
@@ -1517,6 +1522,7 @@ button:focus-visible {
   .grouped-checklist,
   .detail-group-grid,
   .procedure-highlight-grid,
+  .procedure-flow-grid,
   .team-principles,
   .stay-grid,
   .stay-routine-grid,
@@ -1614,6 +1620,7 @@ button:focus-visible {
   .grouped-checklist,
   .detail-group-grid,
   .procedure-highlight-grid,
+  .procedure-flow-grid,
   .team-principles,
   .stay-grid,
   .stay-routine-grid,

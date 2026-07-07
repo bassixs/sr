@@ -34,9 +34,12 @@ import {
   paidServiceRules,
   patientRightsGroups,
   procedureGroups,
+  procedureAssignmentFlow,
   procedureDayFlow,
   procedureHighlights,
+  procedurePurposeDetails,
   procedureRules,
+  procedureSafetyGroups,
   packingList,
   roomCategoryDetails,
   roomNotes,
@@ -576,6 +579,20 @@ function ProceduresPage() {
         </div>
       </section>
       <section className="section section-muted">
+        <div className="container">
+          <SectionIntro
+            eyebrow="Как назначают"
+            title="От карты и осмотра к расписанию процедур"
+            text="Такой маршрут помогает гостю понять, почему нельзя просто выбрать понравившуюся процедуру из списка."
+          />
+          <div className="procedure-flow-grid">
+            {procedureAssignmentFlow.map((item, index) => (
+              <InfoTile key={item.title} item={item} style={getDelay(index)} />
+            ))}
+          </div>
+        </div>
+      </section>
+      <section className="section">
         <div className="container procedure-list">
           {procedureGroups.map((group, index) => (
             <article className="procedure-group" key={group.title} data-animate style={getDelay(index)}>
@@ -593,6 +610,16 @@ function ProceduresPage() {
           ))}
         </div>
       </section>
+      <section className="section section-muted">
+        <div className="container">
+          <SectionIntro
+            eyebrow="Зачем назначают"
+            title="Что дают разные группы процедур"
+            text="Одна и та же процедура может быть полезной или лишней в зависимости от диагноза. Поэтому здесь объяснен смысл групп, а не обещан результат."
+          />
+          <DetailGroupGrid groups={procedurePurposeDetails} />
+        </div>
+      </section>
       <section className="section">
         <div className="container split-layout">
           <SectionIntro
@@ -605,6 +632,16 @@ function ProceduresPage() {
               <InfoTile key={item.title} item={item} style={getDelay(index)} />
             ))}
           </div>
+        </div>
+      </section>
+      <section className="section section-muted">
+        <div className="container">
+          <SectionIntro
+            eyebrow="Безопасность"
+            title="Сочетаемость, подготовка и дополнительные процедуры"
+            text="Этот блок честно отделяет возможности лечебной базы от медицинских ограничений и платных услуг."
+          />
+          <GroupedChecklist groups={procedureSafetyGroups} />
         </div>
       </section>
     </>
@@ -1191,6 +1228,16 @@ function ContactsPage({ onNavigate }: PageProps) {
               </button>
             ))}
           </div>
+        </div>
+      </section>
+      <section className="section section-muted">
+        <div className="container">
+          <SectionIntro
+            eyebrow="Безопасность"
+            title="Сочетаемость, подготовка и дополнительные процедуры"
+            text="Этот блок честно отделяет возможности лечебной базы от медицинских ограничений и платных услуг."
+          />
+          <GroupedChecklist groups={procedureSafetyGroups} />
         </div>
       </section>
     </>
