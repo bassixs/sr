@@ -663,6 +663,9 @@ function AboutPage() {
               <InfoTile key={item.title} item={item} style={getDelay(index)} />
             ))}
           </div>
+          <EditorialNote>
+            Для заказчика: по инфраструктуре нужны реальные фото, подтвержденные названия зон и список объектов, которые можно публиковать на сайте.
+          </EditorialNote>
         </div>
       </section>
     </>
@@ -1042,13 +1045,16 @@ function StayPage() {
         </div>
       </section>
       <section className="section">
-        <div className="container split-layout">
+        <div className="container">
           <SectionIntro
             eyebrow="Питание"
             title="Столовая и лечебное питание как часть курса"
             text="Питание в санатории стоит объяснять не как гостиничный сервис, а как часть режима: оно связано с процедурами, отдыхом и рекомендациями врача."
           />
           <DetailGroupGrid groups={mealDetails} />
+          <EditorialNote>
+            Для заказчика: нужны подтвержденные сведения по кратности питания, диетическим столам, детскому меню и формату обслуживания в столовой.
+          </EditorialNote>
         </div>
       </section>
       <section className="section section-muted">
@@ -1237,7 +1243,7 @@ function OmsPage() {
       <section className="section">
         <div className="container">
           <SectionIntro eyebrow="Прейскурант 2026" title={priceMeta.title} text={priceMeta.approved} />
-          <p className="legal-note" data-animate>{priceMeta.note}</p>
+          <p className="source-note" data-animate>{priceMeta.note}</p>
           <PriceTables />
           <div className="inline-actions" data-animate>
             <a className="button button-primary" href={getHref(priceMeta.href)} target="_blank" rel="noreferrer">
@@ -1520,14 +1526,17 @@ function ContactsPage({ onNavigate }: PageProps) {
         <div className="container">
           <SectionIntro
             eyebrow="Как добраться"
-            title="Маршрут будет опубликован после сверки адреса"
-            text="Пока в материалах есть противоречия по адресу и расстоянию от Калуги, поэтому на сайте лучше не закреплять неподтверждённую схему."
+            title="Маршрут лучше показывать только после подтверждения"
+            text="Чтобы посетитель не ошибся с дорогой, на сайте должен быть один согласованный адрес для навигатора и понятная схема проезда."
           />
           <div className="contact-route-grid">
             {contactRouteNotes.map((item, index) => (
               <InfoTile key={item.title} item={item} style={getDelay(index)} />
             ))}
           </div>
+          <EditorialNote>
+            Для заказчика: нужно подтвердить адрес для навигатора, точку въезда, ближайшую остановку, расстояние от Калуги и схему проезда.
+          </EditorialNote>
         </div>
       </section>
       <section className="section section-muted">
@@ -1654,7 +1663,10 @@ function LegalPage({ content }: { content: LegalPageContent }) {
       </section>
       <section className="section">
         <div className="container legal-body">
-          <p className="legal-note" data-animate>{content.reviewNote}</p>
+          <aside className="legal-note" data-animate>
+            <strong>Пометка для заказчика</strong>
+            <p>{content.reviewNote}</p>
+          </aside>
           <div className="legal-fact-grid">
             {content.facts.map((item, index) => (
               <InfoTile key={item.title} item={item} style={getDelay(index)} />

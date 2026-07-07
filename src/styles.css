@@ -1967,7 +1967,7 @@ button:focus-visible {
   gap: 22px;
 }
 
-.legal-note {
+.source-note {
   margin: 0;
   padding: 16px 20px;
   border: 1px solid rgba(185, 133, 43, 0.32);
@@ -1975,6 +1975,31 @@ button:focus-visible {
   color: var(--amber);
   background: var(--surface-warm);
   font-size: 0.95rem;
+}
+
+.legal-note {
+  margin: 0;
+  padding: 16px 20px;
+  border: 1px solid rgba(185, 133, 43, 0.32);
+  border-left: 5px solid var(--amber);
+  border-radius: 14px;
+  color: #4e3b15;
+  background: #fff7d8;
+  font-size: 0.95rem;
+}
+
+.legal-note strong {
+  display: block;
+  margin-bottom: 6px;
+  color: #6f4c0d;
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.legal-note p {
+  margin-bottom: 0;
+  color: #4e3b15;
 }
 
 .legal-fact-grid {
