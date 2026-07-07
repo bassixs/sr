@@ -662,6 +662,7 @@ h3,
 .treatment-principle-grid,
 .procedure-highlight-grid,
 .procedure-flow-grid,
+.care-team-flow,
 .team-principles,
 .stay-grid,
 .leisure-grid,
@@ -679,6 +680,10 @@ h3,
 }
 
 .procedure-flow-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.care-team-flow {
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
@@ -1523,6 +1528,7 @@ button:focus-visible {
   .detail-group-grid,
   .procedure-highlight-grid,
   .procedure-flow-grid,
+  .care-team-flow,
   .team-principles,
   .stay-grid,
   .stay-routine-grid,
@@ -1621,6 +1627,7 @@ button:focus-visible {
   .detail-group-grid,
   .procedure-highlight-grid,
   .procedure-flow-grid,
+  .care-team-flow,
   .team-principles,
   .stay-grid,
   .stay-routine-grid,

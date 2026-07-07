@@ -16,6 +16,8 @@ import {
   contactChannels,
   contactRequestTips,
   contactRouteNotes,
+  careTeamFlow,
+  doctorCardTemplate,
   doctorProfiles,
   guestJourney,
   homeHighlights,
@@ -45,6 +47,8 @@ import {
   roomNotes,
   routes,
   staffRequests,
+  staffRoleGroups,
+  staffPublicationRules,
   stayInfrastructureGroups,
   stayQuestions,
   stayRoutine,
@@ -681,6 +685,40 @@ function DoctorsPage() {
         </div>
       </section>
       <section className="section section-muted">
+        <div className="container">
+          <SectionIntro
+            eyebrow="Маршрут гостя"
+            title="Кто сопровождает курс от приема до рекомендаций"
+            text="Так посетитель понимает, что санаторное лечение держится не на одном враче, а на согласованной работе команды."
+          />
+          <div className="care-team-flow">
+            {careTeamFlow.map((item, index) => (
+              <InfoTile key={item.title} item={item} style={getDelay(index)} />
+            ))}
+          </div>
+        </div>
+      </section>
+      <section className="section">
+        <div className="container">
+          <SectionIntro
+            eyebrow="Команда"
+            title="Роли специалистов в санаторном курсе"
+            text="Пока нет подтвержденных персональных карточек, безопаснее объяснять роли команды и не выдумывать людей."
+          />
+          <GroupedChecklist groups={staffRoleGroups} />
+        </div>
+      </section>
+      <section className="section section-muted">
+        <div className="container">
+          <SectionIntro
+            eyebrow="Будущие карточки"
+            title="Какие данные нужны по каждому врачу"
+            text="Эта структура готова под реальные сведения: когда администрация передаст данные и согласия, карточки можно будет заполнить без переделки раздела."
+          />
+          <DetailGroupGrid groups={doctorCardTemplate} />
+        </div>
+      </section>
+      <section className="section">
         <div className="container split-layout">
           <SectionIntro
             eyebrow="Для официальной публикации"
@@ -692,6 +730,16 @@ function DoctorsPage() {
               <InfoTile key={item.title} item={item} style={getDelay(index)} />
             ))}
           </div>
+        </div>
+      </section>
+      <section className="section section-muted">
+        <div className="container">
+          <SectionIntro
+            eyebrow="Персональные данные"
+            title="Публиковать врачей можно только после сверки и согласий"
+            text="Для госмедучреждения лучше честно оставить страницу в режиме подготовки, чем публиковать неподтвержденные ФИО, фото или квалификацию."
+          />
+          <GroupedChecklist groups={staffPublicationRules} />
         </div>
       </section>
     </>
