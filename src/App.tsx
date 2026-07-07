@@ -96,10 +96,64 @@ const footerNavigation = [
     paths: ['/official', '/privacy', '/accessibility', '/quality', '/anti-corruption', '/news'],
   },
 ];
+const routeDescriptions: Record<string, string> = {
+  '/': 'Калужский санаторий Звездный: лечение, процедуры, врачи, проживание, документы, ОМС и официальная информация для гостей.',
+  '/about': 'Информация о Калужском санатории Звездный: лечебная база, лесная территория, инфраструктура, история и особенности санаторного восстановления.',
+  '/treatment': 'Программы и профили лечения в санатории Звездный: кому подходит курс, как назначаются процедуры и какие ограничения важно учитывать.',
+  '/procedures': 'Процедуры санатория Звездный: водолечение, ЛФК, физиотерапия, массаж, природные факторы и правила назначения врачом.',
+  '/doctors': 'Врачи и персонал санатория Звездный: как устроено медицинское сопровождение, какие роли есть в команде и какие данные нужны для карточек специалистов.',
+  '/stay': 'Проживание, питание и инфраструктура санатория Звездный: распорядок дня, номера, лечебное питание и условия пребывания.',
+  '/prepare': 'Подготовка к заезду в санаторий Звездный: документы, санаторно-курортная карта, правила пребывания и практические подсказки для гостей.',
+  '/oms': 'ОМС, цены и график заездов санатория Звездный: прейскурант, путевки, платные услуги и официальные документы.',
+  '/official': 'Официальная информация санатория Звездный: лицензия, устав, ЕГРЮЛ, реквизиты, права пациента, контролирующие органы и платные услуги.',
+  '/news': 'Новости санатория Звездный, объявления, материалы о здоровье, графиках, профилактике и жизни учреждения.',
+  '/contacts': 'Контакты санатория Звездный: телефон, email, адреса, порядок обращения, подготовка запроса и данные для связи.',
+  ...Object.fromEntries(legalPages.map((page) => [page.path, page.intro])),
+};
 
 function getPhoneHref(phone: string) {
   const normalized = phone.replace(/[^+\d]/g, '');
   return normalized.replace(/\D/g, '').length >= 10 ? `tel:${normalized}` : null;
+}
+
+function getRouteDescription(path: string) {
+  return routeDescriptions[path] ?? routeDescriptions['/'];
+}
+
+function setMetaByName(name: string, content: string) {
+  let element = document.querySelector<HTMLMetaElement>(`meta[name="${name}"]`);
+
+  if (!element) {
+    element = document.createElement('meta');
+    element.name = name;
+    document.head.appendChild(element);
+  }
+
+  element.content = content;
+}
+
+function setMetaByProperty(property: string, content: string) {
+  let element = document.querySelector<HTMLMetaElement>(`meta[property="${property}"]`);
+
+  if (!element) {
+    element = document.createElement('meta');
+    element.setAttribute('property', property);
+    document.head.appendChild(element);
+  }
+
+  element.content = content;
+}
+
+function setCanonical(href: string) {
+  let element = document.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+
+  if (!element) {
+    element = document.createElement('link');
+    element.rel = 'canonical';
+    document.head.appendChild(element);
+  }
+
+  element.href = href;
 }
 
 function normalizePath(pathname: string) {
@@ -154,7 +208,18 @@ function App() {
   useEffect(() => {
     const siteTitle = 'Калужский санаторий Звездный — официальный информационный сайт';
     const route = routes.find((item) => item.path === currentPath);
-    document.title = route && currentPath !== '/' ? `${route.label} — Калужский санаторий Звездный` : siteTitle;
+    const title = route && currentPath !== '/' ? `${route.label} — Калужский санаторий Звездный` : siteTitle;
+    const description = getRouteDescription(currentPath);
+    const canonicalUrl = new URL(getHref(currentPath), window.location.origin).toString();
+
+    document.title = title;
+    setMetaByName('description', description);
+    setMetaByName('twitter:title', title);
+    setMetaByName('twitter:description', description);
+    setMetaByProperty('og:title', title);
+    setMetaByProperty('og:description', description);
+    setMetaByProperty('og:url', canonicalUrl);
+    setCanonical(canonicalUrl);
   }, [currentPath]);
 
   useEffect(() => {
