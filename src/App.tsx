@@ -1278,16 +1278,6 @@ function ContactsPage({ onNavigate }: PageProps) {
           </div>
         </div>
       </section>
-      <section className="section section-muted">
-        <div className="container">
-          <SectionIntro
-            eyebrow="Безопасность"
-            title="Сочетаемость, подготовка и дополнительные процедуры"
-            text="Этот блок честно отделяет возможности лечебной базы от медицинских ограничений и платных услуг."
-          />
-          <GroupedChecklist groups={procedureSafetyGroups} />
-        </div>
-      </section>
     </>
   );
 }
@@ -1371,6 +1361,11 @@ function LegalPage({ content }: { content: LegalPageContent }) {
       <section className="section">
         <div className="container legal-body">
           <p className="legal-note" data-animate>{content.reviewNote}</p>
+          <div className="legal-fact-grid">
+            {content.facts.map((item, index) => (
+              <InfoTile key={item.title} item={item} style={getDelay(index)} />
+            ))}
+          </div>
           {content.sections.map((section, index) => (
             <article className="legal-section" key={section.heading} data-animate style={getDelay(index)}>
               <h2>{section.heading}</h2>
@@ -1386,6 +1381,7 @@ function LegalPage({ content }: { content: LegalPageContent }) {
               ) : null}
             </article>
           ))}
+          <GroupedChecklist groups={content.nextSteps} compact />
         </div>
       </section>
     </>
