@@ -82,6 +82,20 @@ import {
 const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
 const primaryNavPaths = ['/', '/about', '/treatment', '/procedures', '/doctors', '/stay', '/prepare', '/oms', '/official', '/contacts'];
 const heroFacts = ['40+ лет опыта', '150 коек', 'дети с 4 лет'];
+const footerNavigation = [
+  {
+    title: 'Санаторий',
+    paths: ['/', '/about', '/treatment', '/procedures', '/doctors'],
+  },
+  {
+    title: 'Поездка',
+    paths: ['/stay', '/prepare', '/oms', '/contacts'],
+  },
+  {
+    title: 'Официально',
+    paths: ['/official', '/privacy', '/accessibility', '/quality', '/anti-corruption', '/news'],
+  },
+];
 
 function getPhoneHref(phone: string) {
   const normalized = phone.replace(/[^+\d]/g, '');
@@ -1651,25 +1665,36 @@ function Footer({ onNavigate }: { onNavigate: (path: string) => void }) {
   return (
     <footer className="footer">
       <div className="container footer-layout">
-        <div>
+        <div className="footer-about">
           <strong>ГАУЗ Калужской области "Калужский санаторий "Звездный"</strong>
           <p>Информационный сайт санаторно-курортного учреждения.</p>
         </div>
-        <div className="footer-links">
-          {routes
-            .filter((route) => route.group === 'official')
-            .map((route) => (
-              <a
-                key={route.path}
-                href={getHref(route.path)}
-                onClick={(event) => {
-                  event.preventDefault();
-                  onNavigate(route.path);
-                }}
-              >
-                {route.label}
-              </a>
-            ))}
+        <div className="footer-nav" aria-label="Разделы сайта">
+          {footerNavigation.map((group) => (
+            <nav key={group.title} className="footer-links" aria-label={group.title}>
+              <h2>{group.title}</h2>
+              {group.paths.map((path) => {
+                const route = routes.find((item) => item.path === path);
+
+                if (!route) {
+                  return null;
+                }
+
+                return (
+                  <a
+                    key={route.path}
+                    href={getHref(route.path)}
+                    onClick={(event) => {
+                      event.preventDefault();
+                      onNavigate(route.path);
+                    }}
+                  >
+                    {route.label}
+                  </a>
+                );
+              })}
+            </nav>
+          ))}
         </div>
       </div>
     </footer>
