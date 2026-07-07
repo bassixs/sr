@@ -186,6 +186,7 @@ function App() {
     () => routes.find((route) => route.path === currentPath) ?? routes[0],
     [currentPath],
   );
+  const isKnownPage = currentPath in pages;
 
   const navigate = (path: string) => {
     window.history.pushState({}, '', getHref(path));
@@ -205,11 +206,38 @@ function App() {
         onToggleAccessible={() => setAccessible((value) => !value)}
         onNavigate={navigate}
       />
+      {currentPath !== '/' && isKnownPage ? <Breadcrumbs currentPath={currentPath} onNavigate={navigate} /> : null}
       <main id="main-content" tabIndex={-1}>
         <Page onNavigate={navigate} />
       </main>
       <Footer onNavigate={navigate} />
     </div>
+  );
+}
+
+function Breadcrumbs({ currentPath, onNavigate }: { currentPath: string; onNavigate: (path: string) => void }) {
+  const currentRoute = routes.find((route) => route.path === currentPath);
+
+  if (!currentRoute) {
+    return null;
+  }
+
+  return (
+    <nav className="breadcrumbs" aria-label="Хлебные крошки">
+      <div className="container breadcrumbs-inner">
+        <a
+          href={getHref('/')}
+          onClick={(event) => {
+            event.preventDefault();
+            onNavigate('/');
+          }}
+        >
+          Главная
+        </a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">{currentRoute.label}</span>
+      </div>
+    </nav>
   );
 }
 

@@ -252,6 +252,56 @@ h3,
   transform: translateY(-1px);
 }
 
+.breadcrumbs {
+  border-bottom: 1px solid rgba(22, 50, 46, 0.08);
+  background: rgba(255, 255, 255, 0.74);
+}
+
+.breadcrumbs-inner {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-height: 42px;
+  color: var(--muted);
+  font-size: 0.86rem;
+  font-weight: 760;
+}
+
+.breadcrumbs a,
+.breadcrumbs span[aria-current="page"] {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  border-radius: 8px;
+}
+
+.breadcrumbs a {
+  padding: 3px 7px;
+  color: var(--green-dark);
+  transition:
+    color 160ms ease,
+    background 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease;
+}
+
+.breadcrumbs a:hover,
+.breadcrumbs a:focus-visible {
+  color: var(--green);
+  background: #eef6f1;
+  box-shadow: 0 0 0 4px #eef6f1;
+  transform: translateY(-1px);
+}
+
+.breadcrumbs span[aria-hidden="true"] {
+  color: rgba(22, 50, 46, 0.34);
+}
+
+.breadcrumbs span[aria-current="page"] {
+  color: var(--ink);
+}
+
 .hero,
 .page-hero {
   position: relative;
