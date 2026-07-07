@@ -25,6 +25,7 @@ import {
   doctorProfiles,
   guestJourney,
   homeHighlights,
+  homeTaskLinks,
   infrastructure,
   institutionDetails,
   keyStats,
@@ -132,7 +133,8 @@ function App() {
   }, [accessible]);
 
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
   }, [currentPath]);
 
   useEffect(() => {
@@ -189,7 +191,7 @@ function App() {
         onToggleAccessible={() => setAccessible((value) => !value)}
         onNavigate={navigate}
       />
-      <main id="main-content">
+      <main id="main-content" tabIndex={-1}>
         <Page onNavigate={navigate} />
       </main>
       <Footer onNavigate={navigate} />
@@ -270,6 +272,7 @@ function NavLink({
     <a
       className={item.path === activePath ? 'is-active' : undefined}
       href={getHref(item.path)}
+      aria-current={item.path === activePath ? 'page' : undefined}
       onClick={(event) => {
         event.preventDefault();
         onNavigate(item.path);
@@ -289,6 +292,8 @@ function getDelay(index: number): CSSProperties {
 }
 
 function HomePage({ onNavigate }: PageProps) {
+  const taskPaths = ['/treatment', '/procedures', '/prepare', '/official'];
+
   return (
     <>
       <section className="hero hero-cover" style={{ backgroundImage: `url(${heroImage})` }}>
@@ -329,6 +334,32 @@ function HomePage({ onNavigate }: PageProps) {
         </div>
       </section>
 
+      <section className="section">
+        <div className="container">
+          <SectionIntro
+            eyebrow="Быстрый выбор"
+            title="Что вы хотите узнать в первую очередь"
+            text="Четыре понятных входа помогают сразу попасть в нужный раздел: лечение, процедуры, подготовка к заезду или официальные документы."
+          />
+          <div className="task-link-grid">
+            {homeTaskLinks.map((item, index) => (
+              <button
+                key={item.title}
+                type="button"
+                onClick={() => onNavigate(taskPaths[index])}
+                aria-label={`${item.title}: перейти в раздел ${item.meta}`}
+                data-animate
+                style={getDelay(index)}
+              >
+                {item.meta ? <span>{item.meta}</span> : null}
+                <strong>{item.title}</strong>
+                <em>{item.text}</em>
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="section section-stats">
         <div className="container stat-ribbon" data-animate>
           {keyStats.map((item) => (
@@ -348,17 +379,35 @@ function HomePage({ onNavigate }: PageProps) {
             text="Если вы впервые на сайте, двигайтесь по этим трём шагам: сначала оцените место, затем лечение, затем практические условия поездки."
           />
           <div className="visit-flow">
-            <button type="button" onClick={() => onNavigate('/about')} data-animate style={getDelay(0)}>
+            <button
+              type="button"
+              onClick={() => onNavigate('/about')}
+              aria-label="Понять место: перейти в раздел О санатории"
+              data-animate
+              style={getDelay(0)}
+            >
               <span>01</span>
               <strong>Понять место</strong>
               <em>территория, инфраструктура, питание и отдых</em>
             </button>
-            <button type="button" onClick={() => onNavigate('/treatment')} data-animate style={getDelay(1)}>
+            <button
+              type="button"
+              onClick={() => onNavigate('/treatment')}
+              aria-label="Разобраться в лечении: перейти в раздел Лечение"
+              data-animate
+              style={getDelay(1)}
+            >
               <span>02</span>
               <strong>Разобраться в лечении</strong>
               <em>программы, профили, процедуры, врачи</em>
             </button>
-            <button type="button" onClick={() => onNavigate('/prepare')} data-animate style={getDelay(2)}>
+            <button
+              type="button"
+              onClick={() => onNavigate('/prepare')}
+              aria-label="Подготовить поездку: перейти в раздел Перед заездом"
+              data-animate
+              style={getDelay(2)}
+            >
               <span>03</span>
               <strong>Подготовить поездку</strong>
               <em>документы, ОМС, цены и правила заезда</em>
