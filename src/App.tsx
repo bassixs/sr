@@ -24,7 +24,6 @@ import {
   doctorCardTemplate,
   doctorProfiles,
   guestJourney,
-  homeHighlights,
   homeTaskLinks,
   infrastructure,
   institutionDetails,
@@ -509,14 +508,6 @@ function HomePage({ onNavigate }: PageProps) {
             <span>Лесной массив</span>
             <strong>Лечебная база для профилактики, восстановления и семейного отдыха</strong>
           </aside>
-        </div>
-      </section>
-
-      <section className="section section-compact">
-        <div className="container feature-grid">
-          {homeHighlights.map((item, index) => (
-            <InfoTile key={item.title} item={item} animate style={getDelay(index)} />
-          ))}
         </div>
       </section>
 
