@@ -66,7 +66,6 @@ import {
   treatmentProgramDetails,
   treatmentPrograms,
   treatmentSafetyGroups,
-  treatmentStages,
   legalPages,
   priceGroups,
   priceMeta,
@@ -728,20 +727,6 @@ function TreatmentPage() {
             text="Сравните форматы лечения: полный заезд с проживанием, восстановительный курс или курсовка без круглосуточного пребывания."
           />
           <DetailGroupGrid groups={treatmentProgramDetails} />
-        </div>
-      </section>
-      <section className="section">
-        <div className="container treatment-pathway">
-          <SectionIntro
-            eyebrow="Маршрут лечения"
-            title="Процедуры не выбирают из списка, их назначают по состоянию"
-            text="Вы можете заранее посмотреть возможности санатория, но итоговый курс формируется после приема врача и изучения санаторно-курортной карты."
-          />
-          <div className="pathway-grid">
-            {treatmentStages.map((item, index) => (
-              <InfoTile key={item.title} item={item} style={getDelay(index)} />
-            ))}
-          </div>
         </div>
       </section>
       <section className="section section-muted">
