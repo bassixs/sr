@@ -601,7 +601,14 @@ function AboutPage() {
     <>
       <PageHero
         eyebrow="О санатории"
-        title="Лечебная база, лесная территория и опыт санаторного восстановления"
+        title={
+          <>
+            Лечебная база,<br />
+            лесная территория<br />
+            и опыт санаторного<br />
+            восстановления
+          </>
+        }
         text="Раздел собирает историю, преимущества, инфраструктуру и то, что отличает Звездный от обычного места отдыха."
         image={forestImage}
       />
@@ -1673,7 +1680,7 @@ function PageHero({
   image,
 }: {
   eyebrow: string;
-  title: string;
+  title: ReactNode;
   text: string;
   image: string;
 }) {
