@@ -873,6 +873,110 @@ h3,
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
+.treatment-thread {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-areas:
+    "step-1 ."
+    ". step-2"
+    "step-3 ."
+    ". step-4";
+  gap: 30px clamp(52px, 9vw, 128px);
+  margin-top: 36px;
+  padding: 10px 0;
+}
+
+.treatment-thread-line {
+  position: absolute;
+  inset: 40px 8% 46px;
+  z-index: 0;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.treatment-thread-line path {
+  fill: none;
+  stroke: rgba(15, 109, 88, 0.56);
+  stroke-width: 4;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+  filter: drop-shadow(0 12px 22px rgba(15, 109, 88, 0.16));
+}
+
+.treatment-thread-step {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+  min-height: 166px;
+  padding: 22px;
+  border: 1px solid rgba(15, 109, 88, 0.18);
+  border-radius: 14px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(238, 246, 241, 0.78)),
+    var(--surface);
+  box-shadow: 0 18px 42px rgba(20, 48, 43, 0.07);
+}
+
+.treatment-thread-step-1 {
+  grid-area: step-1;
+}
+
+.treatment-thread-step-2 {
+  grid-area: step-2;
+}
+
+.treatment-thread-step-3 {
+  grid-area: step-3;
+}
+
+.treatment-thread-step-4 {
+  grid-area: step-4;
+}
+
+.treatment-thread-marker {
+  display: grid;
+  width: 48px;
+  height: 48px;
+  place-items: center;
+  border: 2px solid rgba(15, 109, 88, 0.2);
+  border-radius: 50%;
+  color: #ffffff;
+  font-size: 0.88rem;
+  font-weight: 950;
+  background:
+    radial-gradient(circle at 35% 28%, rgba(255, 255, 255, 0.34), transparent 34%),
+    var(--green-dark);
+  box-shadow:
+    0 0 0 8px rgba(238, 244, 238, 0.96),
+    0 14px 26px rgba(10, 67, 56, 0.18);
+}
+
+.treatment-thread-copy span {
+  display: inline-block;
+  margin-bottom: 10px;
+  color: var(--blue);
+  font-size: 0.78rem;
+  font-weight: 950;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.treatment-thread-copy h3 {
+  margin-bottom: 10px;
+  color: var(--ink);
+  font-size: 1.22rem;
+  line-height: 1.25;
+  text-wrap: balance;
+}
+
+.treatment-thread-copy p {
+  margin-bottom: 0;
+}
+
 .pathway-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1903,6 +2007,45 @@ button:focus-visible {
 
   .footer-nav {
     grid-template-columns: 1fr;
+  }
+
+  .treatment-thread {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "step-1"
+      "step-2"
+      "step-3"
+      "step-4";
+    gap: 14px;
+    padding-left: 10px;
+  }
+
+  .treatment-thread::before {
+    content: "";
+    position: absolute;
+    top: 26px;
+    bottom: 26px;
+    left: 34px;
+    width: 2px;
+    border-radius: 99px;
+    background: linear-gradient(180deg, rgba(15, 109, 88, 0.48), rgba(35, 93, 122, 0.2));
+  }
+
+  .treatment-thread-line {
+    display: none;
+  }
+
+  .treatment-thread-step {
+    min-height: auto;
+    padding: 18px;
+  }
+
+  .treatment-thread-marker {
+    width: 42px;
+    height: 42px;
+    box-shadow:
+      0 0 0 6px rgba(238, 244, 238, 0.98),
+      0 10px 20px rgba(10, 67, 56, 0.14);
   }
 }
 

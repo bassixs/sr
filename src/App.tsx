@@ -693,11 +693,7 @@ function TreatmentPage() {
             title="Лечение складывается из врача, режима, процедур и среды"
             text="Процедуры не выбирают как отдельные услуги из меню: врач собирает курс вокруг вашего состояния, допустимой нагрузки и целей восстановления."
           />
-          <div className="treatment-principle-grid">
-            {treatmentPrinciples.map((item, index) => (
-              <InfoTile key={item.title} item={item} style={getDelay(index)} />
-            ))}
-          </div>
+          <TreatmentThread items={treatmentPrinciples} />
         </div>
       </section>
       <section className="section">
@@ -1754,6 +1750,33 @@ function InfoTile({
       <h3>{item.title}</h3>
       <p>{item.text}</p>
     </article>
+  );
+}
+
+function TreatmentThread({ items }: { items: InfoCard[] }) {
+  return (
+    <div className="treatment-thread" aria-label="Маршрут санаторного курса">
+      <svg className="treatment-thread-line" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M 23 12 C 72 10 82 23 77 35 C 71 50 29 42 23 58 C 15 79 65 72 77 88" />
+      </svg>
+      {items.map((item, index) => (
+        <article
+          className={`treatment-thread-step treatment-thread-step-${index + 1}`}
+          key={item.title}
+          data-animate
+          style={getDelay(index)}
+        >
+          <div className="treatment-thread-marker" aria-hidden="true">
+            {String(index + 1).padStart(2, '0')}
+          </div>
+          <div className="treatment-thread-copy">
+            {item.meta ? <span>{item.meta}</span> : null}
+            <h3>{item.title}</h3>
+            <p>{item.text}</p>
+          </div>
+        </article>
+      ))}
+    </div>
   );
 }
 
