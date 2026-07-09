@@ -777,11 +777,7 @@ function ProceduresPage() {
             title="От карты и осмотра к расписанию процедур"
             text="Сначала врач изучает карту и ограничения, затем подбирает процедуры и составляет расписание с учетом переносимости нагрузки."
           />
-          <div className="procedure-flow-grid">
-            {procedureAssignmentFlow.map((item, index) => (
-              <InfoTile key={item.title} item={item} style={getDelay(index)} />
-            ))}
-          </div>
+          <GuidedFlow items={procedureAssignmentFlow} label="Порядок назначения процедур" />
         </div>
       </section>
       <section className="section">
@@ -879,11 +875,7 @@ function DoctorsPage() {
             title="Кто сопровождает курс от приема до рекомендаций"
             text="В течение курса вы встречаетесь не с одним специалистом: лечение держится на согласованной работе врача, медицинских сестер и профильных сотрудников."
           />
-          <div className="care-team-flow">
-            {careTeamFlow.map((item, index) => (
-              <InfoTile key={item.title} item={item} style={getDelay(index)} />
-            ))}
-          </div>
+          <GuidedFlow items={careTeamFlow} label="Маршрут сопровождения гостя" />
         </div>
       </section>
       <section className="section">
@@ -1780,6 +1772,23 @@ function DocumentFlow({ items }: { items: InfoCard[] }) {
         <article key={item.title} data-animate style={getDelay(index)}>
           <span>{String(index + 1).padStart(2, '0')}</span>
           <div>
+            <h3>{item.title}</h3>
+            <p>{item.text}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  );
+}
+
+function GuidedFlow({ items, label }: { items: InfoCard[]; label: string }) {
+  return (
+    <div className="guided-flow" aria-label={label}>
+      {items.map((item, index) => (
+        <article key={item.title} data-animate style={getDelay(index)}>
+          <span>{String(index + 1).padStart(2, '0')}</span>
+          <div>
+            {item.meta ? <em>{item.meta}</em> : null}
             <h3>{item.title}</h3>
             <p>{item.text}</p>
           </div>
