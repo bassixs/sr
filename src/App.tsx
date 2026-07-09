@@ -23,6 +23,7 @@ import {
   careTeamFlow,
   doctorCardTemplate,
   doctorProfiles,
+  documentFlow,
   guestJourney,
   homeTaskLinks,
   infrastructure,
@@ -78,7 +79,7 @@ import {
 } from './content';
 
 const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
-const primaryNavPaths = ['/', '/about', '/treatment', '/procedures', '/doctors', '/stay', '/prepare', '/oms', '/official', '/contacts'];
+const primaryNavPaths = ['/', '/about', '/treatment', '/procedures', '/doctors', '/stay', '/prepare', '/contacts'];
 const heroFacts = ['40+ лет опыта', '150 коек', 'дети с 4 лет'];
 const footerNavigation = [
   {
@@ -970,9 +971,7 @@ function StayPage() {
             text="Заранее посмотрите, как устроен день: когда проходят процедуры, где остаются паузы, как встроены питание, прогулки и отдых."
           />
           <div className="stay-routine-grid">
-            {stayRoutine.map((item, index) => (
-              <InfoTile key={item.title} item={item} style={getDelay(index)} />
-            ))}
+            <JourneyList items={stayRoutine} />
           </div>
         </div>
       </section>
@@ -1090,6 +1089,7 @@ function PreparePage() {
             title="Что подготовить взрослым, детям и сопровождающим"
             text="Проверьте основные документы для взрослого, ребенка и сопровождающего, чтобы на заезде не пришлось срочно что-то досылать или оформлять."
           />
+          <DocumentFlow items={documentFlow} />
           <GroupedChecklist groups={arrivalDocumentGroups} />
           <EditorialNote>
             Вопрос заказчику: подтвердить требования по детям, сопровождающим и срокам действия справок. Решение: после сверки обновить список документов и убрать спорные формулировки.
@@ -1762,6 +1762,22 @@ function JourneyList({ items }: { items: { title: string; text: string }[] }) {
     <div className="journey-list">
       {items.map((item, index) => (
         <article key={item.title} data-animate style={{ '--delay': `${index * 80}ms` } as CSSProperties}>
+          <span>{String(index + 1).padStart(2, '0')}</span>
+          <div>
+            <h3>{item.title}</h3>
+            <p>{item.text}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  );
+}
+
+function DocumentFlow({ items }: { items: InfoCard[] }) {
+  return (
+    <div className="document-flow" aria-label="Порядок подготовки документов">
+      {items.map((item, index) => (
+        <article key={item.title} data-animate style={getDelay(index)}>
           <span>{String(index + 1).padStart(2, '0')}</span>
           <div>
             <h3>{item.title}</h3>
