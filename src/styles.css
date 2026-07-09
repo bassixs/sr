@@ -425,6 +425,10 @@ h3,
   text-shadow: 0 8px 36px rgba(0, 0, 0, 0.42);
 }
 
+.about-title-line {
+  white-space: nowrap;
+}
+
 .hero-copy p,
 .page-hero p {
   max-width: 650px;
@@ -1937,6 +1941,10 @@ button:focus-visible {
   .hero-copy h1,
   .page-hero h1 {
     font-size: clamp(2rem, 8vw, 2.75rem);
+  }
+
+  .about-title-line {
+    white-space: normal;
   }
 
   .hero-copy p,

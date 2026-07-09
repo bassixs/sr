@@ -606,7 +606,7 @@ function AboutPage() {
           <>
             Лечебная база,<br />
             лесная территория<br />
-            и опыт санаторного<br />
+            <span className="about-title-line">и опыт санаторного</span><br />
             восстановления
           </>
         }
