@@ -77,9 +77,10 @@ import {
   type InfoCard,
   type LegalPageContent,
 } from './content';
+import { GalleryPage as GalleryPageModule, PhotoShowcase } from './gallery';
 
 const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
-const primaryNavPaths = ['/', '/about', '/treatment', '/procedures', '/doctors', '/stay', '/prepare', '/contacts'];
+const primaryNavPaths = ['/', '/about', '/treatment', '/procedures', '/doctors', '/stay', '/gallery', '/prepare', '/contacts'];
 const heroFacts = ['40+ лет опыта', '150 коек', 'дети с 4 лет'];
 const footerNavigation = [
   {
@@ -399,6 +400,8 @@ function getDelay(index: number): CSSProperties {
 }
 
 function EditorialNote({ children }: { children: ReactNode }) {
+  if (!import.meta.env.DEV) return null;
+
   return (
     <aside className="editorial-note" data-animate>
       <strong>Пометка для заказчика</strong>
@@ -598,7 +601,7 @@ function HomePage({ onNavigate }: PageProps) {
   );
 }
 
-function AboutPage() {
+function AboutPage({ onNavigate }: PageProps) {
   return (
     <>
       <PageHero
@@ -646,6 +649,13 @@ function AboutPage() {
           </EditorialNote>
         </div>
       </section>
+      <PhotoShowcase
+        categoryIds={['grounds', 'lobby', 'event-hall', 'library']}
+        eyebrow="Фотографии"
+        title="Территория и общественные пространства"
+        text="Посмотрите корпус, прогулочные зоны, фойе и места для спокойного отдыха."
+        onOpenGallery={() => onNavigate('/gallery')}
+      />
     </>
   );
 }
@@ -748,14 +758,14 @@ function TreatmentPage() {
   );
 }
 
-function ProceduresPage() {
+function ProceduresPage({ onNavigate }: PageProps) {
   return (
     <>
       <PageHero
         eyebrow="Процедуры"
         title="Каталог лечебных методик и восстановительных процедур"
         text="Познакомьтесь с процедурами санатория заранее, но учитывайте: итоговый набор назначает врач после осмотра и изучения карты."
-        image={staffImage}
+        image={getHref('/media/gallery/pool/01.webp')}
       />
       <section className="section">
         <div className="container">
@@ -833,6 +843,13 @@ function ProceduresPage() {
           <GroupedChecklist groups={procedureSafetyGroups} />
         </div>
       </section>
+      <PhotoShowcase
+        categoryIds={['pool', 'exercise-therapy', 'massage', 'phyto-sauna']}
+        eyebrow="Лечебная база"
+        title="Процедурные кабинеты и восстановление"
+        text="Реальные пространства лечебной базы можно рассмотреть до приезда."
+        onOpenGallery={() => onNavigate('/gallery')}
+      />
     </>
   );
 }
@@ -933,7 +950,7 @@ function DoctorsPage() {
   );
 }
 
-function StayPage() {
+function StayPage({ onNavigate }: PageProps) {
   return (
     <>
       <PageHero
@@ -1047,6 +1064,13 @@ function StayPage() {
           <GroupedChecklist groups={stayQuestions} compact />
         </div>
       </section>
+      <PhotoShowcase
+        categoryIds={['room-1', 'dining-room', 'pool', 'library']}
+        eyebrow="Фотографии"
+        title="Номера, питание и отдых"
+        text="Посмотрите условия проживания и основные пространства, которыми гости пользуются каждый день."
+        onOpenGallery={() => onNavigate('/gallery')}
+      />
       <ImageBand image={familyImage} title="После процедур остается место для отдыха" text="Бассейн, библиотека, видеозал, бильярд, настольные игры и прогулки помогают удерживать санаторный режим без ощущения больницы." />
     </>
   );
@@ -1059,7 +1083,7 @@ function PreparePage() {
         eyebrow="Перед заездом"
         title="Документы, санаторно-курортная карта и правила процедур"
         text="Гость должен заранее понимать, что подготовить, где оформить карту и почему врач назначает процедуры только после осмотра."
-        image={documentsImage}
+        image={getHref('/media/gallery/lobby/03.webp')}
       />
       <section className="section">
         <div className="container">
@@ -1145,7 +1169,7 @@ function OmsPage() {
         eyebrow="ОМС и цены"
         title="Госгарантии, платные услуги и понятные условия получения путевки"
         text="Разберитесь, чем отличаются государственные гарантии, платные услуги, курсовки и проживание, и где смотреть официальные цены."
-        image={documentsImage}
+        image={getHref('/media/gallery/lobby/05.webp')}
       />
       <section className="section">
         <div className="container two-panels">
@@ -1220,7 +1244,7 @@ function OfficialPage({ onNavigate }: PageProps) {
         eyebrow="Официальная информация"
         title="Юридический и обязательный раздел для сайта госучреждения"
         text="Здесь собираются документы, лицензии, сведения о медорганизации, доступная среда, независимая оценка качества и персональные данные."
-        image={documentsImage}
+        image={getHref('/media/gallery/lobby/07.webp')}
       />
       <section className="section">
         <div className="container">
@@ -1354,7 +1378,7 @@ function NewsPage() {
         eyebrow="Новости и ЗОЖ"
         title="Жизнь санатория, объявления и полезные материалы"
         text="Новости собраны как спокойная лента: события, графики, профилактика, изменения в документах и памятки для гостей."
-        image={familyImage}
+        image={getHref('/media/gallery/event-hall/02.webp')}
       />
       <section className="section">
         <div className="container news-grid">
@@ -1371,128 +1395,6 @@ function NewsPage() {
   );
 }
 
-type GalleryImage = {
-  src: string;
-  thumb: string;
-  width: number;
-  height: number;
-};
-
-type GalleryCategory = {
-  id: string;
-  title: string;
-  images: GalleryImage[];
-};
-
-function GalleryPage() {
-  const [categories, setCategories] = useState<GalleryCategory[]>([]);
-  const [activeId, setActiveId] = useState('grounds');
-  const [activeImage, setActiveImage] = useState<number | null>(null);
-  const activeCategory = categories.find((category) => category.id === activeId) ?? categories[0];
-
-  useEffect(() => {
-    let cancelled = false;
-    fetch(getHref('/media/gallery/manifest.json'))
-      .then((response) => {
-        if (!response.ok) throw new Error('Не удалось загрузить фотогалерею');
-        return response.json() as Promise<GalleryCategory[]>;
-      })
-      .then((data) => {
-        if (!cancelled) setCategories(data);
-      })
-      .catch(() => {
-        if (!cancelled) setCategories([]);
-      });
-    return () => {
-      cancelled = true;
-    };
-  }, []);
-
-  useEffect(() => {
-    if (activeImage === null || !activeCategory) return;
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') setActiveImage(null);
-      if (event.key === 'ArrowRight') setActiveImage((activeImage + 1) % activeCategory.images.length);
-      if (event.key === 'ArrowLeft') setActiveImage((activeImage - 1 + activeCategory.images.length) % activeCategory.images.length);
-    };
-    document.body.classList.add('gallery-open');
-    window.addEventListener('keydown', onKeyDown);
-    return () => {
-      document.body.classList.remove('gallery-open');
-      window.removeEventListener('keydown', onKeyDown);
-    };
-  }, [activeCategory, activeImage]);
-
-  const chooseCategory = (id: string) => {
-    setActiveId(id);
-    setActiveImage(null);
-    window.requestAnimationFrame(() => document.querySelector('#gallery-photos')?.scrollIntoView({ behavior: 'smooth' }));
-  };
-
-  return (
-    <>
-      <PageHero
-        eyebrow="Фотогалерея"
-        title="Посмотрите санаторий до поездки"
-        text="Территория, номера, лечебные кабинеты, бассейн, столовая и пространства для отдыха собраны по разделам. Откройте кадр, чтобы рассмотреть его крупнее."
-        image={getHref('/media/gallery/grounds/02.webp')}
-      />
-      <section className="section">
-        <div className="container">
-          <SectionIntro
-            eyebrow="Все пространства"
-            title="Выберите, что хотите посмотреть"
-            text="Фотографии сгруппированы по помещениям и направлениям, чтобы нужное место находилось без долгой прокрутки."
-          />
-          {categories.length ? (
-            <div className="gallery-category-grid">
-              {categories.map((category) => (
-                <button key={category.id} type="button" onClick={() => chooseCategory(category.id)}>
-                  <img src={getHref(category.images[0].thumb)} alt="" loading="lazy" width="720" height="480" />
-                  <span><strong>{category.title}</strong><small>{category.images.length} фото</small></span>
-                </button>
-              ))}
-            </div>
-          ) : <p className="gallery-loading">Фотографии загружаются…</p>}
-        </div>
-      </section>
-      {activeCategory ? (
-        <section className="section section-muted" id="gallery-photos">
-          <div className="container">
-            <div className="gallery-toolbar">
-              <SectionIntro eyebrow="Выбранный раздел" title={activeCategory.title} text={`${activeCategory.images.length} фото в этом разделе`} />
-              <label>
-                <span>Другой раздел</span>
-                <select value={activeCategory.id} onChange={(event) => chooseCategory(event.target.value)}>
-                  {categories.map((category) => <option key={category.id} value={category.id}>{category.title}</option>)}
-                </select>
-              </label>
-            </div>
-            <div className="photo-grid">
-              {activeCategory.images.map((image, index) => (
-                <button key={image.src} type="button" onClick={() => setActiveImage(index)} aria-label={`Открыть фото ${index + 1}: ${activeCategory.title}`}>
-                  <img src={getHref(image.thumb)} alt={`${activeCategory.title}, фото ${index + 1}`} loading="lazy" width={image.width} height={image.height} />
-                </button>
-              ))}
-            </div>
-          </div>
-        </section>
-      ) : null}
-      {activeCategory && activeImage !== null ? (
-        <div className="lightbox" role="dialog" aria-modal="true" aria-label={`${activeCategory.title}, фото ${activeImage + 1}`} onClick={() => setActiveImage(null)}>
-          <button className="lightbox-close" type="button" onClick={() => setActiveImage(null)} aria-label="Закрыть">×</button>
-          <button className="lightbox-prev" type="button" onClick={(event) => { event.stopPropagation(); setActiveImage((activeImage - 1 + activeCategory.images.length) % activeCategory.images.length); }} aria-label="Предыдущее фото">‹</button>
-          <figure onClick={(event) => event.stopPropagation()}>
-            <img src={getHref(activeCategory.images[activeImage].src)} alt={`${activeCategory.title}, фото ${activeImage + 1}`} />
-            <figcaption>{activeCategory.title} · {activeImage + 1} из {activeCategory.images.length}</figcaption>
-          </figure>
-          <button className="lightbox-next" type="button" onClick={(event) => { event.stopPropagation(); setActiveImage((activeImage + 1) % activeCategory.images.length); }} aria-label="Следующее фото">›</button>
-        </div>
-      ) : null}
-    </>
-  );
-}
-
 function ContactsPage({ onNavigate }: PageProps) {
   const phoneHref = getPhoneHref(contacts.phone);
 
@@ -1502,7 +1404,7 @@ function ContactsPage({ onNavigate }: PageProps) {
         eyebrow="Контакты"
         title="Как связаться с санаторием и подготовить обращение"
         text="Здесь собраны подтверждённые каналы связи, статус данных, подсказки для обращения и быстрые ссылки на официальные разделы."
-        image={forestImage}
+        image={getHref('/media/gallery/grounds/06.webp')}
       />
       <section className="section">
         <div className="container">
@@ -2042,7 +1944,7 @@ const pages: Record<string, (props: PageProps) => ReactElement> = {
   '/procedures': ProceduresPage,
   '/doctors': DoctorsPage,
   '/stay': StayPage,
-  '/gallery': GalleryPage,
+  '/gallery': GalleryPageModule,
   '/prepare': PreparePage,
   '/oms': OmsPage,
   '/official': OfficialPage,

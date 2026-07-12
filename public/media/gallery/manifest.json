@@ -1,7 +1,7 @@
 [
   {
     "id": "pool",
-    "title": "бассейн",
+    "title": "Бассейн",
     "images": [
       {
         "src": "/media/gallery/pool/01.webp",
@@ -31,7 +31,7 @@
   },
   {
     "id": "library",
-    "title": "библиотека и зона ручных работ",
+    "title": "Библиотека и зона творчества",
     "images": [
       {
         "src": "/media/gallery/library/01.webp",
@@ -91,7 +91,7 @@
   },
   {
     "id": "event-hall",
-    "title": "зал мероприятий",
+    "title": "Зал мероприятий",
     "images": [
       {
         "src": "/media/gallery/event-hall/01.webp",
@@ -121,7 +121,7 @@
   },
   {
     "id": "playroom",
-    "title": "Игровая",
+    "title": "Игровая комната",
     "images": [
       {
         "src": "/media/gallery/playroom/01.webp",
@@ -139,7 +139,7 @@
   },
   {
     "id": "cinema",
-    "title": "кинозал",
+    "title": "Кинозал",
     "images": [
       {
         "src": "/media/gallery/cinema/01.webp",
@@ -157,7 +157,7 @@
   },
   {
     "id": "room-1",
-    "title": "комната 1",
+    "title": "Номера — подборка 1",
     "images": [
       {
         "src": "/media/gallery/room-1/01.webp",
@@ -187,7 +187,7 @@
   },
   {
     "id": "room-10",
-    "title": "комната 10",
+    "title": "Номера — подборка 10",
     "images": [
       {
         "src": "/media/gallery/room-10/01.webp",
@@ -217,7 +217,7 @@
   },
   {
     "id": "room-2",
-    "title": "комната 2",
+    "title": "Номера — подборка 2",
     "images": [
       {
         "src": "/media/gallery/room-2/01.webp",
@@ -241,7 +241,7 @@
   },
   {
     "id": "room-3",
-    "title": "комната 3",
+    "title": "Номера — подборка 3",
     "images": [
       {
         "src": "/media/gallery/room-3/01.webp",
@@ -271,7 +271,7 @@
   },
   {
     "id": "room-4",
-    "title": "комната 4",
+    "title": "Номера — подборка 4",
     "images": [
       {
         "src": "/media/gallery/room-4/01.webp",
@@ -301,7 +301,7 @@
   },
   {
     "id": "room-5",
-    "title": "комната 5",
+    "title": "Номера — подборка 5",
     "images": [
       {
         "src": "/media/gallery/room-5/01.webp",
@@ -325,7 +325,7 @@
   },
   {
     "id": "room-6",
-    "title": "комната 6",
+    "title": "Номера — подборка 6",
     "images": [
       {
         "src": "/media/gallery/room-6/01.webp",
@@ -349,7 +349,7 @@
   },
   {
     "id": "room-7",
-    "title": "комната 7",
+    "title": "Номера — подборка 7",
     "images": [
       {
         "src": "/media/gallery/room-7/01.webp",
@@ -385,7 +385,7 @@
   },
   {
     "id": "room-8",
-    "title": "комната 8",
+    "title": "Номера — подборка 8",
     "images": [
       {
         "src": "/media/gallery/room-8/01.webp",
@@ -427,7 +427,7 @@
   },
   {
     "id": "room-9",
-    "title": "комната 9",
+    "title": "Номера — подборка 9",
     "images": [
       {
         "src": "/media/gallery/room-9/01.webp",
@@ -457,7 +457,7 @@
   },
   {
     "id": "psychologist",
-    "title": "Комната психолога",
+    "title": "Кабинет психолога",
     "images": [
       {
         "src": "/media/gallery/psychologist/01.webp",
@@ -475,7 +475,7 @@
   },
   {
     "id": "exercise-therapy",
-    "title": "ЛФК",
+    "title": "Зал ЛФК",
     "images": [
       {
         "src": "/media/gallery/exercise-therapy/01.webp",
@@ -505,7 +505,7 @@
   },
   {
     "id": "massage",
-    "title": "массаж",
+    "title": "Массажный кабинет",
     "images": [
       {
         "src": "/media/gallery/massage/01.webp",
@@ -529,7 +529,7 @@
   },
   {
     "id": "medical-room",
-    "title": "медпункт",
+    "title": "Медицинский кабинет",
     "images": [
       {
         "src": "/media/gallery/medical-room/01.webp",
@@ -541,7 +541,7 @@
   },
   {
     "id": "mineral-water",
-    "title": "минеральная вода",
+    "title": "Минеральная вода",
     "images": [
       {
         "src": "/media/gallery/mineral-water/01.webp",
@@ -559,7 +559,7 @@
   },
   {
     "id": "table-tennis",
-    "title": "настольный теннис",
+    "title": "Настольный теннис",
     "images": [
       {
         "src": "/media/gallery/table-tennis/01.webp",
@@ -577,7 +577,7 @@
   },
   {
     "id": "procedure-1",
-    "title": "процедуры 1",
+    "title": "Лечебные кабинеты — подборка 1",
     "images": [
       {
         "src": "/media/gallery/procedure-1/01.webp",
@@ -601,7 +601,7 @@
   },
   {
     "id": "procedure-10",
-    "title": "процедуры 10",
+    "title": "Лечебные кабинеты — подборка 10",
     "images": [
       {
         "src": "/media/gallery/procedure-10/01.webp",
@@ -619,7 +619,7 @@
   },
   {
     "id": "procedure-11",
-    "title": "процедуры 11",
+    "title": "Лечебные кабинеты — подборка 11",
     "images": [
       {
         "src": "/media/gallery/procedure-11/01.webp",
@@ -637,7 +637,7 @@
   },
   {
     "id": "procedure-12",
-    "title": "процедуры 12",
+    "title": "Лечебные кабинеты — подборка 12",
     "images": [
       {
         "src": "/media/gallery/procedure-12/01.webp",
@@ -667,7 +667,7 @@
   },
   {
     "id": "procedure-13",
-    "title": "процедуры 13",
+    "title": "Лечебные кабинеты — подборка 13",
     "images": [
       {
         "src": "/media/gallery/procedure-13/01.webp",
@@ -685,7 +685,7 @@
   },
   {
     "id": "procedure-14",
-    "title": "процедуры 14",
+    "title": "Лечебные кабинеты — подборка 14",
     "images": [
       {
         "src": "/media/gallery/procedure-14/01.webp",
@@ -703,7 +703,7 @@
   },
   {
     "id": "procedure-15",
-    "title": "процедуры 15",
+    "title": "Лечебные кабинеты — подборка 15",
     "images": [
       {
         "src": "/media/gallery/procedure-15/01.webp",
@@ -733,7 +733,7 @@
   },
   {
     "id": "procedure-16",
-    "title": "процедуры 16",
+    "title": "Лечебные кабинеты — подборка 16",
     "images": [
       {
         "src": "/media/gallery/procedure-16/01.webp",
@@ -751,7 +751,7 @@
   },
   {
     "id": "procedure-2",
-    "title": "процедуры 2",
+    "title": "Лечебные кабинеты — подборка 2",
     "images": [
       {
         "src": "/media/gallery/procedure-2/01.webp",
@@ -763,7 +763,7 @@
   },
   {
     "id": "procedure-3",
-    "title": "процедуры 3",
+    "title": "Лечебные кабинеты — подборка 3",
     "images": [
       {
         "src": "/media/gallery/procedure-3/01.webp",
@@ -787,7 +787,7 @@
   },
   {
     "id": "procedure-4",
-    "title": "процедуры 4",
+    "title": "Лечебные кабинеты — подборка 4",
     "images": [
       {
         "src": "/media/gallery/procedure-4/01.webp",
@@ -805,7 +805,7 @@
   },
   {
     "id": "procedure-5",
-    "title": "процедуры 5",
+    "title": "Лечебные кабинеты — подборка 5",
     "images": [
       {
         "src": "/media/gallery/procedure-5/01.webp",
@@ -817,7 +817,7 @@
   },
   {
     "id": "procedure-6",
-    "title": "процедуры 6",
+    "title": "Лечебные кабинеты — подборка 6",
     "images": [
       {
         "src": "/media/gallery/procedure-6/01.webp",
@@ -835,7 +835,7 @@
   },
   {
     "id": "procedure-7",
-    "title": "процедуры 7",
+    "title": "Лечебные кабинеты — подборка 7",
     "images": [
       {
         "src": "/media/gallery/procedure-7/01.webp",
@@ -853,7 +853,7 @@
   },
   {
     "id": "procedure-8",
-    "title": "процедуры 8",
+    "title": "Лечебные кабинеты — подборка 8",
     "images": [
       {
         "src": "/media/gallery/procedure-8/01.webp",
@@ -877,7 +877,7 @@
   },
   {
     "id": "procedure-9",
-    "title": "процедурыы 9",
+    "title": "Лечебные кабинеты — подборка 9",
     "images": [
       {
         "src": "/media/gallery/procedure-9/01.webp",
@@ -895,7 +895,7 @@
   },
   {
     "id": "dining-room",
-    "title": "столовая",
+    "title": "Столовая",
     "images": [
       {
         "src": "/media/gallery/dining-room/01.webp",
@@ -925,7 +925,7 @@
   },
   {
     "id": "grounds",
-    "title": "территория",
+    "title": "Территория",
     "images": [
       {
         "src": "/media/gallery/grounds/01.webp",
@@ -1081,7 +1081,7 @@
   },
   {
     "id": "phyto-sauna",
-    "title": "фитосауна",
+    "title": "Фитосауна",
     "images": [
       {
         "src": "/media/gallery/phyto-sauna/01.webp",
@@ -1099,7 +1099,7 @@
   },
   {
     "id": "lobby",
-    "title": "фое",
+    "title": "Фойе",
     "images": [
       {
         "src": "/media/gallery/lobby/01.webp",
