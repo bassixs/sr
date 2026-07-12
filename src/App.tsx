@@ -88,7 +88,7 @@ const footerNavigation = [
   },
   {
     title: 'Поездка',
-    paths: ['/stay', '/prepare', '/oms', '/contacts'],
+    paths: ['/stay', '/gallery', '/prepare', '/oms', '/contacts'],
   },
   {
     title: 'Официально',
@@ -102,6 +102,7 @@ const routeDescriptions: Record<string, string> = {
   '/procedures': 'Процедуры санатория Звездный: водолечение, ЛФК, физиотерапия, массаж, природные факторы и правила назначения врачом.',
   '/doctors': 'Врачи и персонал санатория Звездный: как устроено медицинское сопровождение, какие роли есть в команде и какие данные нужны для карточек специалистов.',
   '/stay': 'Проживание, питание и инфраструктура санатория Звездный: распорядок дня, номера, лечебное питание и условия пребывания.',
+  '/gallery': 'Фотогалерея санатория Звездный: территория, номера, лечебные кабинеты, бассейн, столовая и зоны отдыха.',
   '/prepare': 'Подготовка к заезду в санаторий Звездный: документы, санаторно-курортная карта, правила пребывания и практические подсказки для гостей.',
   '/oms': 'ОМС, цены и график заездов санатория Звездный: прейскурант, путевки, платные услуги и официальные документы.',
   '/official': 'Официальная информация санатория Звездный: лицензия, устав, ЕГРЮЛ, реквизиты, права пациента, контролирующие органы и платные услуги.',
@@ -611,7 +612,7 @@ function AboutPage() {
           </>
         }
         text="Раздел собирает историю, преимущества, инфраструктуру и то, что отличает Звездный от обычного места отдыха."
-        image={forestImage}
+        image={getHref('/media/gallery/grounds/01.webp')}
       />
       <section className="section">
         <div className="container split-layout">
@@ -656,7 +657,7 @@ function TreatmentPage() {
         eyebrow="Лечение"
         title="Программы и профили лечения под разные задачи восстановления"
         text="Назначения зависят от санаторно-курортной карты, диагноза, показаний и противопоказаний. До заезда стоит подготовить документы и уточнить, какой формат курса вам подходит."
-        image={treatmentImage}
+        image={getHref('/media/gallery/procedure-1/01.webp')}
       />
       <section className="section">
         <div className="container">
@@ -843,7 +844,7 @@ function DoctorsPage() {
         eyebrow="Врачи и персонал"
         title="Квалифицированная команда, которая ведет гостя по курсу лечения"
         text="Медицинская команда сопровождает вас от первичного приема и назначений до наблюдения во время курса и итоговых рекомендаций."
-        image={staffImage}
+        image={getHref('/media/gallery/exercise-therapy/01.webp')}
       />
       <section className="section">
         <div className="container">
@@ -939,7 +940,7 @@ function StayPage() {
         eyebrow="Проживание и питание"
         title="Спокойный режим дня, номера и лечебное питание"
         text="Узнайте, где проходит проживание, как организовано питание, что предусмотрено для детей и чем заняться после процедур."
-        image={roomImage}
+        image={getHref('/media/gallery/room-1/01.webp')}
       />
       <section className="section">
         <div className="container">
@@ -1366,6 +1367,128 @@ function NewsPage() {
           ))}
         </div>
       </section>
+    </>
+  );
+}
+
+type GalleryImage = {
+  src: string;
+  thumb: string;
+  width: number;
+  height: number;
+};
+
+type GalleryCategory = {
+  id: string;
+  title: string;
+  images: GalleryImage[];
+};
+
+function GalleryPage() {
+  const [categories, setCategories] = useState<GalleryCategory[]>([]);
+  const [activeId, setActiveId] = useState('grounds');
+  const [activeImage, setActiveImage] = useState<number | null>(null);
+  const activeCategory = categories.find((category) => category.id === activeId) ?? categories[0];
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch(getHref('/media/gallery/manifest.json'))
+      .then((response) => {
+        if (!response.ok) throw new Error('Не удалось загрузить фотогалерею');
+        return response.json() as Promise<GalleryCategory[]>;
+      })
+      .then((data) => {
+        if (!cancelled) setCategories(data);
+      })
+      .catch(() => {
+        if (!cancelled) setCategories([]);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  useEffect(() => {
+    if (activeImage === null || !activeCategory) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setActiveImage(null);
+      if (event.key === 'ArrowRight') setActiveImage((activeImage + 1) % activeCategory.images.length);
+      if (event.key === 'ArrowLeft') setActiveImage((activeImage - 1 + activeCategory.images.length) % activeCategory.images.length);
+    };
+    document.body.classList.add('gallery-open');
+    window.addEventListener('keydown', onKeyDown);
+    return () => {
+      document.body.classList.remove('gallery-open');
+      window.removeEventListener('keydown', onKeyDown);
+    };
+  }, [activeCategory, activeImage]);
+
+  const chooseCategory = (id: string) => {
+    setActiveId(id);
+    setActiveImage(null);
+    window.requestAnimationFrame(() => document.querySelector('#gallery-photos')?.scrollIntoView({ behavior: 'smooth' }));
+  };
+
+  return (
+    <>
+      <PageHero
+        eyebrow="Фотогалерея"
+        title="Посмотрите санаторий до поездки"
+        text="Территория, номера, лечебные кабинеты, бассейн, столовая и пространства для отдыха собраны по разделам. Откройте кадр, чтобы рассмотреть его крупнее."
+        image={getHref('/media/gallery/grounds/02.webp')}
+      />
+      <section className="section">
+        <div className="container">
+          <SectionIntro
+            eyebrow="Все пространства"
+            title="Выберите, что хотите посмотреть"
+            text="Фотографии сгруппированы по помещениям и направлениям, чтобы нужное место находилось без долгой прокрутки."
+          />
+          {categories.length ? (
+            <div className="gallery-category-grid">
+              {categories.map((category) => (
+                <button key={category.id} type="button" onClick={() => chooseCategory(category.id)}>
+                  <img src={getHref(category.images[0].thumb)} alt="" loading="lazy" width="720" height="480" />
+                  <span><strong>{category.title}</strong><small>{category.images.length} фото</small></span>
+                </button>
+              ))}
+            </div>
+          ) : <p className="gallery-loading">Фотографии загружаются…</p>}
+        </div>
+      </section>
+      {activeCategory ? (
+        <section className="section section-muted" id="gallery-photos">
+          <div className="container">
+            <div className="gallery-toolbar">
+              <SectionIntro eyebrow="Выбранный раздел" title={activeCategory.title} text={`${activeCategory.images.length} фото в этом разделе`} />
+              <label>
+                <span>Другой раздел</span>
+                <select value={activeCategory.id} onChange={(event) => chooseCategory(event.target.value)}>
+                  {categories.map((category) => <option key={category.id} value={category.id}>{category.title}</option>)}
+                </select>
+              </label>
+            </div>
+            <div className="photo-grid">
+              {activeCategory.images.map((image, index) => (
+                <button key={image.src} type="button" onClick={() => setActiveImage(index)} aria-label={`Открыть фото ${index + 1}: ${activeCategory.title}`}>
+                  <img src={getHref(image.thumb)} alt={`${activeCategory.title}, фото ${index + 1}`} loading="lazy" width={image.width} height={image.height} />
+                </button>
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : null}
+      {activeCategory && activeImage !== null ? (
+        <div className="lightbox" role="dialog" aria-modal="true" aria-label={`${activeCategory.title}, фото ${activeImage + 1}`} onClick={() => setActiveImage(null)}>
+          <button className="lightbox-close" type="button" onClick={() => setActiveImage(null)} aria-label="Закрыть">×</button>
+          <button className="lightbox-prev" type="button" onClick={(event) => { event.stopPropagation(); setActiveImage((activeImage - 1 + activeCategory.images.length) % activeCategory.images.length); }} aria-label="Предыдущее фото">‹</button>
+          <figure onClick={(event) => event.stopPropagation()}>
+            <img src={getHref(activeCategory.images[activeImage].src)} alt={`${activeCategory.title}, фото ${activeImage + 1}`} />
+            <figcaption>{activeCategory.title} · {activeImage + 1} из {activeCategory.images.length}</figcaption>
+          </figure>
+          <button className="lightbox-next" type="button" onClick={(event) => { event.stopPropagation(); setActiveImage((activeImage + 1) % activeCategory.images.length); }} aria-label="Следующее фото">›</button>
+        </div>
+      ) : null}
     </>
   );
 }
@@ -1919,6 +2042,7 @@ const pages: Record<string, (props: PageProps) => ReactElement> = {
   '/procedures': ProceduresPage,
   '/doctors': DoctorsPage,
   '/stay': StayPage,
+  '/gallery': GalleryPage,
   '/prepare': PreparePage,
   '/oms': OmsPage,
   '/official': OfficialPage,

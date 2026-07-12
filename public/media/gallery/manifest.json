@@ -1,0 +1,1172 @@
+[
+  {
+    "id": "pool",
+    "title": "бассейн",
+    "images": [
+      {
+        "src": "/media/gallery/pool/01.webp",
+        "thumb": "/media/gallery/pool/01-thumb.webp",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "src": "/media/gallery/pool/02.webp",
+        "thumb": "/media/gallery/pool/02-thumb.webp",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/media/gallery/pool/03.webp",
+        "thumb": "/media/gallery/pool/03-thumb.webp",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/media/gallery/pool/04.webp",
+        "thumb": "/media/gallery/pool/04-thumb.webp",
+        "width": 1280,
+        "height": 960
+      }
+    ]
+  },
+  {
+    "id": "library",
+    "title": "библиотека и зона ручных работ",
+    "images": [
+      {
+        "src": "/media/gallery/library/01.webp",
+        "thumb": "/media/gallery/library/01-thumb.webp",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/media/gallery/library/02.webp",
+        "thumb": "/media/gallery/library/02-thumb.webp",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "src": "/media/gallery/library/03.webp",
+        "thumb": "/media/gallery/library/03-thumb.webp",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "src": "/media/gallery/library/04.webp",
+        "thumb": "/media/gallery/library/04-thumb.webp",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/media/gallery/library/05.webp",
+        "thumb": "/media/gallery/library/05-thumb.webp",
+        "width": 1280,
+        "height": 960
+      }
+    ]
+  },
+  {
+    "id": "billiards",
+    "title": "Бильярдная",
+    "images": [
+      {
+        "src": "/media/gallery/billiards/01.webp",
+        "thumb": "/media/gallery/billiards/01-thumb.webp",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/media/gallery/billiards/02.webp",
+        "thumb": "/media/gallery/billiards/02-thumb.webp",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "src": "/media/gallery/billiards/03.webp",
+        "thumb": "/media/gallery/billiards/03-thumb.webp",
+        "width": 1280,
+        "height": 960
+      }
+    ]
+  },
+  {
+    "id": "event-hall",
+    "title": "зал мероприятий",
+    "images": [
+      {
+        "src": "/media/gallery/event-hall/01.webp",
+        "thumb": "/media/gallery/event-hall/01-thumb.webp",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "src": "/media/gallery/event-hall/02.webp",
+        "thumb": "/media/gallery/event-hall/02-thumb.webp",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "src": "/media/gallery/event-hall/03.webp",
+        "thumb": "/media/gallery/event-hall/03-thumb.webp",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "src": "/media/gallery/event-hall/04.webp",
+        "thumb": "/media/gallery/event-hall/04-thumb.webp",
+        "width": 1280,
+        "height": 960
+      }
+    ]
+  },
+  {
+    "id": "playroom",
+    "title": "Игровая",
+    "images": [
+      {
+        "src": "/media/gallery/playroom/01.webp",
+        "thumb": "/media/gallery/playroom/01-thumb.webp",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "src": "/media/gallery/playroom/02.webp",
+        "thumb": "/media/gallery/playroom/02-thumb.webp",
+        "width": 1280,
+        "height": 960
+      }
+    ]
+  },
+  {
+    "id": "cinema",
+    "title": "кинозал",
+    "images": [
+      {
+        "src": "/media/gallery/cinema/01.webp",
+        "thumb": "/media/gallery/cinema/01-thumb.webp",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "src": "/media/gallery/cinema/02.webp",
+        "thumb": "/media/gallery/cinema/02-thumb.webp",
+        "width": 960,
+        "height": 1280
+      }
+    ]
+  },
+  {
+    "id": "room-1",
+    "title": "комната 1",
+    "images": [
+      {
+        "src": "/media/gallery/room-1/01.webp",
+        "thumb": "/media/gallery/room-1/01-thumb.webp",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "src": "/media/gallery/room-1/02.webp",
+        "thumb": "/media/gallery/room-1/02-thumb.webp",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "src": "/media/gallery/room-1/03.webp",
+        "thumb": "/media/gallery/room-1/03-thumb.webp",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "src": "/media/gallery/room-1/04.webp",
+        "thumb": "/media/gallery/room-1/04-thumb.webp",
+        "width": 1280,
+        "height": 960
+      }
+    ]
+  },
+  {
+    "id": "room-10",
+    "title": "комната 10",
+    "images": [
+      {
+        "src": "/media/gallery/room-10/01.webp",
+        "thumb": "/media/gallery/room-10/01-thumb.webp",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/media/gallery/room-10/02.webp",
+        "thumb": "/media/gallery/room-10/02-thumb.webp",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/media/gallery/room-10/03.webp",
+        "thumb": "/media/gallery/room-10/03-thumb.webp",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/media/gallery/room-10/04.webp",
+        "thumb": "/media/gallery/room-10/04-thumb.webp",
+        "width": 960,
+        "height": 1280
+      }
+    ]
+  },
+  {
+    "id": "room-2",
+    "title": "комната 2",
+    "images": [
+      {
+        "src": "/media/gallery/room-2/01.webp",
+        "thumb": "/media/gallery/room-2/01-thumb.webp",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/media/gallery/room-2/02.webp",
+        "thumb": "/media/gallery/room-2/02-thumb.webp",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/media/gallery/room-2/03.webp",
+        "thumb": "/media/gallery/room-2/03-thumb.webp",
+        "width": 960,
+        "height": 1280
+      }
+    ]
+  },
+  {
+    "id": "room-3",
+    "title": "комната 3",
+    "images": [
+      {
+        "src": "/media/gallery/room-3/01.webp",
+        "thumb": "/media/gallery/room-3/01-thumb.webp",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/media/gallery/room-3/02.webp",
+        "thumb": "/media/gallery/room-3/02-thumb.webp",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/media/gallery/room-3/03.webp",
+        "thumb": "/media/gallery/room-3/03-thumb.webp",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/media/gallery/room-3/04.webp",
+        "thumb": "/media/gallery/room-3/04-thumb.webp",
+        "width": 960,
+        "height": 1280
+      }
+    ]
+  },
+  {
+    "id": "room-4",
+    "title": "комната 4",
+    "images": [
+      {
+        "src": "/media/gallery/room-4/01.webp",
+        "thumb": "/media/gallery/room-4/01-thumb.webp",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/media/gallery/room-4/02.webp",
+        "thumb": "/media/gallery/room-4/02-thumb.webp",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/media/gallery/room-4/03.webp",
+        "thumb": "/media/gallery/room-4/03-thumb.webp",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/media/gallery/room-4/04.webp",
+        "thumb": "/media/gallery/room-4/04-thumb.webp",
+        "width": 960,
+        "height": 1280
+      }
+    ]
+  },
+  {
+    "id": "room-5",
+    "title": "комната 5",
+    "images": [
+      {
+        "src": "/media/gallery/room-5/01.webp",
+        "thumb": "/media/gallery/room-5/01-thumb.webp",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "src": "/media/gallery/room-5/02.webp",
+        "thumb": "/media/gallery/room-5/02-thumb.webp",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "src": "/media/gallery/room-5/03.webp",
+        "thumb": "/media/gallery/room-5/03-thumb.webp",
+        "width": 960,
+        "height": 1280
+      }
+    ]
+  },
+  {
+    "id": "room-6",
+    "title": "комната 6",
+    "images": [
+      {
+        "src": "/media/gallery/room-6/01.webp",
+        "thumb": "/media/gallery/room-6/01-thumb.webp",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "src": "/media/gallery/room-6/02.webp",
+        "thumb": "/media/gallery/room-6/02-thumb.webp",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "src": "/media/gallery/room-6/03.webp",
+        "thumb": "/media/gallery/room-6/03-thumb.webp",
+        "width": 1280,
+        "height": 960
+      }
+    ]
+  },
+  {
+    "id": "room-7",
+    "title": "комната 7",
+    "images": [
+      {
+        "src": "/media/gallery/room-7/01.webp",
+        "thumb": "/media/gallery/room-7/01-thumb.webp",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "src": "/media/gallery/room-7/02.webp",
+        "thumb": "/media/gallery/room-7/02-thumb.webp",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "src": "/media/gallery/room-7/03.webp",
+        "thumb": "/media/gallery/room-7/03-thumb.webp",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "src": "/media/gallery/room-7/04.webp",
+        "thumb": "/media/gallery/room-7/04-thumb.webp",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "src": "/media/gallery/room-7/05.webp",
+        "thumb": "/media/gallery/room-7/05-thumb.webp",
+        "width": 1280,
+        "height": 960
+      }
+    ]
+  },
+  {
+    "id": "room-8",
+    "title": "комната 8",
+    "images": [
+      {
+        "src": "/media/gallery/room-8/01.webp",
+        "thumb": "/media/gallery/room-8/01-thumb.webp",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/media/gallery/room-8/02.webp",
+        "thumb": "/media/gallery/room-8/02-thumb.webp",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "src": "/media/gallery/room-8/03.webp",
+        "thumb": "/media/gallery/room-8/03-thumb.webp",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/media/gallery/room-8/04.webp",
+        "thumb": "/media/gallery/room-8/04-thumb.webp",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/media/gallery/room-8/05.webp",
+        "thumb": "/media/gallery/room-8/05-thumb.webp",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "src": "/media/gallery/room-8/06.webp",
+        "thumb": "/media/gallery/room-8/06-thumb.webp",
+        "width": 960,
+        "height": 1280
+      }
+    ]
+  },
+  {
+    "id": "room-9",
+    "title": "комната 9",
+    "images": [
+      {
+        "src": "/media/gallery/room-9/01.webp",
+        "thumb": "/media/gallery/room-9/01-thumb.webp",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/media/gallery/room-9/02.webp",
+        "thumb": "/media/gallery/room-9/02-thumb.webp",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/media/gallery/room-9/03.webp",
+        "thumb": "/media/gallery/room-9/03-thumb.webp",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/media/gallery/room-9/04.webp",
+        "thumb": "/media/gallery/room-9/04-thumb.webp",
+        "width": 960,
+        "height": 1280
+      }
+    ]
+  },
+  {
+    "id": "psychologist",
+    "title": "Комната психолога",
+    "images": [
+      {
+        "src": "/media/gallery/psychologist/01.webp",
+        "thumb": "/media/gallery/psychologist/01-thumb.webp",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "src": "/media/gallery/psychologist/02.webp",
+        "thumb": "/media/gallery/psychologist/02-thumb.webp",
+        "width": 960,
+        "height": 1280
+      }
+    ]
+  },
+  {
+    "id": "exercise-therapy",
+    "title": "ЛФК",
+    "images": [
+      {
+        "src": "/media/gallery/exercise-therapy/01.webp",
+        "thumb": "/media/gallery/exercise-therapy/01-thumb.webp",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "src": "/media/gallery/exercise-therapy/02.webp",
+        "thumb": "/media/gallery/exercise-therapy/02-thumb.webp",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/media/gallery/exercise-therapy/03.webp",
+        "thumb": "/media/gallery/exercise-therapy/03-thumb.webp",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/media/gallery/exercise-therapy/04.webp",
+        "thumb": "/media/gallery/exercise-therapy/04-thumb.webp",
+        "width": 960,
+        "height": 1280
+      }
+    ]
+  },
+  {
+    "id": "massage",
+    "title": "массаж",
+    "images": [
+      {
+        "src": "/media/gallery/massage/01.webp",
+        "thumb": "/media/gallery/massage/01-thumb.webp",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/media/gallery/massage/02.webp",
+        "thumb": "/media/gallery/massage/02-thumb.webp",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/media/gallery/massage/03.webp",
+        "thumb": "/media/gallery/massage/03-thumb.webp",
+        "width": 960,
+        "height": 1280
+      }
+    ]
+  },
+  {
+    "id": "medical-room",
+    "title": "медпункт",
+    "images": [
+      {
+        "src": "/media/gallery/medical-room/01.webp",
+        "thumb": "/media/gallery/medical-room/01-thumb.webp",
+        "width": 1280,
+        "height": 960
+      }
+    ]
+  },
+  {
+    "id": "mineral-water",
+    "title": "минеральная вода",
+    "images": [
+      {
+        "src": "/media/gallery/mineral-water/01.webp",
+        "thumb": "/media/gallery/mineral-water/01-thumb.webp",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "src": "/media/gallery/mineral-water/02.webp",
+        "thumb": "/media/gallery/mineral-water/02-thumb.webp",
+        "width": 1280,
+        "height": 960
+      }
+    ]
+  },
+  {
+    "id": "table-tennis",
+    "title": "настольный теннис",
+    "images": [
+      {
+        "src": "/media/gallery/table-tennis/01.webp",
+        "thumb": "/media/gallery/table-tennis/01-thumb.webp",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/media/gallery/table-tennis/02.webp",
+        "thumb": "/media/gallery/table-tennis/02-thumb.webp",
+        "width": 960,
+        "height": 1280
+      }
+    ]
+  },
+  {
+    "id": "procedure-1",
+    "title": "процедуры 1",
+    "images": [
+      {
+        "src": "/media/gallery/procedure-1/01.webp",
+        "thumb": "/media/gallery/procedure-1/01-thumb.webp",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/media/gallery/procedure-1/02.webp",
+        "thumb": "/media/gallery/procedure-1/02-thumb.webp",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/media/gallery/procedure-1/03.webp",
+        "thumb": "/media/gallery/procedure-1/03-thumb.webp",
+        "width": 960,
+        "height": 1280
+      }
+    ]
+  },
+  {
+    "id": "procedure-10",
+    "title": "процедуры 10",
+    "images": [
+      {
+        "src": "/media/gallery/procedure-10/01.webp",
+        "thumb": "/media/gallery/procedure-10/01-thumb.webp",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/media/gallery/procedure-10/02.webp",
+        "thumb": "/media/gallery/procedure-10/02-thumb.webp",
+        "width": 960,
+        "height": 1280
+      }
+    ]
+  },
+  {
+    "id": "procedure-11",
+    "title": "процедуры 11",
+    "images": [
+      {
+        "src": "/media/gallery/procedure-11/01.webp",
+        "thumb": "/media/gallery/procedure-11/01-thumb.webp",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/media/gallery/procedure-11/02.webp",
+        "thumb": "/media/gallery/procedure-11/02-thumb.webp",
+        "width": 960,
+        "height": 1280
+      }
+    ]
+  },
+  {
+    "id": "procedure-12",
+    "title": "процедуры 12",
+    "images": [
+      {
+        "src": "/media/gallery/procedure-12/01.webp",
+        "thumb": "/media/gallery/procedure-12/01-thumb.webp",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "src": "/media/gallery/procedure-12/02.webp",
+        "thumb": "/media/gallery/procedure-12/02-thumb.webp",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "src": "/media/gallery/procedure-12/03.webp",
+        "thumb": "/media/gallery/procedure-12/03-thumb.webp",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/media/gallery/procedure-12/04.webp",
+        "thumb": "/media/gallery/procedure-12/04-thumb.webp",
+        "width": 960,
+        "height": 1280
+      }
+    ]
+  },
+  {
+    "id": "procedure-13",
+    "title": "процедуры 13",
+    "images": [
+      {
+        "src": "/media/gallery/procedure-13/01.webp",
+        "thumb": "/media/gallery/procedure-13/01-thumb.webp",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/media/gallery/procedure-13/02.webp",
+        "thumb": "/media/gallery/procedure-13/02-thumb.webp",
+        "width": 1280,
+        "height": 960
+      }
+    ]
+  },
+  {
+    "id": "procedure-14",
+    "title": "процедуры 14",
+    "images": [
+      {
+        "src": "/media/gallery/procedure-14/01.webp",
+        "thumb": "/media/gallery/procedure-14/01-thumb.webp",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "src": "/media/gallery/procedure-14/02.webp",
+        "thumb": "/media/gallery/procedure-14/02-thumb.webp",
+        "width": 1280,
+        "height": 960
+      }
+    ]
+  },
+  {
+    "id": "procedure-15",
+    "title": "процедуры 15",
+    "images": [
+      {
+        "src": "/media/gallery/procedure-15/01.webp",
+        "thumb": "/media/gallery/procedure-15/01-thumb.webp",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "src": "/media/gallery/procedure-15/02.webp",
+        "thumb": "/media/gallery/procedure-15/02-thumb.webp",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "src": "/media/gallery/procedure-15/03.webp",
+        "thumb": "/media/gallery/procedure-15/03-thumb.webp",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "src": "/media/gallery/procedure-15/04.webp",
+        "thumb": "/media/gallery/procedure-15/04-thumb.webp",
+        "width": 960,
+        "height": 1280
+      }
+    ]
+  },
+  {
+    "id": "procedure-16",
+    "title": "процедуры 16",
+    "images": [
+      {
+        "src": "/media/gallery/procedure-16/01.webp",
+        "thumb": "/media/gallery/procedure-16/01-thumb.webp",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/media/gallery/procedure-16/02.webp",
+        "thumb": "/media/gallery/procedure-16/02-thumb.webp",
+        "width": 960,
+        "height": 1280
+      }
+    ]
+  },
+  {
+    "id": "procedure-2",
+    "title": "процедуры 2",
+    "images": [
+      {
+        "src": "/media/gallery/procedure-2/01.webp",
+        "thumb": "/media/gallery/procedure-2/01-thumb.webp",
+        "width": 960,
+        "height": 1280
+      }
+    ]
+  },
+  {
+    "id": "procedure-3",
+    "title": "процедуры 3",
+    "images": [
+      {
+        "src": "/media/gallery/procedure-3/01.webp",
+        "thumb": "/media/gallery/procedure-3/01-thumb.webp",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/media/gallery/procedure-3/02.webp",
+        "thumb": "/media/gallery/procedure-3/02-thumb.webp",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/media/gallery/procedure-3/03.webp",
+        "thumb": "/media/gallery/procedure-3/03-thumb.webp",
+        "width": 960,
+        "height": 1280
+      }
+    ]
+  },
+  {
+    "id": "procedure-4",
+    "title": "процедуры 4",
+    "images": [
+      {
+        "src": "/media/gallery/procedure-4/01.webp",
+        "thumb": "/media/gallery/procedure-4/01-thumb.webp",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/media/gallery/procedure-4/02.webp",
+        "thumb": "/media/gallery/procedure-4/02-thumb.webp",
+        "width": 960,
+        "height": 1280
+      }
+    ]
+  },
+  {
+    "id": "procedure-5",
+    "title": "процедуры 5",
+    "images": [
+      {
+        "src": "/media/gallery/procedure-5/01.webp",
+        "thumb": "/media/gallery/procedure-5/01-thumb.webp",
+        "width": 960,
+        "height": 1280
+      }
+    ]
+  },
+  {
+    "id": "procedure-6",
+    "title": "процедуры 6",
+    "images": [
+      {
+        "src": "/media/gallery/procedure-6/01.webp",
+        "thumb": "/media/gallery/procedure-6/01-thumb.webp",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/media/gallery/procedure-6/02.webp",
+        "thumb": "/media/gallery/procedure-6/02-thumb.webp",
+        "width": 853,
+        "height": 1280
+      }
+    ]
+  },
+  {
+    "id": "procedure-7",
+    "title": "процедуры 7",
+    "images": [
+      {
+        "src": "/media/gallery/procedure-7/01.webp",
+        "thumb": "/media/gallery/procedure-7/01-thumb.webp",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/media/gallery/procedure-7/02.webp",
+        "thumb": "/media/gallery/procedure-7/02-thumb.webp",
+        "width": 960,
+        "height": 1280
+      }
+    ]
+  },
+  {
+    "id": "procedure-8",
+    "title": "процедуры 8",
+    "images": [
+      {
+        "src": "/media/gallery/procedure-8/01.webp",
+        "thumb": "/media/gallery/procedure-8/01-thumb.webp",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "src": "/media/gallery/procedure-8/02.webp",
+        "thumb": "/media/gallery/procedure-8/02-thumb.webp",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "src": "/media/gallery/procedure-8/03.webp",
+        "thumb": "/media/gallery/procedure-8/03-thumb.webp",
+        "width": 1280,
+        "height": 960
+      }
+    ]
+  },
+  {
+    "id": "procedure-9",
+    "title": "процедурыы 9",
+    "images": [
+      {
+        "src": "/media/gallery/procedure-9/01.webp",
+        "thumb": "/media/gallery/procedure-9/01-thumb.webp",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "src": "/media/gallery/procedure-9/02.webp",
+        "thumb": "/media/gallery/procedure-9/02-thumb.webp",
+        "width": 1280,
+        "height": 960
+      }
+    ]
+  },
+  {
+    "id": "dining-room",
+    "title": "столовая",
+    "images": [
+      {
+        "src": "/media/gallery/dining-room/01.webp",
+        "thumb": "/media/gallery/dining-room/01-thumb.webp",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "src": "/media/gallery/dining-room/02.webp",
+        "thumb": "/media/gallery/dining-room/02-thumb.webp",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "src": "/media/gallery/dining-room/03.webp",
+        "thumb": "/media/gallery/dining-room/03-thumb.webp",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "src": "/media/gallery/dining-room/04.webp",
+        "thumb": "/media/gallery/dining-room/04-thumb.webp",
+        "width": 1280,
+        "height": 960
+      }
+    ]
+  },
+  {
+    "id": "grounds",
+    "title": "территория",
+    "images": [
+      {
+        "src": "/media/gallery/grounds/01.webp",
+        "thumb": "/media/gallery/grounds/01-thumb.webp",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "src": "/media/gallery/grounds/02.webp",
+        "thumb": "/media/gallery/grounds/02-thumb.webp",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "src": "/media/gallery/grounds/03.webp",
+        "thumb": "/media/gallery/grounds/03-thumb.webp",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "src": "/media/gallery/grounds/04.webp",
+        "thumb": "/media/gallery/grounds/04-thumb.webp",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "src": "/media/gallery/grounds/05.webp",
+        "thumb": "/media/gallery/grounds/05-thumb.webp",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "src": "/media/gallery/grounds/06.webp",
+        "thumb": "/media/gallery/grounds/06-thumb.webp",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "src": "/media/gallery/grounds/07.webp",
+        "thumb": "/media/gallery/grounds/07-thumb.webp",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "src": "/media/gallery/grounds/08.webp",
+        "thumb": "/media/gallery/grounds/08-thumb.webp",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/media/gallery/grounds/09.webp",
+        "thumb": "/media/gallery/grounds/09-thumb.webp",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/media/gallery/grounds/10.webp",
+        "thumb": "/media/gallery/grounds/10-thumb.webp",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/media/gallery/grounds/11.webp",
+        "thumb": "/media/gallery/grounds/11-thumb.webp",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "src": "/media/gallery/grounds/12.webp",
+        "thumb": "/media/gallery/grounds/12-thumb.webp",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "src": "/media/gallery/grounds/13.webp",
+        "thumb": "/media/gallery/grounds/13-thumb.webp",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/media/gallery/grounds/14.webp",
+        "thumb": "/media/gallery/grounds/14-thumb.webp",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/media/gallery/grounds/15.webp",
+        "thumb": "/media/gallery/grounds/15-thumb.webp",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "src": "/media/gallery/grounds/16.webp",
+        "thumb": "/media/gallery/grounds/16-thumb.webp",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "src": "/media/gallery/grounds/17.webp",
+        "thumb": "/media/gallery/grounds/17-thumb.webp",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "src": "/media/gallery/grounds/18.webp",
+        "thumb": "/media/gallery/grounds/18-thumb.webp",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/media/gallery/grounds/19.webp",
+        "thumb": "/media/gallery/grounds/19-thumb.webp",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/media/gallery/grounds/20.webp",
+        "thumb": "/media/gallery/grounds/20-thumb.webp",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/media/gallery/grounds/21.webp",
+        "thumb": "/media/gallery/grounds/21-thumb.webp",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/media/gallery/grounds/22.webp",
+        "thumb": "/media/gallery/grounds/22-thumb.webp",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/media/gallery/grounds/23.webp",
+        "thumb": "/media/gallery/grounds/23-thumb.webp",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/media/gallery/grounds/24.webp",
+        "thumb": "/media/gallery/grounds/24-thumb.webp",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/media/gallery/grounds/25.webp",
+        "thumb": "/media/gallery/grounds/25-thumb.webp",
+        "width": 960,
+        "height": 1280
+      }
+    ]
+  },
+  {
+    "id": "phyto-sauna",
+    "title": "фитосауна",
+    "images": [
+      {
+        "src": "/media/gallery/phyto-sauna/01.webp",
+        "thumb": "/media/gallery/phyto-sauna/01-thumb.webp",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/media/gallery/phyto-sauna/02.webp",
+        "thumb": "/media/gallery/phyto-sauna/02-thumb.webp",
+        "width": 1280,
+        "height": 960
+      }
+    ]
+  },
+  {
+    "id": "lobby",
+    "title": "фое",
+    "images": [
+      {
+        "src": "/media/gallery/lobby/01.webp",
+        "thumb": "/media/gallery/lobby/01-thumb.webp",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "src": "/media/gallery/lobby/02.webp",
+        "thumb": "/media/gallery/lobby/02-thumb.webp",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "src": "/media/gallery/lobby/03.webp",
+        "thumb": "/media/gallery/lobby/03-thumb.webp",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "src": "/media/gallery/lobby/04.webp",
+        "thumb": "/media/gallery/lobby/04-thumb.webp",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "src": "/media/gallery/lobby/05.webp",
+        "thumb": "/media/gallery/lobby/05-thumb.webp",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "src": "/media/gallery/lobby/06.webp",
+        "thumb": "/media/gallery/lobby/06-thumb.webp",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "src": "/media/gallery/lobby/07.webp",
+        "thumb": "/media/gallery/lobby/07-thumb.webp",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "src": "/media/gallery/lobby/08.webp",
+        "thumb": "/media/gallery/lobby/08-thumb.webp",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "src": "/media/gallery/lobby/09.webp",
+        "thumb": "/media/gallery/lobby/09-thumb.webp",
+        "width": 1280,
+        "height": 960
+      },
+      {
+        "src": "/media/gallery/lobby/10.webp",
+        "thumb": "/media/gallery/lobby/10-thumb.webp",
+        "width": 960,
+        "height": 1280
+      },
+      {
+        "src": "/media/gallery/lobby/11.webp",
+        "thumb": "/media/gallery/lobby/11-thumb.webp",
+        "width": 960,
+        "height": 1280
+      }
+    ]
+  }
+]
