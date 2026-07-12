@@ -602,7 +602,16 @@ h3,
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(4, 32, 27, 0.06), rgba(4, 32, 27, 0.45));
+  background:
+    linear-gradient(
+      90deg,
+      rgba(3, 28, 24, 0.82) 0%,
+      rgba(3, 28, 24, 0.68) 28%,
+      rgba(3, 28, 24, 0.34) 52%,
+      rgba(3, 28, 24, 0.08) 76%,
+      transparent 100%
+    ),
+    linear-gradient(180deg, rgba(4, 32, 27, 0.04) 35%, rgba(4, 32, 27, 0.42) 100%);
 }
 
 .page-hero {
@@ -1327,22 +1336,43 @@ h3,
   position: relative;
   z-index: 2;
   align-self: end;
-  padding: 90px 0;
+  padding: 86px 0 78px;
   color: #ffffff;
 }
 
+.image-band-copy::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  left: -42px;
+  width: min(820px, calc(100% + 42px));
+  height: calc(100% - 72px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 30px;
+  background: linear-gradient(110deg, rgba(5, 39, 33, 0.3), rgba(5, 39, 33, 0.08));
+  box-shadow: 0 24px 70px rgba(2, 20, 17, 0.16);
+  backdrop-filter: blur(2px);
+  transform: translateY(-50%);
+}
+
 .image-band-copy h2 {
-  max-width: 760px;
+  max-width: 680px;
   margin-bottom: 16px;
   font-size: clamp(2.2rem, 4vw, 4rem);
   line-height: 1.08;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+  text-shadow: 0 3px 24px rgba(0, 18, 15, 0.3);
 }
 
 .image-band-copy p {
-  max-width: 680px;
+  max-width: 620px;
   margin-bottom: 0;
-  color: rgba(255, 255, 255, 0.82);
+  color: rgba(255, 255, 255, 0.9);
   font-size: 1.1rem;
+  line-height: 1.65;
+  text-shadow: 0 2px 16px rgba(0, 18, 15, 0.3);
 }
 
 .program-card {
@@ -2031,6 +2061,35 @@ button:focus-visible {
 
   .hero-copy p,
   .page-hero p {
+    font-size: 1rem;
+  }
+
+  .image-band {
+    min-height: 390px;
+  }
+
+  .image-band::after {
+    background:
+      linear-gradient(90deg, rgba(3, 28, 24, 0.8), rgba(3, 28, 24, 0.32) 88%),
+      linear-gradient(180deg, rgba(4, 32, 27, 0.04), rgba(4, 32, 27, 0.48));
+  }
+
+  .image-band-copy {
+    padding: 64px 0 56px;
+  }
+
+  .image-band-copy::before {
+    left: -16px;
+    width: calc(100% + 32px);
+    height: calc(100% - 42px);
+    border-radius: 22px;
+  }
+
+  .image-band-copy h2 {
+    font-size: clamp(2rem, 9vw, 2.8rem);
+  }
+
+  .image-band-copy p {
     font-size: 1rem;
   }
 
