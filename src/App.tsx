@@ -836,6 +836,7 @@ function ProceduresPage() {
           <GroupedChecklist groups={procedureSafetyGroups} />
         </div>
       </section>
+      <SanatoriumGallery preset="procedures" />
     </>
   );
 }
@@ -1050,6 +1051,7 @@ function StayPage() {
           <GroupedChecklist groups={stayQuestions} compact />
         </div>
       </section>
+      <SanatoriumGallery preset="stay" />
       <ImageBand image={familyImage} title="После процедур остается место для отдыха" text="Бассейн, библиотека, видеозал, бильярд, настольные игры и прогулки помогают удерживать санаторный режим без ощущения больницы." />
     </>
   );
