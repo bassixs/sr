@@ -77,10 +77,10 @@ import {
   type InfoCard,
   type LegalPageContent,
 } from './content';
-import { GalleryPage as GalleryPageModule, PhotoShowcase } from './gallery';
+import { SanatoriumGallery } from './gallery';
 
 const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
-const primaryNavPaths = ['/', '/about', '/treatment', '/procedures', '/doctors', '/stay', '/gallery', '/prepare', '/contacts'];
+const primaryNavPaths = ['/', '/about', '/treatment', '/procedures', '/doctors', '/stay', '/prepare', '/contacts'];
 const heroFacts = ['40+ лет опыта', '150 коек', 'дети с 4 лет'];
 const footerNavigation = [
   {
@@ -89,7 +89,7 @@ const footerNavigation = [
   },
   {
     title: 'Поездка',
-    paths: ['/stay', '/gallery', '/prepare', '/oms', '/contacts'],
+    paths: ['/stay', '/prepare', '/oms', '/contacts'],
   },
   {
     title: 'Официально',
@@ -103,7 +103,6 @@ const routeDescriptions: Record<string, string> = {
   '/procedures': 'Процедуры санатория Звездный: водолечение, ЛФК, физиотерапия, массаж, природные факторы и правила назначения врачом.',
   '/doctors': 'Врачи и персонал санатория Звездный: как устроено медицинское сопровождение, какие роли есть в команде и какие данные нужны для карточек специалистов.',
   '/stay': 'Проживание, питание и инфраструктура санатория Звездный: распорядок дня, номера, лечебное питание и условия пребывания.',
-  '/gallery': 'Фотогалерея санатория Звездный: территория, номера, лечебные кабинеты, бассейн, столовая и зоны отдыха.',
   '/prepare': 'Подготовка к заезду в санаторий Звездный: документы, санаторно-курортная карта, правила пребывания и практические подсказки для гостей.',
   '/oms': 'ОМС, цены и график заездов санатория Звездный: прейскурант, путевки, платные услуги и официальные документы.',
   '/official': 'Официальная информация санатория Звездный: лицензия, устав, ЕГРЮЛ, реквизиты, права пациента, контролирующие органы и платные услуги.',
@@ -601,7 +600,7 @@ function HomePage({ onNavigate }: PageProps) {
   );
 }
 
-function AboutPage({ onNavigate }: PageProps) {
+function AboutPage() {
   return (
     <>
       <PageHero
@@ -649,13 +648,7 @@ function AboutPage({ onNavigate }: PageProps) {
           </EditorialNote>
         </div>
       </section>
-      <PhotoShowcase
-        categoryIds={['grounds', 'lobby', 'event-hall', 'library']}
-        eyebrow="Фотографии"
-        title="Территория и общественные пространства"
-        text="Посмотрите корпус, прогулочные зоны, фойе и места для спокойного отдыха."
-        onOpenGallery={() => onNavigate('/gallery')}
-      />
+      <SanatoriumGallery />
     </>
   );
 }
@@ -758,7 +751,7 @@ function TreatmentPage() {
   );
 }
 
-function ProceduresPage({ onNavigate }: PageProps) {
+function ProceduresPage() {
   return (
     <>
       <PageHero
@@ -843,13 +836,6 @@ function ProceduresPage({ onNavigate }: PageProps) {
           <GroupedChecklist groups={procedureSafetyGroups} />
         </div>
       </section>
-      <PhotoShowcase
-        categoryIds={['pool', 'exercise-therapy', 'massage', 'phyto-sauna']}
-        eyebrow="Лечебная база"
-        title="Процедурные кабинеты и восстановление"
-        text="Реальные пространства лечебной базы можно рассмотреть до приезда."
-        onOpenGallery={() => onNavigate('/gallery')}
-      />
     </>
   );
 }
@@ -950,7 +936,7 @@ function DoctorsPage() {
   );
 }
 
-function StayPage({ onNavigate }: PageProps) {
+function StayPage() {
   return (
     <>
       <PageHero
@@ -1064,13 +1050,6 @@ function StayPage({ onNavigate }: PageProps) {
           <GroupedChecklist groups={stayQuestions} compact />
         </div>
       </section>
-      <PhotoShowcase
-        categoryIds={['room-1', 'dining-room', 'pool', 'library']}
-        eyebrow="Фотографии"
-        title="Номера, питание и отдых"
-        text="Посмотрите условия проживания и основные пространства, которыми гости пользуются каждый день."
-        onOpenGallery={() => onNavigate('/gallery')}
-      />
       <ImageBand image={familyImage} title="После процедур остается место для отдыха" text="Бассейн, библиотека, видеозал, бильярд, настольные игры и прогулки помогают удерживать санаторный режим без ощущения больницы." />
     </>
   );
@@ -1944,7 +1923,6 @@ const pages: Record<string, (props: PageProps) => ReactElement> = {
   '/procedures': ProceduresPage,
   '/doctors': DoctorsPage,
   '/stay': StayPage,
-  '/gallery': GalleryPageModule,
   '/prepare': PreparePage,
   '/oms': OmsPage,
   '/official': OfficialPage,

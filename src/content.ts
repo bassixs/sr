@@ -67,7 +67,6 @@ export const routes: RouteItem[] = [
   { label: 'Процедуры', path: '/procedures', group: 'main' },
   { label: 'Врачи', path: '/doctors', group: 'main' },
   { label: 'Проживание', path: '/stay', group: 'info' },
-  { label: 'Фотогалерея', path: '/gallery', group: 'info' },
   { label: 'Перед заездом', path: '/prepare', group: 'info' },
   { label: 'ОМС и цены', path: '/oms', group: 'info' },
   { label: 'Официально', path: '/official', group: 'official' },
