@@ -1712,6 +1712,19 @@ h3,
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
+.contact-appeal-layout {
+  display: grid;
+  gap: 30px;
+}
+
+.contact-appeal-layout .section-intro {
+  max-width: 780px;
+}
+
+.contact-appeal-layout .contact-flow-grid {
+  margin-top: 0;
+}
+
 .contact-tip-list {
   display: grid;
   gap: 14px;

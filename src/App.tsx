@@ -1413,7 +1413,7 @@ function ContactsPage({ onNavigate }: PageProps) {
         </div>
       </section>
       <section className="section">
-        <div className="container split-layout">
+        <div className="container contact-appeal-layout">
           <SectionIntro
             eyebrow="Обращение"
             title="Как написать так, чтобы ответить было проще"
