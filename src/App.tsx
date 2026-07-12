@@ -315,6 +315,7 @@ type NavigationProps = {
 function Header({ activePath, accessible, onToggleAccessible, onNavigate }: NavigationProps) {
   const mainRoutes = routes.filter((route) => primaryNavPaths.includes(route.path));
   const phoneHref = getPhoneHref(contacts.phone);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <header className="site-header">
@@ -337,6 +338,16 @@ function Header({ activePath, accessible, onToggleAccessible, onNavigate }: Navi
 
         <div className="header-actions">
           <button
+            className="menu-toggle"
+            type="button"
+            aria-expanded={menuOpen}
+            aria-controls="primary-navigation"
+            onClick={() => setMenuOpen((value) => !value)}
+          >
+            <span aria-hidden="true">{menuOpen ? '×' : '☰'}</span>
+            {menuOpen ? 'Закрыть' : 'Меню'}
+          </button>
+          <button
             className="utility-button"
             type="button"
             onClick={onToggleAccessible}
@@ -354,10 +365,10 @@ function Header({ activePath, accessible, onToggleAccessible, onNavigate }: Navi
         </div>
       </div>
 
-      <nav className="container nav-grid" aria-label="Основная навигация">
+      <nav id="primary-navigation" className={`container nav-grid${menuOpen ? ' is-open' : ''}`} aria-label="Основная навигация">
         <div className="nav-row">
           {mainRoutes.map((item) => (
-            <NavLink key={item.path} item={item} activePath={activePath} onNavigate={onNavigate} />
+            <NavLink key={item.path} item={item} activePath={activePath} onNavigate={(path) => { setMenuOpen(false); onNavigate(path); }} />
           ))}
         </div>
       </nav>

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
 type GalleryImage = { src: string; thumb: string; width: number; height: number };
 type GalleryCategory = { id: string; title: string; images: GalleryImage[] };
@@ -72,6 +72,9 @@ export function SanatoriumGallery({ preset = 'about' }: { preset?: GalleryPreset
   const config = presets[preset];
   const [filter, setFilter] = useState('all');
   const [activeImage, setActiveImage] = useState<number | null>(null);
+  const [showAll, setShowAll] = useState(false);
+  const closeButtonRef = useRef<HTMLButtonElement | null>(null);
+  const triggerRef = useRef<HTMLButtonElement | null>(null);
   const selectedFilter = config.filters.find((item) => item.id === filter) ?? config.filters[0];
   const sortCategories = (items: GalleryCategory[]) => [...items].sort((left, right) => {
     const leftIndex = config.order.indexOf(left.id);
@@ -83,15 +86,26 @@ export function SanatoriumGallery({ preset = 'about' }: { preset?: GalleryPreset
   const images = useMemo(() => selectedCategories.flatMap((category) => category.images.map((image) => ({ ...image, category: category.title }))), [selectedCategories]);
   const preview = images.slice(0, 5);
 
+  const closeLightbox = () => {
+    setActiveImage(null);
+    window.setTimeout(() => triggerRef.current?.focus(), 0);
+  };
+
+  const openLightbox = (index: number, trigger: HTMLButtonElement) => {
+    triggerRef.current = trigger;
+    setActiveImage(index);
+  };
+
   useEffect(() => {
     if (activeImage === null || !images.length) return;
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') setActiveImage(null);
+      if (event.key === 'Escape') closeLightbox();
       if (event.key === 'ArrowRight') setActiveImage((activeImage + 1) % images.length);
       if (event.key === 'ArrowLeft') setActiveImage((activeImage - 1 + images.length) % images.length);
     };
     document.body.classList.add('gallery-open');
     window.addEventListener('keydown', onKeyDown);
+    closeButtonRef.current?.focus();
     return () => {
       document.body.classList.remove('gallery-open');
       window.removeEventListener('keydown', onKeyDown);
@@ -114,7 +128,7 @@ export function SanatoriumGallery({ preset = 'about' }: { preset?: GalleryPreset
 
         <div className="about-gallery-filters" role="group" aria-label="Категории фотографий">
           {config.filters.map((item) => (
-            <button key={item.id} type="button" className={filter === item.id ? 'is-active' : undefined} aria-pressed={filter === item.id} onClick={() => { setFilter(item.id); setActiveImage(null); }}>
+            <button key={item.id} type="button" className={filter === item.id ? 'is-active' : undefined} aria-pressed={filter === item.id} onClick={() => { setFilter(item.id); setActiveImage(null); setShowAll(false); }}>
               {item.label}
             </button>
           ))}
@@ -122,17 +136,33 @@ export function SanatoriumGallery({ preset = 'about' }: { preset?: GalleryPreset
 
         <div className="about-gallery-mosaic">
           {preview.map((image, index) => (
-            <button key={`${image.src}-${index}`} className={`about-gallery-tile tile-${index + 1}`} type="button" onClick={() => setActiveImage(index)} aria-label={`Открыть фото: ${image.category}`}>
+            <button key={`${image.src}-${index}`} className={`about-gallery-tile tile-${index + 1}`} type="button" onClick={(event) => openLightbox(index, event.currentTarget)} aria-label={`Открыть фото: ${image.category}`}>
               <img src={mediaHref(image.thumb)} alt={image.category} loading="lazy" width={image.width} height={image.height} />
               <span><strong>{image.category}</strong>{index === 4 && images.length > 5 ? <small>Ещё {images.length - 5} фото</small> : null}</span>
             </button>
           ))}
         </div>
+        {images.length > 5 ? (
+          <div className="about-gallery-more-wrap">
+            <button className="button button-secondary about-gallery-more" type="button" aria-expanded={showAll} onClick={() => setShowAll((value) => !value)}>
+              {showAll ? 'Скрыть дополнительные фото' : `Показать все ${images.length} фото`}
+            </button>
+          </div>
+        ) : null}
+        {showAll ? (
+          <div className="about-gallery-all-grid">
+            {images.map((image, index) => (
+              <button key={`all-${image.src}-${index}`} type="button" onClick={(event) => openLightbox(index, event.currentTarget)} aria-label={`Открыть фото: ${image.category}`}>
+                <img src={mediaHref(image.thumb)} alt={image.category} loading="lazy" width={image.width} height={image.height} />
+              </button>
+            ))}
+          </div>
+        ) : null}
       </div>
 
       {activeImage !== null && images[activeImage] ? (
-        <div className="lightbox" role="dialog" aria-modal="true" aria-label={`${images[activeImage].category}, фото ${activeImage + 1}`} onClick={() => setActiveImage(null)}>
-          <button className="lightbox-close" type="button" onClick={() => setActiveImage(null)} aria-label="Закрыть">×</button>
+        <div className="lightbox" role="dialog" aria-modal="true" aria-label={`${images[activeImage].category}, фото ${activeImage + 1}`} onClick={closeLightbox}>
+          <button ref={closeButtonRef} className="lightbox-close" type="button" onClick={closeLightbox} aria-label="Закрыть">×</button>
           <button className="lightbox-prev" type="button" onClick={(event) => { event.stopPropagation(); setActiveImage((activeImage - 1 + images.length) % images.length); }} aria-label="Предыдущее фото">‹</button>
           <figure onClick={(event) => event.stopPropagation()}>
             <img src={mediaHref(images[activeImage].src)} alt={images[activeImage].category} />
