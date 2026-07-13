@@ -977,19 +977,36 @@ function StayPage() {
           <SectionIntro
             eyebrow="Карточки размещения"
             title="Что будет видно по номерам и путевке"
-            text="Карточка номера быстро отвечает на практические вопросы: кому подходит, что внутри, сколько мест и что входит в путевку."
+            text="Сравните категории номеров по вместимости и оснащению, проверьте возможность размещения с ребенком и состав услуг в путевке."
           />
           <DetailGroupGrid groups={roomCategoryDetails} />
         </div>
       </section>
       <section className="section">
-        <div className="container">
-          <SectionIntro
-            eyebrow="Питание"
-            title="Столовая и лечебное питание как часть курса"
-            text="Питание в санатории связано с процедурами, отдыхом и рекомендациями врача, поэтому показывается как часть лечебного режима."
-          />
-          <DetailGroupGrid groups={mealDetails} />
+        <div className="container stay-meal-layout">
+          <figure className="stay-meal-visual" data-animate>
+            <img src={getHref('/media/gallery/dining-room/01.webp')} alt="Обеденный зал санатория" />
+            <figcaption>
+              <span>Столовая санатория</span>
+              <strong>Питание по распорядку дня</strong>
+            </figcaption>
+          </figure>
+          <div className="stay-meal-content">
+            <SectionIntro
+              eyebrow="Питание"
+              title="Питание в ритме санаторного дня"
+              text="Учитывайте время питания при планировании процедур. Если вам или ребенку нужен особый рацион, уточните доступные условия до оформления путевки."
+            />
+            <div className="stay-meal-facts">
+              {mealDetails[0].rows.map((row, index) => (
+                <article key={row.label} data-animate style={getDelay(index)}>
+                  <span>{String(index + 1).padStart(2, '0')}</span>
+                  <h3>{row.label}</h3>
+                  <p>{row.value}</p>
+                </article>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
       <section className="section section-muted">
