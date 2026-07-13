@@ -408,17 +408,6 @@ function getDelay(index: number): CSSProperties {
   return { '--delay': `${Math.min(index, 6) * 80}ms` } as CSSProperties;
 }
 
-function EditorialNote({ children }: { children: ReactNode }) {
-  if (!import.meta.env.DEV) return null;
-
-  return (
-    <aside className="editorial-note" data-animate>
-      <strong>Пометка для заказчика</strong>
-      <p>{children}</p>
-    </aside>
-  );
-}
-
 function AnimatedStat({ value, delay = 0 }: { value: string; delay?: number }) {
   const elementRef = useRef<HTMLElement | null>(null);
   const [displayValue, setDisplayValue] = useState(() => value.replace(/\d+/u, '0'));
@@ -635,9 +624,6 @@ function AboutPage() {
           />
           <div>
             <CardGrid items={advantages} />
-            <EditorialNote>
-              Нужны исходные фото территории, кабинетов и номеров. Решение: отобрать 8-12 кадров, по ним подготовить генерации в едином стиле и заменить временные визуальные блоки.
-            </EditorialNote>
           </div>
         </div>
       </section>
@@ -653,9 +639,6 @@ function AboutPage() {
               <InfoTile key={item.title} item={item} style={getDelay(index)} />
             ))}
           </div>
-          <EditorialNote>
-            Вопрос заказчику: подтвердить названия зон, список объектов инфраструктуры и разрешенные к публикации фото. Решение: после отбора материалов дополнить этот блок реальными изображениями без отдельного дублирующего раздела.
-          </EditorialNote>
         </div>
       </section>
       <SanatoriumGallery />
@@ -718,9 +701,6 @@ function TreatmentPage() {
               </article>
             ))}
           </div>
-          <EditorialNote>
-            Вопрос заказчику: какие программы нужно раскрыть отдельными страницами с условиями, сроками, документами и составом процедур? Решение: после подтверждения добавить отдельные страницы или подробные карточки программ.
-          </EditorialNote>
         </div>
       </section>
       <section className="section section-muted">
@@ -741,9 +721,6 @@ function TreatmentPage() {
             text="Профили помогают понять, с какими задачами чаще обращаются в санаторий и какие направления восстановления можно обсудить с врачом до заезда."
           />
           <DetailGroupGrid groups={treatmentProfileDetails} />
-          <EditorialNote>
-            Вопрос заказчику: сверить медицинские профили, методики и ограничения, чтобы текст оставался точным и не обещал гарантированный результат лечения.
-          </EditorialNote>
         </div>
       </section>
       <section className="section">
@@ -906,22 +883,19 @@ function DoctorsPage() {
       <section className="section section-muted">
         <div className="container">
           <SectionIntro
-            eyebrow="Будущие карточки"
-            title="Как будут выглядеть карточки специалистов"
-            text="В карточках будут только проверяемые сведения: должность, специализация, образование, квалификация, аккредитация и график приема."
+            eyebrow="Консультация"
+            title="Как проходит общение со специалистом"
+            text="Подготовьте медицинские документы и вопросы о самочувствии, чтобы врач мог оценить состояние и подобрать безопасный режим курса."
           />
           <DetailGroupGrid groups={doctorCardTemplate} />
-          <EditorialNote>
-            Вопрос заказчику: передать ФИО, должности, образование, квалификации, аккредитации, графики и согласия на публикацию фото. Решение: до этого показываем роли команды без персональных карточек.
-          </EditorialNote>
         </div>
       </section>
       <section className="section">
         <div className="container split-layout">
           <SectionIntro
-            eyebrow="Для официальной публикации"
-            title="Какие сведения появятся по каждому специалисту"
-            text="После подтверждения данных здесь появятся карточки специалистов: специализация, опыт, квалификация и порядок приема."
+            eyebrow="Порядок приема"
+            title="Как обратиться к специалисту"
+            text="Первичный прием входит в маршрут гостя, а дополнительные консультации назначаются с учетом программы лечения и состояния здоровья."
           />
           <div className="staff-request-grid">
             {staffRequests.map((item, index) => (
@@ -933,14 +907,11 @@ function DoctorsPage() {
       <section className="section section-muted">
         <div className="container">
           <SectionIntro
-            eyebrow="Персональные данные"
-            title="Публиковать врачей можно только после сверки и согласий"
-            text="На сайте публикуются только проверенные сведения о специалистах, разрешённые для открытого размещения."
+            eyebrow="Подготовка к приему"
+            title="Что поможет врачу точнее оценить состояние"
+            text="Возьмите медицинские документы, расскажите о самочувствии и сообщите обо всех ограничениях до назначения процедур."
           />
           <GroupedChecklist groups={staffPublicationRules} />
-          <EditorialNote>
-            Вопрос заказчику: подтвердить ФИО, фото и квалификацию по кадровым документам и согласиям сотрудников. Решение: неподтвержденные персональные данные не публикуем.
-          </EditorialNote>
         </div>
       </section>
     </>
@@ -1009,9 +980,6 @@ function StayPage() {
             text="Карточка номера быстро отвечает на практические вопросы: кому подходит, что внутри, сколько мест и что входит в путевку."
           />
           <DetailGroupGrid groups={roomCategoryDetails} />
-          <EditorialNote>
-            Для заказчика: нужны реальные категории номеров, оснащение, фотографии, доступность Wi-Fi, условия для детей и подтвержденный состав путевки.
-          </EditorialNote>
         </div>
       </section>
       <section className="section">
@@ -1022,9 +990,6 @@ function StayPage() {
             text="Питание в санатории связано с процедурами, отдыхом и рекомендациями врача, поэтому показывается как часть лечебного режима."
           />
           <DetailGroupGrid groups={mealDetails} />
-          <EditorialNote>
-            Для заказчика: нужны подтвержденные сведения по кратности питания, диетическим столам, детскому меню и формату обслуживания в столовой.
-          </EditorialNote>
         </div>
       </section>
       <section className="section section-muted">
@@ -1099,9 +1064,6 @@ function PreparePage() {
           />
           <DocumentFlow items={documentFlow} />
           <GroupedChecklist groups={arrivalDocumentGroups} />
-          <EditorialNote>
-            Вопрос заказчику: подтвердить требования по детям, сопровождающим и срокам действия справок. Решение: после сверки обновить список документов и убрать спорные формулировки.
-          </EditorialNote>
         </div>
       </section>
       <section className="section">
@@ -1175,9 +1137,6 @@ function OmsPage() {
               Условия получения направления и перечень документов зависят от основания поездки.
               Перед оформлением путевки уточните порядок действий по основному телефону санатория.
             </p>
-            <EditorialNote>
-              Вопрос заказчику: подтвердить текст по ОМС, госгарантиям, направлению, документам и контактам ответственного сотрудника. Решение: до подтверждения не публикуем пошаговую инструкцию как окончательную.
-            </EditorialNote>
           </article>
           <article data-animate style={getDelay(1)}>
             <span className="eyebrow">Платные услуги</span>
@@ -1233,8 +1192,8 @@ function OfficialPage({ onNavigate }: PageProps) {
     <>
       <PageHero
         eyebrow="Официальная информация"
-        title="Юридический и обязательный раздел для сайта госучреждения"
-        text="Здесь собираются документы, лицензии, сведения о медорганизации, доступная среда, независимая оценка качества и персональные данные."
+        title="Документы и сведения о санатории"
+        text="Здесь доступны лицензия, реквизиты учреждения, права пациента, сведения о доступной среде, оценке качества и обработке персональных данных."
         image={getHref('/media/gallery/lobby/07.webp')}
       />
       <section className="section">
@@ -1245,9 +1204,9 @@ function OfficialPage({ onNavigate }: PageProps) {
             ))}
           </div>
           <SectionIntro
-            eyebrow="Обязательные блоки"
-            title="Что должно быть опубликовано"
-            text="Структура учитывает обязанности медицинской организации информировать граждан через интернет и поддерживать открытость информации."
+            eyebrow="Основные сведения"
+            title="Что можно узнать в официальном разделе"
+            text="Проверьте сведения об учреждении, медицинской деятельности, документах, услугах и порядке обращений."
           />
           <div className="wide-grid">
             {officialSections.map((item, index) => (
@@ -1260,13 +1219,10 @@ function OfficialPage({ onNavigate }: PageProps) {
         <div className="container">
           <SectionIntro
             eyebrow="Сведения об учреждении"
-            title="Короткая официальная карточка без открытия PDF"
+            title="Основные сведения об учреждении"
             text="Название учреждения, реквизиты, адреса, контакты, руководитель и режим работы собраны в одном месте без необходимости открывать PDF."
           />
           <DetailGroupGrid groups={institutionDetails} />
-          <EditorialNote>
-            Вопрос заказчику: подтвердить режим работы и должностные/контактные данные администрации. Решение: после подтверждения добавить их в официальную карточку.
-          </EditorialNote>
         </div>
       </section>
       <section className="section">
@@ -1274,8 +1230,8 @@ function OfficialPage({ onNavigate }: PageProps) {
           <div>
             <SectionIntro
               eyebrow="Лицензия"
-              title="Медицинская деятельность текстом"
-              text="Ключевые сведения о лицензии вынесены на страницу, а PDF и XML остаются первоисточниками для сверки."
+              title="Сведения о медицинской деятельности"
+              text="Ключевые сведения можно посмотреть на странице, а полные версии лицензии доступны в PDF и XML."
             />
             <DetailGroupGrid groups={licenseDetails} />
           </div>
@@ -1286,9 +1242,6 @@ function OfficialPage({ onNavigate }: PageProps) {
               text="Посмотрите, какие направления медицинской деятельности указаны в лицензии учреждения."
             />
             <GroupedChecklist groups={licensedWorkGroups} compact />
-            <EditorialNote>
-              Вопрос заказчику: сверить формулировки лицензии с медицинской частью и первоисточниками. Решение: в спорных местах оставить текст лицензии без редакторских сокращений.
-            </EditorialNote>
           </div>
         </div>
       </section>
@@ -1296,8 +1249,8 @@ function OfficialPage({ onNavigate }: PageProps) {
         <div className="container">
           <SectionIntro
             eyebrow="Документы"
-            title="Материалы, которые уже доступны на сайте"
-            text="Откройте устав, лицензию, выписку, прейскурант и график заездов, чтобы свериться с официальными первоисточниками."
+            title="Официальные документы"
+            text="Откройте устав, лицензию, выписку, прейскурант или график заездов в удобном формате."
           />
           <div className="document-grid">
             {officialDocuments.map((document, index) => (
@@ -1314,9 +1267,6 @@ function OfficialPage({ onNavigate }: PageProps) {
               </article>
             ))}
           </div>
-          <EditorialNote>
-            Вопрос заказчику: проверить актуальность дат, реквизитов и финальных формулировок официальных документов. Решение: обновить PDF и карточки одновременно, чтобы они не расходились.
-          </EditorialNote>
         </div>
       </section>
       <section className="section">
@@ -1339,7 +1289,7 @@ function OfficialPage({ onNavigate }: PageProps) {
         <div className="container">
           <SectionIntro
             eyebrow="Правовые разделы"
-            title="Обязательная информация для сайта медорганизации"
+            title="Права гостей и открытость учреждения"
             text="Перейдите к информации о персональных данных, доступной среде, оценке качества и обращениях граждан."
           />
           <div className="legal-links">
@@ -1394,14 +1344,14 @@ function ContactsPage({ onNavigate }: PageProps) {
       <PageHero
         eyebrow="Контакты"
         title="Как связаться с санаторием и подготовить обращение"
-        text="Здесь собраны подтверждённые каналы связи, статус данных, подсказки для обращения и быстрые ссылки на официальные разделы."
+        text="Здесь собраны способы связи, подсказки для обращения и быстрые ссылки на официальные разделы."
         image={getHref('/media/gallery/grounds/06.webp')}
       />
       <section className="section">
         <div className="container">
           <SectionIntro
             eyebrow="Связь"
-            title="Контакты из официальных материалов"
+            title="Как связаться с санаторием"
             text="Выберите удобный канал связи: телефон, электронную почту или почтовый адрес для официального обращения."
           />
           <div className="contact-channel-grid">
@@ -1409,9 +1359,6 @@ function ContactsPage({ onNavigate }: PageProps) {
               <InfoTile key={item.title} item={item} style={getDelay(index)} />
             ))}
           </div>
-          <EditorialNote>
-            Вопрос заказчику: подтвердить режим работы, разделение телефонов по отделам и порядок приема обращений. Решение: после сверки добавить отдельные каналы для заезда, лечения, документов и платных услуг.
-          </EditorialNote>
         </div>
       </section>
       <section className="section section-muted">
@@ -1429,7 +1376,7 @@ function ContactsPage({ onNavigate }: PageProps) {
           <SectionIntro
             eyebrow="Обращение"
             title="Как написать так, чтобы ответить было проще"
-            text="Вместо одной общей подсказки показываем простой порядок действий. Он подходит для письма на email, официального обращения или запроса по документам."
+            text="Следуйте простому порядку действий при отправке письма, официального обращения или запроса по документам."
           />
           <div className="contact-flow-grid">
             {contactAppealFlow.map((item, index) => (
@@ -1499,16 +1446,13 @@ function ContactsPage({ onNavigate }: PageProps) {
           <SectionIntro
             eyebrow="Как добраться"
             title="Уточните маршрут перед поездкой"
-            text="Перед поездкой используйте подтвержденный адрес для навигатора и уточните схему проезда, остановку или точку въезда."
+            text="Перед поездкой уточните у санатория адрес для навигатора, схему проезда, ближайшую остановку и точку въезда."
           />
           <div className="contact-route-grid">
             {contactRouteNotes.map((item, index) => (
               <InfoTile key={item.title} item={item} style={getDelay(index)} />
             ))}
           </div>
-          <EditorialNote>
-            Вопрос заказчику: подтвердить адрес для навигатора, точку въезда, ближайшую остановку, расстояние от Калуги и схему проезда. Решение: после сверки добавить карту и короткий маршрут.
-          </EditorialNote>
         </div>
       </section>
       <section className="section">
@@ -1538,9 +1482,6 @@ function ContactsPage({ onNavigate }: PageProps) {
               </button>
             ))}
           </div>
-          <EditorialNote>
-            Вопрос заказчику: провести юридическую сверку этих разделов и передать недостающие реальные данные учреждения. Решение: структуру сохраняем, но финальные формулировки публикуем только после подтверждения.
-          </EditorialNote>
         </div>
       </section>
     </>
@@ -1625,10 +1566,6 @@ function LegalPage({ content }: { content: LegalPageContent }) {
       </section>
       <section className="section">
         <div className="container legal-body">
-          <aside className="legal-note" data-animate>
-            <strong>Пометка для заказчика</strong>
-            <p>{content.reviewNote}</p>
-          </aside>
           <div className="legal-fact-grid">
             {content.facts.map((item, index) => (
               <InfoTile key={item.title} item={item} style={getDelay(index)} />
@@ -1649,7 +1586,6 @@ function LegalPage({ content }: { content: LegalPageContent }) {
               ) : null}
             </article>
           ))}
-          <GroupedChecklist groups={content.nextSteps} compact />
         </div>
       </section>
     </>
