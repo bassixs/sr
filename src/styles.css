@@ -1712,6 +1712,18 @@ h3,
   margin-top: 30px;
 }
 
+.contact-primary-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.contact-primary-actions .button-secondary {
+  color: var(--green-dark);
+  border-color: rgba(15, 109, 88, 0.26);
+}
+
 .contact-flow-grid {
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }

@@ -1359,6 +1359,10 @@ function ContactsPage({ onNavigate }: PageProps) {
               <InfoTile key={item.title} item={item} style={getDelay(index)} />
             ))}
           </div>
+          <div className="contact-primary-actions" data-animate>
+            {phoneHref ? <a className="button button-primary" href={phoneHref}>Позвонить</a> : null}
+            <a className="button button-secondary" href={`mailto:${contacts.email}`}>Написать на email</a>
+          </div>
         </div>
       </section>
       <section className="section section-muted">
@@ -1383,38 +1387,6 @@ function ContactsPage({ onNavigate }: PageProps) {
               <InfoTile key={item.title} item={item} style={getDelay(index)} />
             ))}
           </div>
-        </div>
-      </section>
-      <section className="section section-muted">
-        <div className="container contact-layout">
-          <article className="contact-panel" data-animate>
-            <h2>Быстрая связь</h2>
-            {phoneHref ? <a href={phoneHref}>{contacts.phone}</a> : <span className="contact-status">{contacts.phone}</span>}
-            <span>Дополнительный телефон: {contacts.phoneExtra}</span>
-            <span>Факс: {contacts.fax}</span>
-            <a href={`mailto:${contacts.email}`}>{contacts.email}</a>
-            <p>{contacts.address}</p>
-            <span>{contacts.note}</span>
-          </article>
-          <article className="contact-panel" data-animate style={getDelay(1)}>
-            <h2>Официальные обращения</h2>
-            <p>
-              Для обращений указаны телефон, email и почтовый адрес учреждения. Посетителю важно
-              сразу понимать, какие данные приложить и как сформулировать запрос.
-            </p>
-            <p>
-              Официальное обращение можно направить на электронную почту или почтовый адрес
-              учреждения. Не отправляйте лишние медицинские и персональные данные без необходимости.
-            </p>
-            <div className="contact-action-list">
-              <button type="button" onClick={() => window.location.href = `mailto:${contacts.email}`}>
-                Написать на email
-              </button>
-              <button type="button" onClick={() => onNavigate('/privacy')}>
-                Персональные данные
-              </button>
-            </div>
-          </article>
         </div>
       </section>
       <section className="section">
