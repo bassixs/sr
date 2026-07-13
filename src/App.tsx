@@ -1038,7 +1038,7 @@ function PreparePage() {
       <PageHero
         eyebrow="Перед заездом"
         title="Документы, санаторно-курортная карта и правила процедур"
-        text="Гость должен заранее понимать, что подготовить, где оформить карту и почему врач назначает процедуры только после осмотра."
+        text="Подготовьте документы и санаторно-курортную карту заранее. Здесь вы найдете списки для взрослых и детей, порядок заезда и правила прохождения процедур."
         image={getHref('/media/gallery/lobby/03.webp')}
       />
       <section className="section">
@@ -1048,9 +1048,15 @@ function PreparePage() {
             title="Пять шагов до спокойного курса"
             text="До поездки проверьте даты, подготовьте документы, оформите санаторно-курортную карту и заранее разберитесь, что вас ждет в первый день."
           />
-          <div className="arrival-step-grid arrival-flow-grid">
+          <div className="prepare-roadmap" role="list" aria-label="Пять шагов подготовки к заезду">
             {arrivalFlow.map((item, index) => (
-              <InfoTile key={item.title} item={item} style={getDelay(index)} />
+              <article key={item.title} role="listitem" data-animate style={getDelay(index)}>
+                <span>{String(index + 1).padStart(2, '0')}</span>
+                <div>
+                  <h3>{item.title}</h3>
+                  <p>{item.text}</p>
+                </div>
+              </article>
             ))}
           </div>
         </div>
@@ -1083,7 +1089,32 @@ function PreparePage() {
             title="Санаторный режим, безопасность и медицинские ограничения"
             text="Во время пребывания важно соблюдать назначения, сообщать о самочувствии и помнить, что процедуры проходят только по медицинскому решению."
           />
-          <GroupedChecklist groups={stayRules} />
+          <div className="prepare-rules-layout">
+            <article className="prepare-rules-main" data-animate>
+              <div className="prepare-rule-heading">
+                <span>01</span>
+                <div>
+                  <h2>{stayRules[0].title}</h2>
+                  <p>{stayRules[0].text}</p>
+                </div>
+              </div>
+              <ul>
+                {stayRules[0].items.map((item) => <li key={item}>{item}</li>)}
+              </ul>
+            </article>
+            <article className="prepare-rules-safety" data-animate style={getDelay(1)}>
+              <div className="prepare-rule-heading">
+                <span>02</span>
+                <div>
+                  <h2>{stayRules[1].title}</h2>
+                  <p>{stayRules[1].text}</p>
+                </div>
+              </div>
+              <ul>
+                {stayRules[1].items.map((item) => <li key={item}>{item}</li>)}
+              </ul>
+            </article>
+          </div>
         </div>
       </section>
       <section className="section">

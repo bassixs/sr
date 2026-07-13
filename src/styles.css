@@ -1521,8 +1521,168 @@ h3,
   align-items: start;
 }
 
-.arrival-flow-grid {
+.prepare-roadmap {
+  position: relative;
+  display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 26px;
+  margin-top: 38px;
+}
+
+.prepare-roadmap::before {
+  content: "";
+  position: absolute;
+  top: 27px;
+  right: 4%;
+  left: 4%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--green), rgba(35, 93, 122, 0.34));
+}
+
+.prepare-roadmap article {
+  position: relative;
+  z-index: 1;
+}
+
+.prepare-roadmap article > span {
+  display: grid;
+  width: 56px;
+  height: 56px;
+  margin-bottom: 24px;
+  place-items: center;
+  border: 7px solid var(--page);
+  border-radius: 50%;
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 950;
+  background: var(--green-dark);
+  box-shadow: 0 10px 24px rgba(20, 48, 43, 0.16);
+}
+
+.prepare-roadmap article:nth-child(2n) > span {
+  background: var(--blue);
+}
+
+.prepare-roadmap h3 {
+  max-width: 210px;
+  margin-bottom: 10px;
+  color: var(--ink);
+  font-size: 1.08rem;
+  line-height: 1.25;
+}
+
+.prepare-roadmap p {
+  margin: 0;
+  font-size: 0.94rem;
+  line-height: 1.65;
+}
+
+.prepare-rules-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(320px, 0.75fr);
+  gap: 20px;
+  align-items: start;
+  margin-top: 32px;
+}
+
+.prepare-rules-main,
+.prepare-rules-safety {
+  padding: clamp(24px, 3vw, 38px);
+  border-radius: 22px;
+}
+
+.prepare-rules-main {
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.86);
+  box-shadow: 0 16px 42px rgba(20, 48, 43, 0.07);
+}
+
+.prepare-rules-safety {
+  color: rgba(255, 255, 255, 0.84);
+  background:
+    radial-gradient(circle at 100% 0%, rgba(255, 255, 255, 0.13), transparent 38%),
+    linear-gradient(145deg, #123f38, #0d302b);
+  box-shadow: 0 18px 44px rgba(13, 48, 43, 0.18);
+}
+
+.prepare-rule-heading {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+  margin-bottom: 24px;
+}
+
+.prepare-rule-heading > span {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border-radius: 50%;
+  color: var(--green-dark);
+  font-size: 0.74rem;
+  font-weight: 950;
+  background: #dfeee7;
+}
+
+.prepare-rules-safety .prepare-rule-heading > span {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.prepare-rule-heading h2 {
+  margin-bottom: 7px;
+  font-size: clamp(1.25rem, 2vw, 1.65rem);
+}
+
+.prepare-rule-heading p {
+  margin: 0;
+  font-size: 0.93rem;
+  line-height: 1.6;
+}
+
+.prepare-rules-safety h2 {
+  color: #fff;
+}
+
+.prepare-rules-safety p {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.prepare-rules-layout ul {
+  display: grid;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.prepare-rules-main ul {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 28px;
+}
+
+.prepare-rules-layout li {
+  position: relative;
+  padding-left: 22px;
+  line-height: 1.55;
+}
+
+.prepare-rules-layout li::before {
+  content: "";
+  position: absolute;
+  top: 0.65em;
+  left: 0;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 0 4px rgba(15, 109, 88, 0.1);
+}
+
+.prepare-rules-safety li::before {
+  background: #a8d7bf;
+  box-shadow: 0 0 0 4px rgba(168, 215, 191, 0.12);
 }
 
 .checklist h2 {
@@ -2876,5 +3036,78 @@ body.gallery-open {
   .table-scroll td {
     padding: 10px 12px;
     font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 1040px) {
+  .prepare-roadmap {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px 24px;
+  }
+
+  .prepare-roadmap::before {
+    display: none;
+  }
+
+  .prepare-roadmap article {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 14px;
+    padding: 18px 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .prepare-roadmap article > span {
+    margin-bottom: 0;
+  }
+
+  .prepare-roadmap h3 {
+    max-width: none;
+  }
+
+  .prepare-rules-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .prepare-roadmap {
+    grid-template-columns: 1fr;
+    gap: 4px;
+    margin-top: 28px;
+  }
+
+  .prepare-roadmap::before {
+    display: block;
+    top: 26px;
+    right: auto;
+    bottom: 26px;
+    left: 27px;
+    width: 2px;
+    height: auto;
+    background: linear-gradient(180deg, var(--green), rgba(35, 93, 122, 0.3));
+  }
+
+  .prepare-roadmap article {
+    border-top: 0;
+  }
+
+  .prepare-roadmap article > span {
+    border-color: var(--page);
+  }
+
+  .prepare-rules-main,
+  .prepare-rules-safety {
+    padding: 22px;
+    border-radius: 18px;
+  }
+
+  .prepare-rules-main ul {
+    grid-template-columns: 1fr;
+  }
+
+  .prepare-rule-heading {
+    grid-template-columns: 1fr;
+    gap: 12px;
   }
 }
