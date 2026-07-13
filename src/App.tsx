@@ -1386,6 +1386,7 @@ function NewsPage() {
 
 function ContactsPage({ onNavigate }: PageProps) {
   const phoneHref = getPhoneHref(contacts.phone);
+  const bookingPhoneHref = getPhoneHref(contacts.bookingPhone);
 
   return (
     <>
@@ -1408,8 +1409,10 @@ function ContactsPage({ onNavigate }: PageProps) {
             ))}
           </div>
           <div className="contact-primary-actions" data-animate>
-            {phoneHref ? <a className="button button-primary" href={phoneHref}>Позвонить</a> : null}
-            <a className="button button-secondary" href={`mailto:${contacts.email}`}>Написать на email</a>
+            {bookingPhoneHref ? <a className="button button-primary" href={bookingPhoneHref}>Позвонить для бронирования</a> : null}
+            <a className="button button-secondary" href={`mailto:${contacts.bookingEmail}`}>Написать по бронированию</a>
+            {phoneHref ? <a className="button button-secondary" href={phoneHref}>Общий телефон</a> : null}
+            <a className="button button-secondary" href={`mailto:${contacts.email}`}>Официальный email</a>
           </div>
         </div>
       </section>
