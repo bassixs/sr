@@ -13,11 +13,8 @@ import {
   arrivalTips,
   audienceCards,
   contacts,
-  contactAppealFlow,
   contactChannels,
   contactDetailGroups,
-  contactPurposeGroups,
-  contactRequestTips,
   contactRouteNotes,
   careTeamFlow,
   doctorCardTemplate,
@@ -109,11 +106,6 @@ const routeDescriptions: Record<string, string> = {
   '/contacts': 'Контакты санатория Звездный: телефон, email, адреса, порядок обращения, подготовка запроса и данные для связи.',
   ...Object.fromEntries(legalPages.map((page) => [page.path, page.intro])),
 };
-
-function getPhoneHref(phone: string) {
-  const normalized = phone.replace(/[^+\d]/g, '');
-  return normalized.replace(/\D/g, '').length >= 10 ? `tel:${normalized}` : null;
-}
 
 function getRouteDescription(path: string) {
   return routeDescriptions[path] ?? routeDescriptions['/'];
@@ -314,7 +306,6 @@ type NavigationProps = {
 
 function Header({ activePath, accessible, onToggleAccessible, onNavigate }: NavigationProps) {
   const mainRoutes = routes.filter((route) => primaryNavPaths.includes(route.path));
-  const phoneHref = getPhoneHref(contacts.phone);
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
@@ -355,13 +346,7 @@ function Header({ activePath, accessible, onToggleAccessible, onNavigate }: Navi
           >
             {accessible ? 'Обычная версия' : 'Версия для слабовидящих'}
           </button>
-          {phoneHref ? (
-            <a className="phone-link" href={phoneHref}>
-              {contacts.phone}
-            </a>
-          ) : (
-            <span className="phone-link phone-link-muted">{contacts.phone}</span>
-          )}
+          <span className="phone-link phone-link-muted">{contacts.phone}</span>
         </div>
       </div>
 
@@ -1385,34 +1370,25 @@ function NewsPage() {
 }
 
 function ContactsPage({ onNavigate }: PageProps) {
-  const phoneHref = getPhoneHref(contacts.phone);
-  const bookingPhoneHref = getPhoneHref(contacts.bookingPhone);
-
   return (
     <>
       <PageHero
         eyebrow="Контакты"
-        title="Как связаться с санаторием и подготовить обращение"
-        text="Здесь собраны способы связи, подсказки для обращения и быстрые ссылки на официальные разделы."
+        title="Контактная информация санатория"
+        text="Здесь собраны справочные контакты, адреса и быстрые ссылки на официальные разделы."
         image={getHref('/media/gallery/grounds/06.webp')}
       />
       <section className="section">
         <div className="container">
           <SectionIntro
             eyebrow="Связь"
-            title="Как связаться с санаторием"
-            text="Выберите удобный канал связи: телефон, электронную почту или почтовый адрес для официального обращения."
+            title="Контактные данные"
+            text="Телефоны, электронные адреса и почтовый адрес приведены только для справки. Сайт не принимает обращения, заявки или документы."
           />
           <div className="contact-channel-grid">
             {contactChannels.map((item, index) => (
               <InfoTile key={item.title} item={item} style={getDelay(index)} />
             ))}
-          </div>
-          <div className="contact-primary-actions" data-animate>
-            {bookingPhoneHref ? <a className="button button-primary" href={bookingPhoneHref}>Позвонить для бронирования</a> : null}
-            <a className="button button-secondary" href={`mailto:${contacts.bookingEmail}`}>Написать по бронированию</a>
-            {phoneHref ? <a className="button button-secondary" href={phoneHref}>Общий телефон</a> : null}
-            <a className="button button-secondary" href={`mailto:${contacts.email}`}>Официальный email</a>
           </div>
         </div>
       </section>
@@ -1424,44 +1400,6 @@ function ContactsPage({ onNavigate }: PageProps) {
             text="Наименование, регистрационные данные и адреса собраны отдельно от способов связи — для договоров, заявлений и официальной корреспонденции."
           />
           <DetailGroupGrid groups={contactDetailGroups} />
-        </div>
-      </section>
-      <section className="section">
-        <div className="container contact-appeal-layout">
-          <SectionIntro
-            eyebrow="Обращение"
-            title="Как написать так, чтобы ответить было проще"
-            text="Следуйте простому порядку действий при отправке письма, официального обращения или запроса по документам."
-          />
-          <div className="contact-flow-grid">
-            {contactAppealFlow.map((item, index) => (
-              <InfoTile key={item.title} item={item} style={getDelay(index)} />
-            ))}
-          </div>
-        </div>
-      </section>
-      <section className="section">
-        <div className="container">
-          <SectionIntro
-            eyebrow="Сценарии"
-            title="Куда направить вопрос: заезд, лечение или официальное обращение"
-            text="Выберите ситуацию и приложите нужные данные: даты заезда, возраст гостей, номер путевки, медицинские документы или тему официального обращения."
-          />
-          <GroupedChecklist groups={contactPurposeGroups} />
-        </div>
-      </section>
-      <section className="section section-muted">
-        <div className="container split-layout">
-          <SectionIntro
-            eyebrow="Что указать"
-            title="Так обращение будет проще обработать"
-            text="Чем точнее указаны даты, формат поездки, контакты и вопрос, тем быстрее учреждение сможет подготовить предметный ответ."
-          />
-          <div className="contact-tip-list">
-            {contactRequestTips.map((item, index) => (
-              <InfoTile key={item.title} item={item} style={getDelay(index)} />
-            ))}
-          </div>
         </div>
       </section>
       <section className="section">
