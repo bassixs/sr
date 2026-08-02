@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://bassixs.github.io/sr/sitemap.xml
+Sitemap: https://star40.ru/sitemap.xml

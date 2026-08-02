@@ -33,6 +33,8 @@ jobs:
 
       - name: Check and build
         run: npm run check
+        env:
+          VITE_BASE_PATH: /sr/
 
       - name: Configure Pages
         uses: actions/configure-pages@v5

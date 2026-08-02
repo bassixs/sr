@@ -32,7 +32,7 @@ if (existsSync(manifestPath)) {
 
 const sitemap = readFileSync(resolve(root, 'public/sitemap.xml'), 'utf8');
 for (const route of ['about', 'treatment', 'procedures', 'doctors', 'stay', 'prepare', 'prices', 'official', 'news', 'contacts']) {
-  if (!sitemap.includes(`/sr/${route}`)) failures.push(`Маршрут отсутствует в sitemap: /${route}`);
+  if (!sitemap.includes(`/${route}`)) failures.push(`Маршрут отсутствует в sitemap: /${route}`);
 }
 
 if (failures.length) {
