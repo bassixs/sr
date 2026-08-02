@@ -20,6 +20,7 @@ import {
   doctorCardTemplate,
   doctorProfiles,
   documentFlow,
+  externalResources,
   guestJourney,
   homeTaskLinks,
   infrastructure,
@@ -472,7 +473,7 @@ function HomePage({ onNavigate }: PageProps) {
         <div className="container hero-layout">
           <div className="hero-copy">
             <span className="eyebrow">Калужский санаторий Звездный</span>
-            <h1>Восстановление и отдых в лесном санатории рядом с Калугой</h1>
+            <h1>Восстановление и отдых в санатории рядом с Калугой, в лесном массиве</h1>
             <p>
               Здесь можно спокойно разобраться, кому подходит санаторий, какие есть программы,
               какие процедуры назначают врачи и что подготовить перед заездом.
@@ -713,7 +714,7 @@ function TreatmentPage() {
           <SectionIntro
             eyebrow="Безопасность"
             title="Показания, осторожность и вопросы до заезда"
-            text="Процедуры назначает врач, а при остром состоянии, температуре или обострении поездку нужно заранее согласовать со специалистом."
+            text="Процедуры назначает врач. При остром состоянии, температуре или обострении поездку лучше отложить до стабилизации состояния и получить рекомендации специалиста."
           />
           <GroupedChecklist groups={treatmentSafetyGroups} />
         </div>
@@ -1315,6 +1316,23 @@ function OfficialPage({ onNavigate }: PageProps) {
           <div>
             <GroupedChecklist groups={oversightContacts} compact />
             <GroupedChecklist groups={paidServiceRules} compact />
+          </div>
+        </div>
+      </section>
+      <section className="section section-muted">
+        <div className="container">
+          <SectionIntro
+            eyebrow="Полезные ресурсы"
+            title="Официальные ссылки"
+            text="Внешние государственные и информационные ресурсы открываются в новой вкладке."
+          />
+          <div className="external-link-grid">
+            {externalResources.map((resource, index) => (
+              <a key={resource.href} href={resource.href} target="_blank" rel="noreferrer" data-animate style={getDelay(index)}>
+                <strong>{resource.title}</strong>
+                <span>{resource.text}</span>
+              </a>
+            ))}
           </div>
         </div>
       </section>
