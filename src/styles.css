@@ -12,6 +12,7 @@
   --berry: #8b3f55;
   --amber: #b9852b;
   --shadow: 0 20px 60px rgba(20, 48, 43, 0.1);
+  --asset-revision: "star40-20260802";
   color: var(--ink);
   background: var(--bg);
   font-family:
