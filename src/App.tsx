@@ -321,7 +321,7 @@ function Header({ activePath, accessible, onToggleAccessible, onNavigate }: Navi
           }}
           aria-label="Калужский санаторий Звездный"
         >
-          <span className="brand-mark">З</span>
+          <img className="brand-mark" src={`${basePath}/brand-emblem.png`} alt="" />
           <span>
             <strong>Звездный</strong>
             <small>Калужский санаторий</small>
