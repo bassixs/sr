@@ -3,6 +3,16 @@ import { resolve } from 'node:path';
 
 const root = process.cwd();
 const failures = [];
+
+// The RIFF length catches interrupted binary transfers without re-encoding.
+// Full decoding is a separate release audit; this is a structural check only.
+export function webpStructureError(bytes) {
+  if (bytes.length < 12 || bytes.toString('ascii', 0, 4) !== 'RIFF' || bytes.toString('ascii', 8, 12) !== 'WEBP') {
+    return 'Неверный заголовок WebP';
+  }
+  const expected = bytes.readUInt32LE(4) + 8;
+  return bytes.length === expected ? null : `Неполный WebP: ${bytes.length} байт вместо ${expected}`;
+}
 const requiredFiles = [
   'public/.htaccess',
   'public/robots.txt',
@@ -25,7 +35,12 @@ if (existsSync(manifestPath)) {
     for (const image of category.images ?? []) {
       for (const key of ['src', 'thumb']) {
         const relative = String(image[key] ?? '').replace(/^\//, 'public/');
-        if (!relative || !existsSync(resolve(root, relative))) failures.push(`Не найден файл галереи: ${image[key]}`);
+        if (!relative || !existsSync(resolve(root, relative))) {
+          failures.push(`Не найден файл галереи: ${image[key]}`);
+        } else if (relative.endsWith('.webp')) {
+          const error = webpStructureError(readFileSync(resolve(root, relative)));
+          if (error) failures.push(`${relative}: ${error}`);
+        }
       }
     }
   }

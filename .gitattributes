@@ -1,0 +1,17 @@
+# Preserve published binary assets byte-for-byte on every platform.
+*.pdf -text
+*.doc -text
+*.docx -text
+*.webp -text
+*.png -text
+*.jpg -text
+*.jpeg -text
+*.gif -text
+*.ico -text
+*.woff -text
+*.woff2 -text
+*.zip -text
+*.tar -text
+*.gz -text
+*.tgz -text
+*.7z -text
