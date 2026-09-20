@@ -3,6 +3,7 @@ dist/
 .claude/
 .env
 .env.*
+.hosting.local.json
 *.local
 *.tsbuildinfo
 vite.config.js

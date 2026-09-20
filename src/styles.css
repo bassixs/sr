@@ -2156,6 +2156,18 @@ button:focus-visible {
   min-height: 60vh;
 }
 
+.legal-fact-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.external-link-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
 .accessible-mode {
   --bg: #ffffff;
   --surface-soft: #f3f3f3;
@@ -2904,12 +2916,6 @@ body.gallery-open {
   color: #4e3b15;
 }
 
-.legal-fact-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 18px;
-}
-
 .legal-section {
   padding: 24px;
   border: 1px solid var(--line);
@@ -3099,12 +3105,6 @@ body.gallery-open {
     padding: 10px 12px;
     font-size: 0.9rem;
   }
-}
-
-.external-link-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 14px;
 }
 
 .external-link-grid a {

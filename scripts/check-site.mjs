@@ -4,6 +4,7 @@ import { resolve } from 'node:path';
 const root = process.cwd();
 const failures = [];
 const requiredFiles = [
+  'public/.htaccess',
   'public/robots.txt',
   'public/sitemap.xml',
   'public/404.html',

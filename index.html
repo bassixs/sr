@@ -53,21 +53,6 @@
         "identifier": { "@type": "PropertyValue", "name": "ОГРН", "value": "1024001182138" }
       }
     </script>
-    <script>
-      // Восстановление пути после SPA-редиректа с 404.html (GitHub Pages)
-      (function (l) {
-        if (l.search[1] === '/') {
-          var decoded = l.search
-            .slice(1)
-            .split('&')
-            .map(function (s) {
-              return s.replace(/~and~/g, '&');
-            })
-            .join('?');
-          window.history.replaceState(null, null, l.pathname.slice(0, -1) + decoded + l.hash);
-        }
-      })(window.location);
-    </script>
   </head>
   <body>
     <div id="root"></div>

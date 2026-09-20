@@ -6,7 +6,7 @@ export default defineConfig(({ mode }) => {
 
   return {
     // По умолчанию сайт собирается для корня собственного домена.
-    // GitHub Pages временно передаёт /sr/ через переменную в workflow.
+    // Для публикации на star40.ru и проверки в CI используется /.
     base: env.VITE_BASE_PATH || '/',
     plugins: [react()],
   };
