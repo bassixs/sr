@@ -25,7 +25,8 @@ PANEL = 'https://server193.hosting.reg.ru:1500'
 MARKER = '.star40-owned-stage.json'
 STAGE_PATTERN = re.compile(r'/star40-stage-[0-9a-f]{32}\Z')
 BACKUP_PATTERN = re.compile(r'/star40-backup-[0-9a-f]{32}\Z')
-REGULAR_TYPES = {'file', 'image', 'archive'}
+# Observed ISPmanager classifications: PDFs are "pdf", .tgz archives are "gzip".
+REGULAR_TYPES = {'file', 'image', 'archive', 'pdf', 'gzip'}
 
 
 class SafetyError(RuntimeError):
@@ -129,8 +130,10 @@ class PanelTransport:
 
 
 class Deployer:
-    def __init__(self, transport, state_directory):
+    def __init__(self, transport, state_directory, progress=None):
         self._transport = transport
+        self._progress = progress or (lambda message: None)
+        self._inventory_count = 0
         self.state_directory = pathlib.Path(state_directory).resolve()
         repository = pathlib.Path(__file__).resolve().parent.parent
         require(not self.state_directory.is_relative_to(repository), 'State must stay outside Git')
@@ -139,6 +142,7 @@ class Deployer:
         self._marker = None
         self._owned_files = {}
         self._pending_upload = None
+        self._probe_destination = None
         self._backup_directory = None
         self._backup = None
         self._plan = {}
@@ -238,6 +242,18 @@ class Deployer:
                         and params['move'] == 'off' and params['overwrite'] == 'off',
                         'Live files may only be copied to a new backup, never moved')
                 require(self.listing(destination) == {}, 'Backup directory is not empty')
+            elif self._probe_destination is not None and destination == self._probe_destination._stage:
+                # Exercise overwrite/move only between two independently owned non-public stages.
+                other = self._probe_destination
+                self._stage_identity()
+                other._stage_identity()
+                require(parent == self._stage and not is_public(destination), 'Unsafe probe source/destination')
+                require(params['elid'] == 'transfer-probe.bin'
+                        and params['move'] == 'on' and params['overwrite'] == 'on', 'Unsafe probe operation')
+                for owner in (self, other):
+                    require(owner.listing(owner._stage).get(params['elid']) in REGULAR_TYPES
+                            and digest(owner.download(owner._stage, params['elid']))
+                            == owner._owned_files.get(params['elid']), 'Probe ownership/content changed')
             else:
                 self._stage_identity()
                 require(parent == self._stage, 'Live writes must originate from owned stage')
@@ -273,7 +289,7 @@ class Deployer:
             self._real_directory(parent)
             kind = self.listing(parent).get(params['elid'])
             require(kind == 'dir' if directory else kind in REGULAR_TYPES,
-                    'Permission target replaced by a link or special file')
+                    f'Permission target has unsupported type: {target} ({kind})')
         else:
             raise SafetyError('Changing API action is not allowed')
         return self._transport.send(func, {**params, 'sok': 'ok', 'out': 'xml'}, data)
@@ -307,9 +323,25 @@ class Deployer:
                                       'mode': mode, 'uid': 'u3596090', 'gid': 'u3596090', **bits})
 
     def probe(self):
-        """Binary transfer experiment can only create a file in the owned stage."""
+        """Verify binary upload, read, overwrite and move strictly outside the site."""
         self._stage_identity()
-        self._upload('transfer-probe.bin', b'star40\x00\xff\r\n\n' + secrets.token_bytes(32))
+        data = b'star40\x00\xff\r\n\n' + secrets.token_bytes(32)
+        self._upload('transfer-probe.bin', data)
+        other = Deployer(self._transport, self.state_directory / 'probe')
+        other.create_stage()
+        other._upload('transfer-probe.bin', b'previous test content\r\n')
+        self._probe_destination = other
+        try:
+            self._mutate('file.copyto', {'plid': self._stage, 'elid': 'transfer-probe.bin',
+                                        'dirlist': other._stage.encode().hex(),
+                                        'move': 'on', 'overwrite': 'on', 'goto': 'off'})
+            require('transfer-probe.bin' not in self.listing(self._stage), 'Probe move did not remove source')
+            require(other.download(other._stage, 'transfer-probe.bin') == data, 'Probe overwrite failed')
+            del self._owned_files['transfer-probe.bin']
+            other._owned_files['transfer-probe.bin'] = digest(data)
+            other.cleanup()
+        finally:
+            self._probe_destination = None
 
     def _inventory(self, path, prefix=''):
         result = {}
@@ -319,12 +351,18 @@ class Deployer:
             if kind == 'dir':
                 result.update(self._inventory(child(path, name), key + '/'))
             else:
-                require(kind in REGULAR_TYPES, 'Backup source contains a link or special file')
+                require(kind in REGULAR_TYPES,
+                        f'Backup source has unsupported entry: {child(path, name)} ({kind})')
                 result[key] = digest(self.download(path, name))
+                self._inventory_count += 1
+                if self._inventory_count % 50 == 0:
+                    self._progress(f'Inventory: {self._inventory_count} files read and hashed')
         return result
 
     def backup(self):
         require(self._backup is None, 'Backup already verified')
+        self._progress('Reading complete live inventory before backup')
+        self._inventory_count = 0
         files = self._inventory(SITE)
         require('index.html' in files and '.htaccess' in files, 'Backup source is incomplete')
         self._backup_directory = '/star40-backup-' + secrets.token_hex(16)
@@ -431,10 +469,11 @@ def main():
     require(args.publish, 'No action: --publish was not supplied')
     require(args.file, 'No action: explicit --file list required')
     require(not pathlib.Path(args.state_dir).exists(), 'Use a new local release directory')
-    deployer = Deployer(PanelTransport.login(), args.state_dir)
+    deployer = Deployer(PanelTransport.login(), args.state_dir, progress=print)
     deployer.create_stage()
     print('Owned temporary stage:', deployer._stage)
     deployer.probe()
+    print('Non-public upload/read/overwrite/move probe verified')
     backup = deployer.backup()
     print('Verified backup:', ACCOUNT + backup['directory'] + '/before-release.tgz')
     deployer.publish(args.dist, args.file)

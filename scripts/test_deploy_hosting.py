@@ -15,7 +15,8 @@ class FakePanel:
     def __init__(self):
         self.directories = {'/', '/www', SITE, SITE + '/assets'}
         self.files = {SITE + '/index.html': b'old index', SITE + '/.htaccess': b'old rules',
-                      SITE + '/assets/old.js': b'old JS', SITE + '/assets/style.css': b'old CSS'}
+                      SITE + '/assets/old.js': b'old JS', SITE + '/assets/style.css': b'old CSS',
+                      SITE + '/document.pdf': b'%PDF-1.7\r\n\x00\xff\n'}
         self.links = set()
         self.calls = []
         self.archive_mode = 'ok'
@@ -33,7 +34,7 @@ class FakePanel:
                     ET.SubElement(element, 'name').text = pathlib.PurePosixPath(path).name
                     ET.SubElement(element, 'type').text = ('linkdir' if path in self.links else 'dir'
                         if path in self.directories else 'image' if path.endswith('.png')
-                        else 'archive' if path.endswith('.tgz') else 'file')
+                        else 'gzip' if path.endswith('.tgz') else 'pdf' if path.endswith('.pdf') else 'file')
             return document
         if func == 'file.download':
             return self.files[child(parent, name)]
@@ -172,7 +173,7 @@ class DeploySafetyTests(unittest.TestCase):
 
     def test_changed_owned_file_or_marker_stops_cleanup(self):
         stage = self.stage()
-        self.deployer.probe()
+        self.deployer._upload('transfer-probe.bin', b'owned test file')
         for name in ('transfer-probe.bin', MARKER):
             with self.subTest(name=name):
                 original = self.backend.files[stage + '/' + name]
@@ -209,6 +210,27 @@ class DeploySafetyTests(unittest.TestCase):
                                        'filename': 'probe.bin', 'out': 'xml'}, binary)
         self.assertIn(binary, post.call_args.args[1])
         self.assertEqual(post.call_args.args[0], 'https://server193.hosting.reg.ru:1500/mancgi/upload')
+
+    def test_probe_exercises_overwrite_outside_site_and_cleans_its_destination(self):
+        stage = self.stage()
+        self.deployer.probe()
+        copies = [p for f, p in self.backend.changes() if f == 'file.copyto']
+        self.assertEqual(len(copies), 1)
+        self.assertEqual(copies[0]['plid'], stage)
+        self.assertTrue(bytes.fromhex(copies[0]['dirlist']).decode().startswith('/star40-stage-'))
+        self.assertEqual(copies[0]['move'], 'on')
+        self.assertEqual(copies[0]['overwrite'], 'on')
+        self.assertEqual(self.backend.live_writes(), [])
+        self.assertEqual(self.deployer.listing(stage), {MARKER: 'file'})
+
+    def test_probe_cannot_redirect_overwrite_to_live_site(self):
+        self.stage()
+        other = Deployer(self.backend, pathlib.Path(self.temporary.name) / 'other')
+        other._stage = SITE
+        self.deployer._probe_destination = other
+        self.assert_no_new_changes(lambda: self.deployer._mutate('file.copyto', {
+            'plid': self.deployer._stage, 'elid': 'transfer-probe.bin', 'dirlist': SITE.encode().hex(),
+            'move': 'on', 'overwrite': 'on', 'goto': 'off'}))
 
     def test_stage_symlink_stops_cleanup(self):
         stage = self.stage()
@@ -268,6 +290,15 @@ class DeploySafetyTests(unittest.TestCase):
         self.stage()
         del self.backend.files[SITE + '/.htaccess']
         self.assert_no_new_changes(self.deployer.backup)
+
+    def test_backup_accepts_regular_pdf_classification_and_checks_binary_bytes(self):
+        self.stage()
+        backup = self.deployer.backup()
+        self.assertEqual(backup['files']['document.pdf'], digest(self.backend.files[SITE + '/document.pdf']))
+        with tarfile.open(self.deployer.state_directory / 'before-release.tgz', 'r:gz') as archive:
+            self.assertEqual(archive.extractfile('star40.ru/document.pdf').read(),
+                             self.backend.files[SITE + '/document.pdf'])
+        self.assertEqual(self.backend.live_writes(), [])
 
     def test_backup_cannot_move_or_delete_live_files(self):
         self.stage()

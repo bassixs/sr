@@ -7,6 +7,8 @@ import familyImage from '../photo/5.webp';
 import staffImage from '../photo/6.webp';
 import documentsImage from '../photo/7.webp';
 import {
+  administrationDepartment,
+  administrationMembers,
   advantages,
   arrivalDocumentGroups,
   arrivalFlow,
@@ -1256,6 +1258,23 @@ function OfficialPage({ onNavigate }: PageProps) {
             text="Название учреждения, реквизиты, адреса, контакты, руководитель и режим работы собраны в одном месте без необходимости открывать PDF."
           />
           <DetailGroupGrid groups={institutionDetails} />
+        </div>
+      </section>
+      <section className="section" id="administration" aria-label="Администрация">
+        <div className="container">
+          <SectionIntro
+            eyebrow="Руководство"
+            title="Администрация"
+            text={administrationDepartment}
+          />
+          <div className="card-grid">
+            {administrationMembers.map((member) => (
+              <article className="staff-card" key={member.name}>
+                <h3>{member.name}</h3>
+                <p>{member.role}</p>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
       <section className="section">
